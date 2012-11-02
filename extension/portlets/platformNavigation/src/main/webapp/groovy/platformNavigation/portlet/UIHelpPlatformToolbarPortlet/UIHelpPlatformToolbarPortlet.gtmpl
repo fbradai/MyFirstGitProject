@@ -5,7 +5,7 @@
                 <div >
                     <div >
                         <div >
-                            <a href="<%=uicomponent.getHelpPage()%>">Help</a>
+                            <a href="http://docs.exoplatform.com">Help</a>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,6 @@
 package org.exoplatform.platform.component;
 
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
@@ -16,19 +14,20 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UIHelpPlatformToolBarPortlet/UIHelpPlatformToolBarPortlet.gtmpl")
 public class UIHelpPlatformToolbarPortlet extends UIPortletApplication {
 
-    private static final Log LOG = ExoLogger.getLogger(UIHelpPlatformToolbarPortlet.class);
+    //private static final Log LOG = ExoLogger.getLogger(UIHelpPlatformToolbarPortlet.class);
     //private HelpPortletService helpService = null;
     private String currentPage= null;
     public UIHelpPlatformToolbarPortlet() throws Exception {
-        try {
+     /*   try {
            // helpService= getApplicationComponent(HelpPortletService.class);
         } catch (Exception exception) {
             LOG.error("HelpPortletService null  ", exception);
-        }
+        }  */
     /*    if (helpService == null) {
             return;
         }    */
-
+       // System.out.println("getNavigationData"+Util.getPortalRequestContext().getNavigationData());
+        System.out.println("looooooooooooooooooooooooooooooooooooooooooooooooooool");
     }
 
   public String getCurrentPage()
@@ -40,13 +39,13 @@ public class UIHelpPlatformToolbarPortlet extends UIPortletApplication {
       System.out.println("getPortalURI"+Util.getPortalRequestContext().getPortalURI());
       System.out.println("getRequestURI"+Util.getPortalRequestContext().getRequestURI());
       System.out.println("getRequest().getRequestURI()"+Util.getPortalRequestContext().getRequest().getRequestURI());
-      System.out.println(("getInitialURI()"+Util.getPortalRequestContext().getInitialURI()!=null)?Util.getPortalRequestContext().getInitialURI().toString():"null");
+     // System.out.println(("getInitialURI()"+Util.getPortalRequestContext().getInitialURI()!=null)?Util.getPortalRequestContext().getInitialURI().toString():"null");
       return Util.getPortalRequestContext().getInitialURI();
   }
     public  void getHelpPage()
     {
 
-        getCurrentPage();
+     //   getCurrentPage();
       //  return helpService.getDefaultPageHelp();
 
     }
