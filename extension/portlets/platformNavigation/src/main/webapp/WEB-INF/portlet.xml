@@ -194,7 +194,7 @@
         <init-param>
             <name>webui.configuration</name>
             <!-- must match the path to configuration file -->
-            <value>/WEB-INF/conf/portlet/UIHelpPlatformToolbarPortlet/webui/configuration.xml</value>
+            <value>/WEB-INF/conf/portlet/UIHelpPlatformToolbarPortlet/configuration.xml</value>
         </init-param>
         <expiration-cache>0</expiration-cache>
         <supports>
