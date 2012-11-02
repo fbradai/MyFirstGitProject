@@ -99,4 +99,20 @@
             </depends>
         </module>
     </portlet>
+    <portlet>
+        <name>UIHelpPlatformToolBarPortlet</name>
+        <module>
+            <depends>
+                <module>base</module>
+            </depends>
+            <!--
+            <depends>
+                <module>socialcomposer</module>
+            </depends>
+            -->
+            <depends>
+                <module>social-core</module>
+            </depends>
+        </module>
+    </portlet>
 </gatein-resources>

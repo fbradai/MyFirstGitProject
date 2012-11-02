@@ -18,6 +18,7 @@ public class UIHelpPlatformToolbarPortlet extends UIPortletApplication {
     //private HelpPortletService helpService = null;
     private String currentPage= null;
     public UIHelpPlatformToolbarPortlet() throws Exception {
+    super();
      /*   try {
            // helpService= getApplicationComponent(HelpPortletService.class);
         } catch (Exception exception) {

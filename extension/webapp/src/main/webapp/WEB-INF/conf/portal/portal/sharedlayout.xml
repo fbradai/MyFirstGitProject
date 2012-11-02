@@ -40,17 +40,7 @@
 				</portlet-application>
 			</container>
 
-            <container id="HelpPlatformToolbarPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
-                <access-permissions>*:/platform/users</access-permissions>
-                <portlet-application>
-                    <portlet>
-                        <application-ref>platformNavigation</application-ref>
-                        <portlet-ref>UIHelpPlatformToolbarPortlet</portlet-ref><!--PLF-308-->
-                    </portlet>
-                    <access-permissions>*:/platform/users</access-permissions>
-                    <show-info-bar>false</show-info-bar>
-                </portlet-application>
-            </container>
+
 
 			<container id="SpacesToolbarPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
 				<access-permissions>*:/platform/users</access-permissions>
@@ -120,6 +110,17 @@
 					<show-info-bar>false</show-info-bar>
 				</portlet-application>
 			</container>
+            <container id="UIHelpPlatformToolbarPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+
+                <portlet-application>
+                    <portlet>
+                        <application-ref>platformNavigation</application-ref>
+                        <portlet-ref>UIHelpPlatformToolbarPortlet</portlet-ref><!--PLF-308-->
+                    </portlet>
+                    <access-permissions>*:/platform/users</access-permissions>
+                    <show-info-bar>false</show-info-bar>
+                </portlet-application>
+            </container>
 		</container>
 
 	</container>
