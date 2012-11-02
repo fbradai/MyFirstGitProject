@@ -1,3 +1,4 @@
+<!--
 <div >
     <div >
         <div >
@@ -5,11 +6,52 @@
                 <div >
                     <div >
                         <div >
-                            <a href="http://docs.exoplatform.com" target="">Help</a>
+                            <a href="<%=uicomponent.getHelpPage()%>" TARGET="_blank" class="UIUserToolBarPortlet"  > Help</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>   -->
+<div class="UserToolBarSitePortletTDContainer FL">
+    <div class="UIContainer " id="UserToolBarSitePortlet">
+
+        <div class="NormalContainerBlock UIComponentBlock">
+
+            <div class="VIEW-CONTAINER VIEW-BLOCK">
+
+
+                <div>
+                    <div class="UIRowContainer ">
+
+                        <div id="6b3faefc-5732-4734-a2bb-dd9a4d8d7806">
+                            <div class="PORTLET-FRAGMENT" style="width: null;height: null;">
+
+
+
+                                <ul class="UIUserToolBarSitePortlet UIHorizontalTabs" id="UIUserPlatformToolBarSitePortlet">
+                                    <li class="UITab NormalToolbarTab">
+                                        <a class="ArrowIcon TBIcon" href="<%=uicomponent.getHelpPage()%>" TARGET="_blank">
+                                            Help
+                                        </a>
+
+
+
+                                    </li>
+                                </ul>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
         </div>
     </div>
 </div>

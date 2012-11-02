@@ -1,6 +1,8 @@
 package org.exoplatform.platform.component;
 
-import help.HelpPortletService;
+
+import org.exoplatform.navigation.bar.help.HelpPortletUtils;
+import org.exoplatform.navigation.bar.help.HelpService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPortletApplication;
@@ -15,42 +17,36 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UIHelpPlatformToolbarPortlet/UIHelpPlatformToolbarPortlet.gtmpl")
 public class UIHelpPlatformToolbarPortlet extends UIPortletApplication {
 
-    //private static final Log LOG = ExoLogger.getLogger(UIHelpPlatformToolbarPortlet.class);
-    private HelpPortletService helpService = null;
-    private String currentPage= null;
+
+    private HelpService helpService = null;
+    private String currentNavigation= null;
+
     public UIHelpPlatformToolbarPortlet() throws Exception {
     super();
-        try {
-            helpService= getApplicationComponent(HelpPortletService.class);
-        } catch (Exception exception) {
-         //   LOG.error("HelpPortletService null  ", exception);
-        }
-        if (helpService == null) {
-            return;
-        }
-       System.out.println("getNavigationData"+Util.getPortalRequestContext().getNavigationData());
-        System.out.println("looooooooooooooooooooooooooooooooooooooooooooooooooool");
     }
 
-  public String getCurrentPage()
+  public String getCurrentNavigation()
   {
-      System.out.println("getNavigationData"+Util.getPortalRequestContext().getNavigationData());
-      System.out.println("getPortalContextPath"+Util.getPortalRequestContext().getPortalContextPath());
-      System.out.println("getParentAppRequestContext"+Util.getPortalRequestContext().getParentAppRequestContext());
-      System.out.println("getNodePath"+Util.getPortalRequestContext().getNodePath());
-      System.out.println("getPortalURI"+Util.getPortalRequestContext().getPortalURI());
-      System.out.println("getRequestURI"+Util.getPortalRequestContext().getRequestURI());
-      System.out.println("getRequest().getRequestURI()"+Util.getPortalRequestContext().getRequest().getRequestURI());
-     // System.out.println(("getInitialURI()"+Util.getPortalRequestContext().getInitialURI()!=null)?Util.getPortalRequestContext().getInitialURI().toString():"null");
-      currentPage=helpService.getDefaultPageHelp();
 
-      return currentPage;
+      try {
+          currentNavigation= Util.getUIPortal().getNavPath().getName();
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+       if (currentNavigation!=null)
+      return currentNavigation;
+      else return "default";
   }
     public  String getHelpPage()
     {
-
-        System.out.println("currentPAge"+getCurrentPage());
-        return helpService.getDefaultPageHelp();
-
+        try {
+            helpService= getApplicationComponent(HelpService.class);
+        } catch (Exception exception) {
+        }
+        if (helpService == null) {
+            return HelpPortletUtils.DEFAULT_HELP_PAGE;
+        }
+        System.out.println("currentNavigation"+getCurrentNavigation());
+        return helpService.fetchHelpPage(currentNavigation);
     }
 }

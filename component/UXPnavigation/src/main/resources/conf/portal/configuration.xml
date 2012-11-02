@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd" xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
-  <component>
-    <type>org.exoplatform.navigation.bar.help</type>
+    <component>
+        <key>org.exoplatform.navigation.bar.help.HelpPortletService</key>
+        <type>org.exoplatform.navigation.bar.help.HelpPortletServiceImpl</type>
 
-      <init-params>
-          <value-param>
-              <name>default.help.page</name>
-              <value>http://docs.exoplatform.com</value>
-          </value-param>
-      </init-params>
-  </component>
+        <init-params>
+            <properties-param>
+                <name>help.pages</name>
+                <description>Help Pages match definition</description>
+                <property name="default.help.page" value="http://docs.exoplatform.com"/>
+                <property name="news" value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Organize_Content.html"/>
+            </properties-param>
+        </init-params>
+    </component>
 
 </configuration>
