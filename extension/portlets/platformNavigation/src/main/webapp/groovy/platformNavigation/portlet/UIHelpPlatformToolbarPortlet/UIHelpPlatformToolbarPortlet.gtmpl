@@ -5,8 +5,7 @@
                 <div >
                     <div >
                         <div >
-                            <a href="http://docs.exoplatform.com">Help</a>      >
-                            HELLO word !
+                            <a href="http://docs.exoplatform.com" target="">Help</a>
                         </div>
                     </div>
                 </div>
