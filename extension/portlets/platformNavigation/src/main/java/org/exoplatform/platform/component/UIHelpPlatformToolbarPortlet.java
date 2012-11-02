@@ -1,6 +1,5 @@
 package org.exoplatform.platform.component;
 
-import help.HelpPortletService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -18,17 +17,17 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 public class UIHelpPlatformToolbarPortlet extends UIPortletApplication {
 
     private static final Log LOG = ExoLogger.getLogger(UIHelpPlatformToolbarPortlet.class);
-    private HelpPortletService helpService = null;
+    //private HelpPortletService helpService = null;
     private String currentPage= null;
     public UIHelpPlatformToolbarPortlet() throws Exception {
         try {
-            helpService= getApplicationComponent(HelpPortletService.class);
+           // helpService= getApplicationComponent(HelpPortletService.class);
         } catch (Exception exception) {
             LOG.error("HelpPortletService null  ", exception);
         }
-        if (helpService == null) {
+    /*    if (helpService == null) {
             return;
-        }
+        }    */
 
     }
 
@@ -44,11 +43,11 @@ public class UIHelpPlatformToolbarPortlet extends UIPortletApplication {
       System.out.println(("getInitialURI()"+Util.getPortalRequestContext().getInitialURI()!=null)?Util.getPortalRequestContext().getInitialURI().toString():"null");
       return Util.getPortalRequestContext().getInitialURI();
   }
-    public  String getHelpPage()
+    public  void getHelpPage()
     {
 
         getCurrentPage();
-        return helpService.getDefaultPageHelp();
+      //  return helpService.getDefaultPageHelp();
 
     }
 }
