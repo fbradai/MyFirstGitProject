@@ -19,16 +19,19 @@ public class HelpServiceImpl implements HelpService {
     PropertiesParam param = null;
 
     public HelpServiceImpl(InitParams initParams) {
-        param = initParams.getPropertiesParam("help.pages");
+         param = initParams.getPropertiesParam("help.pages");
     }
 
     public String fetchHelpPage(String currentNavigation) {
 
         String helpPage = param.getProperty(currentNavigation);
-        if ((helpPage!=null)&&(!helpPage.equals(""))) helpPage= param.getProperty("default.help.page")  ;
 
-        //return (((helpPage != null)&&(!helpPage.equals(""))) ? helpPage : defaultPageHelp);
-        if ((helpPage != null)&&(!helpPage.equals(""))) helpPage=defaultPageHelp;
+        if ((helpPage != null) && (!helpPage.equals(""))) helpPage = param.getProperty("default.help.page");
+
+        if ((helpPage != null) && (!helpPage.equals(""))) helpPage = defaultPageHelp;
+
         return helpPage;
+        //return (((helpPage != null)&&(!helpPage.equals(""))) ? helpPage : defaultPageHelp);
+        // return HelpPortletUtils.DEFAULT_HELP_PAGE;
     }
 }
