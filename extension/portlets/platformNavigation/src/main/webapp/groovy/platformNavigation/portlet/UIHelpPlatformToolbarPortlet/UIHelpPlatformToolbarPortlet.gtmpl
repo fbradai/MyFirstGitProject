@@ -17,6 +17,8 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
    %>
+<%  def labelHelp = _ctx.appRes("UIHelpPlatformToolbarPortlet.Title");
+    %>
 <div class="UserToolBarSitePortletTDContainer FL">
     <div class="UIContainer " id="UserToolBarSitePortlet">
 
@@ -35,7 +37,7 @@
                                     <li class="UITab NormalToolbarTab">
                                         <a class="ArrowIcon TBIcon" href="<%=uicomponent.getHelpPage()%>"
                                            TARGET="_blank">
-                                            Help
+                                           $labelHelp
                                         </a>
                                     </li>
                                 </ul>
