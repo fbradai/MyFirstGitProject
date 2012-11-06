@@ -25,9 +25,6 @@ import org.exoplatform.platform.navigation.component.help.Helper;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author <a href="kmenzli@exoplatform.com">Kmenzli</a>
  * @date 05/11/12
@@ -36,21 +33,19 @@ public class HelpServiceImpl implements HelpService {
 
     private static final Log LOG = ExoLogger.getExoLogger(HelpServiceImpl.class);
 
-    PropertiesParam param = null;
-
-    private final PropertiesParam props;
+    private PropertiesParam props=null;
 
     public HelpServiceImpl(InitParams params) {
 
         if (params == null) {
-            //TODO create new exception and throw it
+            throw new IllegalStateException("given params are null in helpService");
         }
 
         this.props = params.getPropertiesParam("help.pages");
 
         if (props == null)
         {
-            // TODO create new Exception 2 and throw it
+            throw new IllegalStateException("params.getPropertiesParam() returns null in helpService");
         }
     }
 
@@ -79,7 +74,6 @@ public class HelpServiceImpl implements HelpService {
             if (Helper.present(props.getProperty("default"))) {
                  return props.getProperty("default") ;
             }
-
         }
         return Helper.DEFAULT_HELP_PAGE;
 

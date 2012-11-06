@@ -17,6 +17,12 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.platform.navigation.component.help;
+
+
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 /**
  * @author <a href="kmenzli@exoplatform.com">Kmenzli</a>
  * @date 05/11/12
@@ -24,6 +30,7 @@ package org.exoplatform.platform.navigation.component.help;
 
 public class Helper {
 
+    private static final Log LOG = ExoLogger.getExoLogger(Helper.class);
     public static final String DEFAULT_HELP_PAGE= "http://docs.exoplatform.com";
 
     public static boolean present (String theString) {
@@ -32,5 +39,19 @@ public class Helper {
             present = true;
         }
         return present;
+    }
+
+    public static String getCurrentNavigation() {
+        try {
+
+            return  Util.getUIPortal().getNavPath().getName();
+
+        } catch (Exception E) {
+
+            LOG.warn("Can not load the currentNavigation ",E);
+            E.printStackTrace();
+            return null;
+        }
+
     }
 }

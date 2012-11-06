@@ -21,7 +21,6 @@ package org.exoplatform.platform.component;
 
 import org.exoplatform.platform.navigation.component.help.HelpService;
 import org.exoplatform.platform.navigation.component.help.Helper;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -38,7 +37,7 @@ public class UIHelpPlatformToolbarPortlet extends UIPortletApplication {
 
     private static final Log LOG = ExoLogger.getExoLogger(UIHelpPlatformToolbarPortlet.class);
     private String currentNavigation = "";
-    private String helpPage = "";
+    private String helpPage = Helper.DEFAULT_HELP_PAGE;
     private HelpService helpService = null;
 
     public UIHelpPlatformToolbarPortlet() throws Exception {
@@ -47,35 +46,20 @@ public class UIHelpPlatformToolbarPortlet extends UIPortletApplication {
 
     public String getHelpPage() {
 
-        getCurrentNavigation();
+        currentNavigation = Helper.getCurrentNavigation();
 
-        //TODO use a Helper Class for this test
-        if (currentNavigation != null && currentNavigation.length() !=0) {
+        if (Helper.present(currentNavigation) && ((helpService != null))) {
 
             helpPage = helpService.fetchHelpPage(currentNavigation);
 
         }
 
         if (LOG.isDebugEnabled()) {
-            LOG.debug("The navigation [[ "+currentNavigation+" ]] has as page help [[ "+helpPage+" ]]");
+            LOG.debug("The navigation [[ " + currentNavigation + " ]] has as page help [[ " + helpPage + " ]]");
         }
 
-        return  helpPage;
+        return helpPage;
     }
 
-    //TODO put it in helper class
-    private void getCurrentNavigation() {
-        try {
 
-            currentNavigation =  Util.getUIPortal().getNavPath().getName();
-
-        } catch (Exception E) {
-
-            LOG.warn("Can not load the currentNavigation ",E);
-
-        }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("The current Navigation is [[ "+currentNavigation+" ]]");
-        }
-    }
 }

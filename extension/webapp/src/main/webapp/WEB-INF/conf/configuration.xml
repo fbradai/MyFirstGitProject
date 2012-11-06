@@ -37,6 +37,5 @@
   
   <!-- Redefine Authoring dashboard-->
   <import>war:/conf/authoring/authoring-configuration.xml</import>
-   <import>war:/conf/help-services/help-services.xml</import>
 
 </configuration>

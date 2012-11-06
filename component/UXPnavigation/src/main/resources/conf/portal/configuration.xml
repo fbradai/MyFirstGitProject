@@ -31,8 +31,35 @@
             <properties-param>
                 <name>help.pages</name>
                 <description>Help Pages match definition</description>
+                <!-- social -->
+                <property name="spaces"        value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Social.Manage_Spaces.html"     />
+                <property name="all-spaces"       value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FSoc_User_Guide.Space_Management.Join_Space.Search.html"     />
+               <!--site acme pages-->
                 <property name="default" value="http://docs.exoplatform.com/"/>
                 <property name="news" value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FIDEUserGuide.html"/>
+                <property name="products"        value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Organize_Content.html"     />
+                <!--setup menu: manage your organisation-->
+                <property name="newStaff"        value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Manage_Organization.html"     />
+                <property name="newAccount" value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Manage_Organization.html"/>
+                <property name="management"       value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Manage_Organization.html"     />
+                <property name="monitoring" value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Get_started.html" />
+               <!--setup menu: manage your portal-->
+                <property name="pageManagement"    value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Manage_Your_Portals.html"/>
+                <property name="portalnavigation" value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Manage_Your_Portals.Manage_sites.html"/>
+                <property name="groupnavigation"    value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Manage_Your_Portals.Manage_Pages.html"/>
+                <!-- setup menu: manage your contents-->
+                <property name="wcmAdmin"           value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Organize_Content.Structure_Content.html"/>
+                <property name="siteExplorer"         value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FPlatform_User_Guide.Organize_Content.Manage_Content.html"/>
+                <!-- setup menu: manage applications-->
+                <property name="registry"      value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2Fsect-User_Guide-Manage_Portlets_and_Gadgets.html"       />
+                <!--webOS-->
+                <property name="classicWebosPage"      value="http://docs.exoplatform.com/PLF35/index.jsp?topic=%2Forg.exoplatform.doc.35%2FGateInReferenceGuide.html"       />
+
+                <!--   -->
+                <!--<property name="servicesManagement"        value="http://docs.exoplatform.com/PLF35/index.jsp"  />
+                <property name="monitoring"        value="http://docs.exoplatform.com/PLF35/index.jsp"  />     -->
+
+
             </properties-param>
         </init-params>
     </component>
