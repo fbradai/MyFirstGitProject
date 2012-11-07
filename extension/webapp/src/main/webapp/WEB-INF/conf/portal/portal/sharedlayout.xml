@@ -28,44 +28,39 @@
 			<container id="HomeLink" template="war:/groovy/portal/webui/container/UIHomeLinkContainer.gtmpl">
 				<access-permissions>*:/platform/users</access-permissions>
 			</container>
-			<container id="UserToolBarSitePortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
-				<access-permissions>*:/platform/users</access-permissions>
+			<container id="PinToolbarContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+			</container>
+			
+			
+					
+			<container id="HelpPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+			<access-permissions>*:/platform/users</access-permissions>
+				help
+			</container>
+			<container id="UserInfoPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
 				<portlet-application>
 					<portlet>
 						<application-ref>platformNavigation</application-ref>
-						<portlet-ref>UIUserPlatformToolBarSitePortlet</portlet-ref>
+						<portlet-ref>UserInfoPortlet</portlet-ref><!--PLF-308-->
 					</portlet>
 					<access-permissions>*:/platform/users</access-permissions>
 					<show-info-bar>false</show-info-bar>
 				</portlet-application>
 			</container>
-			<container id="SpacesToolbarPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
-				<access-permissions>*:/platform/users</access-permissions>
-				<portlet-application>
-					<portlet>
-						<application-ref>platformNavigation</application-ref>
-						<portlet-ref>UIMySpacePlatformToolBarPortlet</portlet-ref>
-					</portlet>
-					<access-permissions>Everyone</access-permissions>
-					<show-info-bar>false</show-info-bar>
-				</portlet-application>
+			<container id="SearchPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+			<access-permissions>*:/platform/users</access-permissions>
+				Search
 			</container>
-			<container id="GroupsToolbarPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+			<container id="CreatePortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+			<access-permissions>*:/platform/users</access-permissions>
+				Create
+			</container>
+			
+			<container id="UISetupPlatformToolBarPortletID" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
 				<portlet-application>
 					<portlet>
 						<application-ref>platformNavigation</application-ref>
-						<portlet-ref>UIMyGroupsPlatformToolBarPortlet</portlet-ref>
-					</portlet>
-					<access-permissions>Everyone</access-permissions>
-					<show-info-bar>false</show-info-bar>
-				</portlet-application>
-			</container>			
-			<container id="UserToolBarDashboardPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
-				<access-permissions>*:/platform/users</access-permissions>
-				<portlet-application>
-					<portlet>
-						<application-ref>platformNavigation</application-ref>
-						<portlet-ref>UIUserPlatformToolbarDesktopPortlet</portlet-ref>
+						<portlet-ref>UISetupPlatformToolBarPortlet</portlet-ref><!--PLF-308-->
 					</portlet>
 					<access-permissions>*:/platform/users</access-permissions>
 					<show-info-bar>false</show-info-bar>
@@ -83,28 +78,14 @@
 				</portlet-application>
 			</container>
 
-			<container id="PinToolbarContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
-			</container>
-			<container id="UISetupPlatformToolBarPortletID" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
-				<portlet-application>
-					<portlet>
-						<application-ref>platformNavigation</application-ref>
-						<portlet-ref>UISetupPlatformToolBarPortlet</portlet-ref><!--PLF-308-->
-					</portlet>
-					<access-permissions>*:/platform/users</access-permissions>
-					<show-info-bar>false</show-info-bar>
-				</portlet-application>
-			</container>
-			<container id="UserInfoPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
-				<portlet-application>
-					<portlet>
-						<application-ref>platformNavigation</application-ref>
-						<portlet-ref>UserInfoPortlet</portlet-ref><!--PLF-308-->
-					</portlet>
-					<access-permissions>*:/platform/users</access-permissions>
-					<show-info-bar>false</show-info-bar>
-				</portlet-application>
-			</container>
+			
+			
+			
+			
+			
+			
+			
+			
 		</container>
 
 	</container>
