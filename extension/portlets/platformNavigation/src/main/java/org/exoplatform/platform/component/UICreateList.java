@@ -2,10 +2,12 @@ package org.exoplatform.platform.component;
 
 import org.exoplatform.cs.event.UICreateEvent;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.webui.commons.UIDocumentSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -36,6 +38,10 @@ import java.util.List;
                 @EventConfig(
                         listeners = UICreateList.WikiActionListener.class
 
+                )   ,
+
+                @EventConfig
+                        (listeners = UICreateList.UploadActionListener.class
                 )
         }
 )
@@ -65,7 +71,6 @@ public class UICreateList extends UIContainer {
 
         public void execute(Event<UICreateList> event)
                 throws Exception {
-
             UIUserPlatformToolBarCreatePortlet uiForm = (UIUserPlatformToolBarCreatePortlet) event.getSource().getAncestorOfType(UIUserPlatformToolBarCreatePortlet.class);
             UICreateList uisource = (UICreateList) event.getSource();
             HttpServletRequest request = Util.getPortalRequestContext().getRequest();
@@ -140,6 +145,50 @@ public class UICreateList extends UIContainer {
 
 
     }
+
+
+
+    /*****/
+
+    static public class UploadActionListener extends EventListener<UICreateList> {
+
+        public void execute(Event<UICreateList> event) throws Exception {
+            UICreateList uiComp = event.getSource();
+
+            UIPopupWindow uiPopup = uiComp.getChild(UIPopupWindow.class);
+
+            if (uiPopup == null) {
+                try {
+                    uiPopup = uiComp.addChild(UIPopupWindow.class, null, "UXPuploadWinForm");
+                } catch (Exception e) {
+                    //TODO add log
+                }
+            }
+            final UIComponent child = uiPopup.getUIComponent();
+
+            if (child != null && child instanceof UIDocumentSelector) {
+
+                uiPopup.setShow(true);
+                uiPopup.setResizable(true);
+            } else {
+                try {
+                    UIDocumentSelector selector = uiPopup.createUIComponent(UIDocumentSelector.class, null, "UploadFileSelector");
+                    uiPopup.setUIComponent(selector);
+                    uiPopup.setShow(true);
+                    uiPopup.setResizable(true);
+                } catch (Exception e) {
+                    //TODO add log
+                }
+            }
+
+            uiPopup.setWindowSize(500, 0);
+            uiPopup.setRendered(true);
+
+
+        }
+
+    }
+    /******/
 
     public static String getParStatus() {
         return parStatus;

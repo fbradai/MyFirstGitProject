@@ -23,8 +23,6 @@ jsmanager.require("SHARED/navigation", "navigation").addScripts('navigation.UIPo
                  	<%uicomponent.renderChildren()%>
 
 
-
-
 		</ul>
 	</li>
 </ul>

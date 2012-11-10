@@ -7,14 +7,16 @@ def labelWiki = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.wiki");
 //def doc="javascript:ajaxGet(eXo.env.server.createPortalURL('UIDocActivityComposer','SelectDocument',true));"
 
 
- for(action in uicomponent.getActions()) { %>
+ for(action in uicomponent.getActions()) {
+
+%>
 
 						<li id="$action" class="MenuItem $clazz">
 							<a  href="<%=uicomponent.event(action,action)%>" class="ToolBarActivityIcon" >$action</a>
 						</li>
 
-				 <% } %>
+				 <%}  %>
 
-				<li class="MenuItem $clazz">
-				<a href="#" class="ToolBarActivityIcon">$labelUpload</a>
-			</li>
+			<li class="MenuItem $clazz">
+				<a href="<%=uicomponent.event("Upload")%>" class="ToolBarActivityIcon">Upload</a>
+			</li>        <% uicomponent.renderChildren() %>
