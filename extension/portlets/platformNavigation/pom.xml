@@ -76,6 +76,12 @@
       <version>${org.gatein.shindig.version}</version>
       <scope>provided</scope>
     </dependency>
+	 <dependency>
+          <groupId>org.exoplatform.calendar</groupId>
+          <artifactId>calendar-Create-event</artifactId>
+          <version>${org.exoplatform.calendar.version}</version>
+          <scope>provided</scope>
+      </dependency>
   </dependencies>
   <build>
     <finalName>platformNavigation</finalName>

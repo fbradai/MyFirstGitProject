@@ -1,0 +1,20 @@
+<%String clazz = "";
+def labelTopic = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.topic");
+def labelPoll = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.poll");
+def labelEvent = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.eventtask");
+def labelUpload = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.upload");
+def labelWiki = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.wiki");
+//def doc="javascript:ajaxGet(eXo.env.server.createPortalURL('UIDocActivityComposer','SelectDocument',true));"
+
+
+ for(action in uicomponent.getActions()) { %>
+
+						<li id="$action" class="MenuItem $clazz">
+							<a  href="<%=uicomponent.event(action,action)%>" class="ToolBarActivityIcon" >$action</a>
+						</li>
+
+				 <% } %>
+
+				<li class="MenuItem $clazz">
+				<a href="#" class="ToolBarActivityIcon">$labelUpload</a>
+			</li>

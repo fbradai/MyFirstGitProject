@@ -100,7 +100,7 @@ function getProduct(version) {
     product.addDependencies(calendar.web.resources);
     product.addDependencies(calendar.web.webservice); // exo.cs.web.webservice-2.0.0-SNAPSHOT.jar
     product.addDependencies(calendar.extension.webapp);
-   
+    product.addDependencies(calendar.createevent);
 
   /* FORUM */
 

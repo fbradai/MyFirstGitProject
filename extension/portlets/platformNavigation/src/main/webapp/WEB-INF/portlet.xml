@@ -123,7 +123,29 @@
 			<short-title>UISetupPlatformToolBarPortlet</short-title>
 		</portlet-info>
 	</portlet>
-	
+	<portlet>
+        <description xml:lang="EN">UserPlatformToolBarCreatePortlet</description>
+        <portlet-name>UserPlatformToolBarCreatePortlet</portlet-name>
+        <display-name xml:lang="EN">UserPlatformToolBarCreatePortlet</display-name>
+        <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+
+        <init-param>
+            <name>webui.configuration</name>
+            <value>/WEB-INF/conf/portlet/UIUserPlatformToolBarCreatePortlet/configuration.xml</value>
+        </init-param>
+
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>help</portlet-mode>
+        </supports>
+        <supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.UIUserPlatformToolBarCreatePortlet.UIUserPlatformToolBarCreatePortlet</resource-bundle>
+        <portlet-info>
+            <title>UIUserPlatformToolBarCreatePortlet</title>
+            <short-title>UIUserPlatformToolBarCreatePortlet</short-title>
+        </portlet-info>
+    </portlet>
 	<portlet>
 	<description xml:lang="EN">PlatformNavigation Portlet</description>
 	<portlet-name>UIUserPlatformToolBarSitePortlet</portlet-name>

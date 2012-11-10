@@ -99,4 +99,13 @@
             </depends>
         </module>
     </portlet>
+	 <portlet>
+        <name>UIUserPlatformToolBarCreatePortlet</name>
+        <module>
+            <depends>
+                <module>navigation</module>
+            </depends>
+
+        </module>
+    </portlet>
 </gatein-resources>

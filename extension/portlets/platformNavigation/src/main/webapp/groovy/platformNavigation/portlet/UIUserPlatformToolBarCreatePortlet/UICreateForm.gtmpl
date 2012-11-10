@@ -1,0 +1,73 @@
+
+<%
+import org.exoplatform.platform.component.UICreateList;
+
+
+def Topic="javascript:eXo.webui.UIForm.submitForm('UITopicContainer','AddTopic',true);"
+def message=UICreateList.getParStatus();
+def addpage="/portal/intranet/wiki#AddPage";
+def Poll="javascript:eXo.webui.UIForm.submitForm('UITopicDetail','AddPoll',true);"
+%>
+
+<div class="UIQuickAddEvent" id="QuickAddEventContainer">
+   <div class="QuickAddEventContainer">
+  <% uiform.begin()
+    %>
+
+  <div class="HorizontalLayout">
+    <div class="FormContainer">
+      <table class="UIFormGrid">
+	   <tbody>
+
+          <div> Create a new $message</div>
+         <tr>
+                   <td class="FieldLabel"> <%=uicomponent.getLabel(uicomponent.LOCATION)%>  </td>
+	               <td class="FieldComponent" colspan="2"><% uicomponent.renderField(uicomponent.LOCATION) %></td>
+	     </tr>
+
+
+
+
+		 </tbody>
+      </table>
+       </div>
+  </div>
+   <%uiform.end()%>
+   </div>
+
+      <%//Rerender this  component with the new structure%>
+      <%// start render action%>
+ <% if(uicomponent.getActions() != null) { %>
+  <div class="$uicomponent.id">
+    <div class="UIAction">
+      <table class="ActionContainer" align="center">
+      	<tr>
+      		<td align="center">
+	        <% for(action in uicomponent.getActions()) {
+
+if(message=="Topic"){		%>
+            <a href="$Topic" class="ActionButton LightBlueStyle" >
+<%}else if(message=="Poll"){%>
+	  <a href="$Poll" class="ActionButton LightBlueStyle" >	
+	  <%}else{%>
+	  <a href="$addpage" class="ActionButton LightBlueStyle" >	
+	  <%}%>
+              <div class="ButtonLeft">
+                <div class="ButtonRight">
+                  <div class="ButtonMiddle">
+                      <%=_ctx.appRes(uicomponent.getId() + ".action." + action)%>
+                  </div>
+                </div>
+              </div>
+            </a>
+	        <% } %>
+					</td>
+				</tr>
+      </table>
+    </div>
+  </div>
+<% }%>
+      <%// end render action%>
+
+
+</div>

@@ -1,0 +1,31 @@
+<%
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.web.application.JavascriptManager;
+import org.exoplatform.platform.component.social.UINavigationComposer;
+import org.exoplatform.platform.webui.NavigationURLUtils;
+
+def rcontext = _ctx.getRequestContext() ;
+JavascriptManager jsmanager = rcontext.getJavascriptManager();
+//jsmanager.addCustomizedOnLoadScript('eXo.portal.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
+jsmanager.require("SHARED/navigation", "navigation").addScripts('navigation.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
+
+
+%>
+
+<ul class="UIUserToolBarPortlet UIHorizontalTabs" id="$uicomponent.id">
+	<li id="UserNavigationTabsContainer" class="UITab">
+		 <a href="#" class="TBIcon"><img src="/eXoPlatformResources/skin/platformSkin/icons/bullet-toggle-plus-icon.png" alt="Create" /></a>
+		<ul style="display:none;" class="MenuItemContainer">
+
+
+                 	<%uicomponent.renderChildren()%>
+
+
+
+
+		</ul>
+	</li>
+</ul>
+
