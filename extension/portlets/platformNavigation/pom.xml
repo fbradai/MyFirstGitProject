@@ -82,6 +82,12 @@
           <version>${org.exoplatform.calendar.version}</version>
           <scope>provided</scope>
       </dependency>
+      <dependency>
+          <groupId>org.exoplatform.platform</groupId>
+          <artifactId>platform-component-UXPnavigation</artifactId>
+          <version>${project.version}</version>
+          <scope>provided</scope>
+      </dependency>
   </dependencies>
   <build>
     <finalName>platformNavigation</finalName>

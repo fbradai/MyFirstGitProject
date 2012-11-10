@@ -200,7 +200,35 @@
       <supported-processing-event>
          <name>NavigationChange</name>
       </supported-processing-event>
-   </portlet>	
+   </portlet>
+    <!-- help BEGIN-->
+    <portlet>
+        <description xml:lang="EN">Help Portlet</description>
+        <portlet-name>UIHelpPlatformToolbarPortlet</portlet-name>
+        <display-name xml:lang="EN">UIHelpPlatformToolbarPortlet</display-name>
+        <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+        <init-param>
+            <name>webui.configuration</name>
+            <!-- must match the path to configuration file -->
+            <value>/WEB-INF/conf/portlet/UIHelpPlatformToolbarPortlet/configuration.xml</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>help</portlet-mode>
+        </supports>
+        <supported-locale>en</supported-locale>
+        <resource-bundle>locale.portlet.UIHelpPlatformToolbarPortlet.UIHelpPlatformToolbarPortlet</resource-bundle>
+        <portlet-info>
+            <title>UIHelpPlatformToolbarPortlet</title>
+            <short-title>UIHelpPlatformToolbarPortlet</short-title>
+        </portlet-info>
+        <supported-processing-event>
+            <name>NavigationChange</name>
+        </supported-processing-event>
+    </portlet>
+
+    <!-- help END-->
 	<event-definition>
 	  <name>NavigationChange</name>
 	</event-definition>

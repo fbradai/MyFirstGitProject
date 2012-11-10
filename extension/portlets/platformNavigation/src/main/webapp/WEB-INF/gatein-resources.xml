@@ -108,4 +108,21 @@
 
         </module>
     </portlet>
+
+    <!--Begin-->
+    <portlet>
+        <name>UIHelpPlatformToolBarPortlet</name>
+        <module>
+            <depends>
+                <module>base</module>
+            </depends>
+
+            <depends>
+                <module>social-core</module>
+            </depends>
+        </module>
+    </portlet>
+    <!--END-->
+
+
 </gatein-resources>
