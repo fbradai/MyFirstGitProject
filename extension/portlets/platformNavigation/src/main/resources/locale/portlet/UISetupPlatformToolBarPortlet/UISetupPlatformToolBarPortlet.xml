@@ -18,6 +18,7 @@
 			<monitoring>Monitoring</monitoring>
 			<spaces>Spaces</spaces>
 			<Branding>Branding</Branding>
+			<ide>IDE</ide>
 		</label>
 	</UISetupPlatformToolBarPortlet>
 </bundle>
