@@ -478,7 +478,10 @@ box-shadow: 1px 1px 2px #dddddd;
 .UIUserToolBarPortlet .NavigationAvatar img {
 width: 40px;
 }
-
+.UIUserToolBarPortlet .TBIcon img {
+width:25px;
+margin-bottom: 6px;
+}
 .UIUserToolBarPortlet .UINavigationComposer {
 margin: 0px;
 }

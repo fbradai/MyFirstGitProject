@@ -3,7 +3,6 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.web.application.JavascriptManager;
-import org.exoplatform.platform.component.social.UINavigationComposer;
 import org.exoplatform.platform.webui.NavigationURLUtils;
 
 def rcontext = _ctx.getRequestContext() ;
