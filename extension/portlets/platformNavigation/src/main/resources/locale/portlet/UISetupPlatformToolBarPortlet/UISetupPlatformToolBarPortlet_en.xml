@@ -16,7 +16,8 @@
 			<portalnavigation>Sites</portalnavigation>
 			<servicesManagement>Management</servicesManagement>
 			<monitoring>Monitoring</monitoring>
-			<ide>IDE</ide>
+			<spaces>Spaces</spaces>
+			<Branding>Branding</Branding>
 		</label>
 	</UISetupPlatformToolBarPortlet>
 </bundle>
