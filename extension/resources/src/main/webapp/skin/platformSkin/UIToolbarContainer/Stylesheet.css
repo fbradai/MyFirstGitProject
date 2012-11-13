@@ -36,8 +36,7 @@ float: left;/* orientation=rt */
 
 #UIToolbarContainer .HomeLinkTDContainer {
     /*line-height: 31px;*/
-    margin: 4px 5px;
-float: left !important;
+    margin: 3px 5px;
     /*vertical-align: middle;*/
 }
 
@@ -550,8 +549,4 @@ height:24px;
 
 .UIToolbarContainer .MenuItemContainer .MenuItem .SEOMenuItem{
 height:24px;
-}
-
-.FL {
-    float: right !important;
 }

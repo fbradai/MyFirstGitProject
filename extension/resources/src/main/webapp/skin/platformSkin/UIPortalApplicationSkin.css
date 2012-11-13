@@ -181,6 +181,22 @@ a {
 	float: right;
 }
 
+.UIToolbarContainer .AdminToolBarPortletTDContainer {
+    float: right;    
+}
+
+.UIToolbarContainer .UserPlatformToolBarCreatePortletTDContainer {
+    float: right;    
+}
+
+.UIToolbarContainer .UIHelpPlatformToolbarPortletTDContainer {
+    float: right;    
+}
+
+.UIToolbarContainer .SearchPortletTDContainer {
+    float: right;    
+}
+
 .UITableColumnContainer .UIPopupWindow .PopupContent {
     position: inherit;
 }
