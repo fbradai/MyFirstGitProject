@@ -1,15 +1,14 @@
 package org.exoplatform.platform.common.space.statistic;
 
-import java.io.IOException;
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.web.filter.Filter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.web.filter.Filter;
+import java.io.IOException;
 
 public class SpaceAccessFilter implements Filter {
 
@@ -28,7 +27,7 @@ public class SpaceAccessFilter implements Filter {
     spaceId = spaceId.replace(":", "/");
     spaceId=new StringBuffer().append("spaces/").append(spaceId).toString();
 
-    getSpaceAccessService().incrementSpaceAccess(spaceId, httpServletRequest.getRemoteUser());
+    getSpaceAccessService().updateSpaceAccess(spaceId, httpServletRequest.getRemoteUser());
     chain.doFilter(request, response);
   }
 

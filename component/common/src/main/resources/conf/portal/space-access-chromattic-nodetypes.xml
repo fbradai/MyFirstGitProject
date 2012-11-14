@@ -8,7 +8,7 @@
 			<supertype>mix:referenceable</supertype>
 		</supertypes>
 		<propertyDefinitions>
-			<propertyDefinition name="plf:mostAccessedSpaces" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
+			<propertyDefinition name="plf:spaceAccessList" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
 				<valueConstraints/>
 			</propertyDefinition>
 		</propertyDefinitions>

@@ -8,15 +8,6 @@ package org.exoplatform.platform.component;
  * To change this template use File | Settings | File Templates.
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.platform.common.space.statistic.SpaceAccessService;
 import org.exoplatform.portal.config.UserACL;
@@ -44,6 +35,8 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
+import java.util.*;
+
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UIMySpacePlatformToolBarPortlet/UIMySpacePlatformToolBarPortlet.gtmpl", events = { @EventConfig(listeners = UIMySpacePlatformToolBarPortlet.NavigationChangeActionListener.class) })
 public class UIMySpacePlatformToolBarPortlet extends UIPortletApplication {
 
@@ -60,8 +53,8 @@ public class UIMySpacePlatformToolBarPortlet extends UIPortletApplication {
 
   private Comparator<UserNavigation> spaceAccessComparator = new Comparator<UserNavigation>() {
     public int compare(UserNavigation o1, UserNavigation o2) {
-      String ownerId1 = o1.getKey().getName();
-      String ownerId2 = o2.getKey().getName();
+      String ownerId1 = o1.getKey().getName().substring(1);
+      String ownerId2 = o2.getKey().getName().substring(1);
       return spacesSortedByAccesscount.indexOf(ownerId2) - spacesSortedByAccesscount.indexOf(ownerId1);
     }
   };
@@ -131,7 +124,7 @@ public class UIMySpacePlatformToolBarPortlet extends UIPortletApplication {
           navigationItr.remove();
         }
       }
-      if (spacesSortedByAccesscount != null && !spacesSortedByAccesscount.isEmpty()) {
+     if (spacesSortedByAccesscount != null && !spacesSortedByAccesscount.isEmpty()) {
         Collections.sort(computedNavigations, spaceAccessComparator);
       }
     }
