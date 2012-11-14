@@ -91,7 +91,7 @@
       <dependency>
           <groupId>org.exoplatform.commons</groupId>
           <artifactId>commons-webui-component</artifactId>
-          <version>${project.version}</version>
+          <version>${org.exoplatform.commons.version}</version>
       </dependency>
   </dependencies>
   <build>
