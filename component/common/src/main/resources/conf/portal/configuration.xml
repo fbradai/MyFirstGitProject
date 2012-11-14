@@ -10,7 +10,8 @@
     <type>org.exoplatform.platform.common.space.SpaceCustomizationService</type>
   </component>
   <component profiles="all,default,social">
-    <type>org.exoplatform.platform.common.space.statistic.SpaceAccessService</type>
+      <key>org.exoplatform.platform.common.space.statistic.SpaceAccessService</key>
+    <type>org.exoplatform.platform.common.space.statistic.LastSpaceAccessServiceImpl</type>
   </component>
   <component profiles="all,default,social">
     <key>org.exoplatform.platform.common.admin.TermsAndConditionsService</key>
