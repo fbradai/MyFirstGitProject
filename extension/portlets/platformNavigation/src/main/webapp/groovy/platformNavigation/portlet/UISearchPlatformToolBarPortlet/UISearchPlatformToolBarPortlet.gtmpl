@@ -12,7 +12,7 @@
     </script>
     <li class="UITab NormalToolbarTab">
         <div id = "ToolBarSearch">
-            <a href = "#">
+            <a class="TBIcon" href = "#">
                 <img alt="Search" src="/eXoPlatformResources/skin/platformSkin/icons/Search.png">
             </a>
             <input id="adminkeyword" name="adminkeyword" onkeypress="eXo.ecm.SearchPortlet.quickSearchOnEnter(event);" type="text" />
