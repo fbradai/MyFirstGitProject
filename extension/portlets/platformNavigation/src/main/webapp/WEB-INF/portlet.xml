@@ -228,7 +228,28 @@
 			<name>NavigationChange</name>
 		</supported-processing-event>
 	</portlet>
-
+    <portlet>
+        <description xml:lang="EN">Search Portlet</description>
+        <portlet-name>UISearchPlatformToolbarPortlet</portlet-name>
+        <display-name xml:lang="EN">UISearchPlatformToolbarPortlet</display-name>
+        <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+        <init-param>
+            <name>webui.configuration</name>
+            <!-- must match the path to configuration file -->
+            <value>/WEB-INF/conf/portlet/UISearchPlatformToolbarPortlet/configuration.xml</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>help</portlet-mode>
+        </supports>
+        <supported-locale>en</supported-locale>
+        <resource-bundle>locale.portlet.UISearchPlatformToolbarPortlet.UISearchPlatformToolbarPortlet</resource-bundle>
+        <portlet-info>
+            <title>UISearchPlatformToolbarPortlet</title>
+            <short-title>UISearchPlatformToolbarPortlet</short-title>
+        </portlet-info>
+    </portlet>
 	<!-- help END-->
 	<event-definition>
 		<name>NavigationChange</name>
