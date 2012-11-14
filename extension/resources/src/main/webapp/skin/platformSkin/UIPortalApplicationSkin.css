@@ -265,3 +265,9 @@ a {
 	background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailViewSelected.png') no-repeat center !important;
 	display: block;
 }
+
+.adminkeyword {
+    border: medium none;
+    height: 18px;
+    width: 120px;
+}
