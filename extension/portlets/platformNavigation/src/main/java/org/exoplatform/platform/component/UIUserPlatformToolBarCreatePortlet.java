@@ -32,12 +32,5 @@ public class UIUserPlatformToolBarCreatePortlet extends UIPortletApplication {
         return uiParent.getChild(T).getId();
     }
 
-    //  public Boolean getIndicator() {
-    //      HttpServletRequest request = Util.getPortalRequestContext().getRequest();
-    //     Boolean indic = (Boolean) request.getAttribute("indicator");
-    //      return indic;
-    // }
-
-
 
 }

@@ -1,12 +1,16 @@
 package org.exoplatform.platform.component;
 
 import org.exoplatform.cs.event.UICreateEvent;
+import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
 import org.exoplatform.webui.commons.UIDocumentSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -153,13 +157,20 @@ public class UICreateList extends UIContainer {
     static public class UploadActionListener extends EventListener<UICreateList> {
 
         public void execute(Event<UICreateList> event) throws Exception {
-            UICreateList uiComp = event.getSource();
 
-            UIPopupWindow uiPopup = uiComp.getChild(UIPopupWindow.class);
+            PortalRequestContext prContext = Util.getPortalRequestContext();
+            UIPortalApplication uiPortalApp = (UIPortalApplication)prContext.getUIApplication();
+            UIWorkingWorkspace uiWorkingWS = uiPortalApp.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
+            UIPopupWindow uiPopup = null;
+            if (uiWorkingWS != null ) {
+                uiPopup = uiWorkingWS.getChild(UIPopupWindow.class);
+            }
+
+
 
             if (uiPopup == null) {
                 try {
-                    uiPopup = uiComp.addChild(UIPopupWindow.class, null, "UXPuploadWinForm");
+                    uiPopup = uiWorkingWS.addChild(UIPopupWindow.class, null, "UXPuploadWinForm");
                 } catch (Exception e) {
                     //TODO add log
                 }
@@ -181,8 +192,10 @@ public class UICreateList extends UIContainer {
                 }
             }
 
-            uiPopup.setWindowSize(500, 0);
+            uiPopup.setWindowSize(500, 200);
             uiPopup.setRendered(true);
+            //prContext.addUIComponentToUpdateByAjax(uiPopup);
+            prContext.addUIComponentToUpdateByAjax(uiWorkingWS);
 
 
         }
