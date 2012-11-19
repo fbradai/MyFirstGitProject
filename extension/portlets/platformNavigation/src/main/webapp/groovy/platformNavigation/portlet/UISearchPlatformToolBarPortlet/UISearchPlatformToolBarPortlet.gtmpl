@@ -5,7 +5,11 @@
           var isAlt = false;
           jQuery("#adminkeyword").hide();
           jQuery('#ToolBarSearch > a').click(function() {
+            if(jQuery("#adminkeyword").val('')){jQuery("#adminkeyword").val('Search:')}
             jQuery("#adminkeyword").show();
+          });
+          jQuery("#adminkeyword").focus(function(){
+            if(jQuery("#adminkeyword").val('Search:')){jQuery("#adminkeyword").val('')}
           });
           jQuery("#adminkeyword").blur(function() {
             jQuery("#adminkeyword").hide();
