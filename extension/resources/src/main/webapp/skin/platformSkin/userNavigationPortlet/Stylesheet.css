@@ -1,0 +1,25 @@
+
+
+.FL {
+    float: left;
+}
+
+.ClearFix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.UIUserNAvigationPortlet  {
+    background-color: #f0f0f0;
+}
+
+.UIUserNAvigationPortletTab {
+    margin: 2px 5px 6px 10px;
+}
+
+.UIUserNAvigationPortletTabSelected{
+    margin: 2px 5px 6px 10px;
+    background-color: #959595;
+}

@@ -42,7 +42,7 @@
   </page>
 
   <!-- The default user wiki page -->
-  <page>
+<!--  <page>
     <name>wiki</name>
     <title>Wiki</title>
     <portlet-application>
@@ -56,7 +56,7 @@
       <show-application-state>false</show-application-state>
       <show-application-mode>false</show-application-mode>
     </portlet-application>
-  </page>
+  </page>                    -->
 
 
 </page-set>
