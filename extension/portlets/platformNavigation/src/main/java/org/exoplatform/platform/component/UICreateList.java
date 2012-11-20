@@ -1,21 +1,18 @@
 package org.exoplatform.platform.component;
 
 import org.exoplatform.cs.event.UICreateEvent;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
-import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
+import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.commons.UIDocumentSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPopupContainer;
-import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,176 +35,132 @@ import java.util.List;
                 @EventConfig(
                         listeners = UICreateList.TopicActionListener.class
 
-                )  ,
+                ),
                 @EventConfig(
                         listeners = UICreateList.WikiActionListener.class
 
-                )   ,
+                ),
 
                 @EventConfig
                         (listeners = UICreateList.UploadActionListener.class
-                )
+                        )
         }
 )
 
 public class UICreateList extends UIContainer {
     static String parStatus;
 
-    public static void remove(UIUserPlatformToolBarCreatePortlet uiform) {
+    public static void remove(UICreateList uiform) {
         List<UIComponent> uilist = uiform.getChildren();
-        List<String> lisID = null;
+        List<String> lisID = new ArrayList<String>();
+       if(uilist.size()!=0) {
         for (UIComponent uIComponent : uilist) {
             lisID.add(uIComponent.getId());
-
         }
         for (String id : lisID) {
             uiform.removeChildById(id);
 
         }
-
-
+       }
     }
 
 
     static public class AddEventActionListener extends EventListener<UICreateList> {
-        Boolean indicator = false;
 
 
         public void execute(Event<UICreateList> event)
                 throws Exception {
+
             UIUserPlatformToolBarCreatePortlet uiForm = (UIUserPlatformToolBarCreatePortlet) event.getSource().getAncestorOfType(UIUserPlatformToolBarCreatePortlet.class);
             UICreateList uisource = (UICreateList) event.getSource();
             HttpServletRequest request = Util.getPortalRequestContext().getRequest();
-
-            //uisource.setRendered(false);
-            uiForm.getChild(UICreateForm.class) .setRendered(false);
-            uiForm.getChild(UICreateEvent.class).setRendered(true);
-            // uiForm.addChild(UICreateEvent.class, null, null).setRendered(true);
-            //    request.setAttribute("indicator", !indicator);
-            //event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+            remove(uisource);
+            uisource.addChild(UICreateEvent.class, null, null).setRendered(true);
+            event.getRequestContext().addUIComponentToUpdateByAjax(uisource);
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
         }
-
 
     }
 
     static public class PollActionListener extends EventListener<UICreateList> {
-        Boolean indicator = false;
+
 
         public void execute(Event<UICreateList> event)
                 throws Exception {
 
             UIUserPlatformToolBarCreatePortlet uiForm = (UIUserPlatformToolBarCreatePortlet) event.getSource().getAncestorOfType(UIUserPlatformToolBarCreatePortlet.class);
             parStatus = event.getRequestContext().getRequestParameter("objectId");
-            System.out.println("##############" + parStatus);
-            HttpServletRequest request = Util.getPortalRequestContext().getRequest();
-            // remove(uiForm);
-            uiForm.getChild(UICreateEvent.class).setRendered(false);
-            uiForm.getChild(UICreateForm.class).setRendered(true);
-            //  request.setAttribute("indicator", !indicator);
+
+            UICreateList uisource = (UICreateList) event.getSource();
+            remove(uisource);
+            uisource.addChild(UICreateForm.class, null, null).setRendered(true);
+            event.getRequestContext().addUIComponentToUpdateByAjax(uisource);
             event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
         }
-
 
     }
 
 
     static public class TopicActionListener extends EventListener<UICreateList> {
-        Boolean indicator = false;
+
 
         public void execute(Event<UICreateList> event)
                 throws Exception {
 
-            UIUserPlatformToolBarCreatePortlet uiForm = (UIUserPlatformToolBarCreatePortlet) event.getSource().getAncestorOfType(UIUserPlatformToolBarCreatePortlet.class);
-            HttpServletRequest request = Util.getPortalRequestContext().getRequest();
+             UIUserPlatformToolBarCreatePortlet uiForm = (UIUserPlatformToolBarCreatePortlet) event.getSource().getAncestorOfType(UIUserPlatformToolBarCreatePortlet.class);
             parStatus = event.getRequestContext().getRequestParameter("objectId");
-            //remove(uiForm);
-            uiForm.getChild(UICreateEvent.class).setRendered(false);
-            uiForm.getChild(UICreateForm.class).setRendered(true);
-            //    request.setAttribute("indicator", !indicator);
+            UICreateList uisource = (UICreateList) event.getSource();
+            remove(uisource);
+            uisource.addChild(UICreateForm.class, null, null).setRendered(true);
+            event.getRequestContext().addUIComponentToUpdateByAjax(uisource);
             event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
         }
-
-
     }
 
 
     static public class WikiActionListener extends EventListener<UICreateList> {
-        Boolean indicator = false;
 
         public void execute(Event<UICreateList> event)
                 throws Exception {
-
             UIUserPlatformToolBarCreatePortlet uiForm = (UIUserPlatformToolBarCreatePortlet) event.getSource().getAncestorOfType(UIUserPlatformToolBarCreatePortlet.class);
-            HttpServletRequest request = Util.getPortalRequestContext().getRequest();
             parStatus = event.getRequestContext().getRequestParameter("objectId");
-            //remove(uiForm);
-            uiForm.getChild(UICreateEvent.class).setRendered(false);
-            uiForm.getChild(UICreateForm.class).setRendered(true);
-            //    request.setAttribute("indicator", !indicator);
+            UICreateList uisource = (UICreateList) event.getSource();
+            remove(uisource);
+            uisource.addChild(UICreateForm.class, null, null).setRendered(true);
+            event.getRequestContext().addUIComponentToUpdateByAjax(uisource);
             event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
         }
-
-
     }
 
 
-
-    /*****/
+    /**
+     * *
+     */
 
     static public class UploadActionListener extends EventListener<UICreateList> {
 
         public void execute(Event<UICreateList> event) throws Exception {
+            UICreateList uiCraeteList = event.getSource();
+            //PortalRequestContext prContext = Util.getPortalRequestContext();
 
-            PortalRequestContext prContext = Util.getPortalRequestContext();
-            UIPortalApplication uiPortalApp = (UIPortalApplication)prContext.getUIApplication();
-            UIWorkingWorkspace uiWorkingWS = uiPortalApp.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
-            UIPopupWindow uiPopup = null;
-            if (uiWorkingWS != null ) {
-                uiPopup = uiWorkingWS.getChild(UIPopupWindow.class);
+            try {
+                UIDocumentSelector selector = uiCraeteList.createUIComponent(UIDocumentSelector.class, null, "UploadFileSelector");
+                Utils.createPopupWindow(uiCraeteList, selector, "UploadFileSelectorPopUpWindow", 335);
+            } catch (Exception e) {
+                //TODO add log
             }
-
-
-
-            if (uiPopup == null) {
-                try {
-                    uiPopup = uiWorkingWS.addChild(UIPopupWindow.class, null, "UXPuploadWinForm");
-                } catch (Exception e) {
-                    //TODO add log
-                }
-            }
-            final UIComponent child = uiPopup.getUIComponent();
-
-            if (child != null && child instanceof UIDocumentSelector) {
-
-                uiPopup.setShow(true);
-                uiPopup.setResizable(true);
-            } else {
-                try {
-                    UIDocumentSelector selector = uiPopup.createUIComponent(UIDocumentSelector.class, null, "UploadFileSelector");
-                    uiPopup.setUIComponent(selector);
-                    uiPopup.setShow(true);
-                    uiPopup.setResizable(true);
-                } catch (Exception e) {
-                    //TODO add log
-                }
-            }
-
-            uiPopup.setWindowSize(500, 200);
-            uiPopup.setRendered(true);
-            //prContext.addUIComponentToUpdateByAjax(uiPopup);
-            prContext.addUIComponentToUpdateByAjax(uiWorkingWS);
-
-
         }
-
     }
-    /******/
+
+    /**
+     * **
+     */
 
     public static String getParStatus() {
         return parStatus;
     }
 
     public String[] getActions() {
-        return new String[]{"Topic", "Poll", "AddEvent","Wiki"};
+        return new String[]{"Topic", "Poll", "AddEvent", "Wiki", "Upload"};
     }
 }

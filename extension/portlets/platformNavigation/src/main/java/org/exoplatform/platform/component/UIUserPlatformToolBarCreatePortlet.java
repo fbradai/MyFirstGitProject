@@ -1,7 +1,7 @@
 package org.exoplatform.platform.component;
 
-import org.exoplatform.cs.event.UICreateEvent;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 
@@ -22,9 +22,8 @@ public class UIUserPlatformToolBarCreatePortlet extends UIPortletApplication {
     private String renderedCompId_;
 
     public UIUserPlatformToolBarCreatePortlet() throws Exception {
-        addChild(UICreateList.class, null, null).setRendered(true);
-        addChild(UICreateForm.class, null, null).setRendered(false);
-        addChild(UICreateEvent.class, null, null).setRendered(false);
+        addChild(UICreateList.class, null, null);
+        addChild(UIPopupContainer.class, null, "CreatePortletPopUPContainer");
     }
 
 

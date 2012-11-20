@@ -4,25 +4,28 @@ import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.platform.webui.NavigationURLUtils;
+import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.platform.component.UICreateList;
+import org.exoplatform.cs.event.UICreateEvent;
+import org.exoplatform.platform.component.UICreateForm;
 
 def rcontext = _ctx.getRequestContext() ;
 JavascriptManager jsmanager = rcontext.getJavascriptManager();
 //jsmanager.addCustomizedOnLoadScript('eXo.portal.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
-jsmanager.require("SHARED/navigation", "navigation").addScripts('navigation.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
+jsmanager.require("SHARED/navigation", "nav").addScripts("nav.UIPortalNavigation.onLoad('" + uicomponent.id + "');");
 
 
 %>
 
-<ul class="UIUserToolBarPortlet UIHorizontalTabs" id="$uicomponent.id">
-	<li id="UserNavigationTabsContainer" class="UITab">
+<ul class="UICreateToolBarPortlet UIHorizontalTabs" id="$uicomponent.id">
+	<li id="CreateNavigationTabsContainer" class="UITab NormalToolbarTab">
 		 <a href="#" class="TBIcon"><img src="/eXoPlatformResources/skin/platformSkin/icons/bullet-toggle-plus-icon.png" alt="Create" /></a>
-		<ul style="display:none;" class="MenuItemContainer">
-
-
-                 	<%uicomponent.renderChildren()%>
-
-
+		<ul style="display:none;" class="MenuItemContainer">  
+		
+				   <%uicomponent.renderChild(UICreateList.class);%> 
 		</ul>
 	</li>
 </ul>
+<%uicomponent.renderChild(UIPopupContainer.class);%>
+
 

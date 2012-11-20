@@ -53,7 +53,7 @@
     </portlet>
     <portlet>
         <name>UIUserPlatformToolbarDesktopPortlet</name>
-        <module>           
+        <module>
             <depends>
                 <module>navigation</module>
             </depends>
@@ -78,12 +78,12 @@
                 <module>socialcomposer</module>
             </depends>
             -->
-             <depends>
+            <depends>
                 <module>social-core</module>
             </depends>
         </module>
     </portlet>
-     <portlet>
+    <portlet>
         <name>UIUserPlatformToolBarPortlet</name>
         <module>
             <depends>
@@ -99,11 +99,17 @@
             </depends>
         </module>
     </portlet>
-	 <portlet>
+    <portlet>
         <name>UIUserPlatformToolBarCreatePortlet</name>
         <module>
             <depends>
                 <module>navigation</module>
+            </depends>
+            <depends>
+                <module>base</module>
+            </depends>
+            <depends>
+                <module>social-core</module>
             </depends>
 
         </module>

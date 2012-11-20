@@ -1,4 +1,7 @@
-<%String clazz = "";
+<%
+import org.exoplatform.web.application.JavascriptManager;
+
+
 def labelTopic = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.topic");
 def labelPoll = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.poll");
 def labelEvent = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.eventtask");
@@ -6,17 +9,34 @@ def labelUpload = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.upload")
 def labelWiki = _ctx.appRes("UIUserPlatformToolBarCreatePortlet.label.wiki");
 //def doc="javascript:ajaxGet(eXo.env.server.createPortalURL('UIDocActivityComposer','SelectDocument',true));"
 
-
- for(action in uicomponent.getActions()) {
-
+def rcontext = _ctx.getRequestContext() ;
+JavascriptManager jsmanager = rcontext.getJavascriptManager();
+//jsmanager.addCustomizedOnLoadScript('eXo.portal.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
+jsmanager.require("SHARED/navigation", "nav").addScripts("nav.UIPortalNavigation.onLoad('" + uicomponent.id + "');");
 %>
-
-						<li id="$action" class="MenuItem $clazz">
-							<a  href="<%=uicomponent.event(action,action)%>" class="ToolBarActivityIcon" >$action</a>
-						</li>
-
-				 <%}  %>
-
-			<li class="MenuItem $clazz">
-				<a href="<%=uicomponent.event("Upload")%>" class="ToolBarActivityIcon">Upload</a>
-			</li>        <% uicomponent.renderChildren() %>
+<div id="$uicomponent.id">
+		<% System.out.println("##################"+uicomponent.getChildren().size());
+		if(uicomponent.getChildren().size()==0){%>	
+		
+			<li class="MenuItem">
+				<a href="<%=uicomponent.event("Topic","Topic")%>" class="ToolBarActivityIcon">$labelTopic</a>
+			</li>       
+             <li class="MenuItem">
+				<a href="<%=uicomponent.event("Poll","Poll")%>" class="ToolBarActivityIcon">$labelPoll</a>
+			</li>               
+             <li class="MenuItem">
+				<a href="<%=uicomponent.event("AddEvent","AddEvent")%>" class="ToolBarActivityIcon">$labelEvent</a>
+			</li>    
+			<li class="MenuItem">
+				<a href="<%=uicomponent.event("Wiki","Wiki")%>" class="ToolBarActivityIcon">$labelWiki</a>
+			</li>        
+			<li class="MenuItem">
+				<a href="<%=uicomponent.event("Upload","Upload")%>" class="ToolBarActivityIcon">$labelUpload</a>
+			</li> 
+			
+		<%} %>
+		    <li class="MenuItem">
+	            <%uicomponent.renderChildren();%>	
+			</li>
+				
+</div>
