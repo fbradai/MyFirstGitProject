@@ -30,23 +30,16 @@
   </properties>
 
  	<portal-layout>
-  <!-- 
-		 <portlet-application>
-		   <portlet>
-		     <application-ref>web</application-ref>
-		     <portlet-ref>LogoPortlet</portlet-ref>
-		     <preferences>
-		       <preference>
-		         <name>url</name>
-		         <value>/eXoResources/skin/sharedImages/DashboardIcon.png</value>
-		         <read-only>false</read-only>
-		       </preference>
-		     </preferences>
-		   </portlet>
-		   <access-permissions>Everyone</access-permissions>
-		   <show-info-bar>false</show-info-bar>
-		 </portlet-application>
-     -->
+         <portlet-application>
+             <portlet>
+                 <application-ref>platformNavigation</application-ref>
+                 <portlet-ref>UserNavigationPortlet</portlet-ref>
+                 <preferences/>
+             </portlet>
+             <access-permissions>Everyone</access-permissions>
+             <show-info-bar>false</show-info-bar>
+             <show-application-state>true</show-application-state>
+         </portlet-application>
     <portlet-application>
       <portlet>
         <application-ref>dashboard</application-ref>

@@ -52,7 +52,7 @@
 			<short-title>UIUserPlatformToolBarPortlet</short-title>
 		</portlet-info>
 	</portlet>
-	<!-- PLF-488 : Simplified Shared layout -->
+
 	<portlet>
 		<description xml:lang="EN">PlatformNavigation Portlet</description>
 		<portlet-name>UIMySpacePlatformToolBarPortlet</portlet-name>
@@ -60,7 +60,6 @@
 		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
 		<init-param>
 			<name>webui.configuration</name>
-			<!-- must match the path to configuration file -->
 			<value>/WEB-INF/conf/portlet/UIMySpacePlatformToolBarPortlet/configuration.xml</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -78,7 +77,7 @@
 			<name>NavigationChange</name>
 		</supported-processing-event>
 	</portlet>
-	<!-- FIN PLF-488-->
+
 	<portlet>
 		<description xml:lang="EN">PlatformNavigation Portlet</description>
 		<portlet-name>UIMyGroupsPlatformToolBarPortlet</portlet-name>
@@ -248,6 +247,30 @@
         <portlet-info>
             <title>UISearchPlatformToolbarPortlet</title>
             <short-title>UISearchPlatformToolbarPortlet</short-title>
+        </portlet-info>
+    </portlet>
+
+    <portlet>
+        <description xml:lang="EN">PlatformNavigation Portlet</description>
+        <portlet-name>UserNavigationPortlet</portlet-name>
+        <!--PLF-308-->
+        <display-name xml:lang="EN">UIUserNavigationPortlet</display-name>
+        <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+        <init-param>
+            <name>webui.configuration</name>
+            <!-- must match the path to configuration file -->
+            <value>/WEB-INF/conf/portlet/UIUserNavigationPortlet/configuration.xml</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>help</portlet-mode>
+        </supports>
+        <supported-locale>en</supported-locale>
+        <resource-bundle>locale.portlet.UIUserNavigationPortlet.UIUserNavigationPortlet</resource-bundle>
+        <portlet-info>
+            <title>UIUserNavigationPortlet</title>
+            <short-title>UIUserNavigationPortlet</short-title>
         </portlet-info>
     </portlet>
 	<!-- help END-->
