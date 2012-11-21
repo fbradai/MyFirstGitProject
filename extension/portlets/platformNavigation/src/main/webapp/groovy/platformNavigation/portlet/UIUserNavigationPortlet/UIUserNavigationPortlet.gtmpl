@@ -29,23 +29,23 @@
 
 <div class="UIUserNAvigationPortlet ClearFix" id="$uicomponentId">
     <%
-    String[] urlList = uicomponent.getURLAsList();
-    def i = 0;
-    def pageURL;
-    def imgPath="/eXoPlatformResources/skin/platformSkin/userNavigationPortlet/background/";
-    def imgUrl;
-    for (node in uicomponent.getUserNodesAsList()) {
-        def nodeLabel;
-        def str="UIUserNavigationPortlet.label."+node;
-        if (uicomponent.isProfileOwner()) str="UIUserNavigationPortlet.label.My"+node;
-        else   str="UIUserNavigationPortlet.label."+node;
-        nodeLabel = _ctx.appRes("UIUserNavigationPortlet.label.connections");
-        pageURL = urlList[i];
-        imgUrl=imgPath+node+".jpg";
-        def navigationTabClass = "UIUserNAvigationPortletTab";
-        if ((uicomponent.isSelectedUserNavigation(node))||((node.equals(uicomponent.DASHBOARD_URI))&&(uicomponent.isSelectedUserNavigation("/u/")))) {
-            navigationTabClass = "UIUserNAvigationPortletTabSelected";
-        }
+        String[] urlList = uicomponent.getURLAsList();
+        def i = 0;
+        def pageURL;
+        def imgPath="/eXoPlatformResources/skin/platformSkin/userNavigationPortlet/background/";
+        def imgUrl;
+        for (node in uicomponent.getUserNodesAsList()) {
+            def nodeLabel;
+            def str="UIUserNavigationPortlet.label."+node;
+            if (uicomponent.isProfileOwner()) str="UIUserNavigationPortlet.label.My"+node;
+            else   str="UIUserNavigationPortlet.label."+node;
+            nodeLabel = _ctx.appRes(str);
+            pageURL = urlList[i];
+            imgUrl=imgPath+node+".jpg";
+            def navigationTabClass = "UIUserNAvigationPortletTab";
+            if ((uicomponent.isSelectedUserNavigation(node))||((node.equals(uicomponent.DASHBOARD_URI))&&(uicomponent.isSelectedUserNavigation("/u/")))) {
+                navigationTabClass = "UIUserNAvigationPortletTabSelected";
+            }
     %>
     <% if ((node.equals(uicomponent.WIKI_URI)) || (node.equals(uicomponent.DASHBOARD_URI))) {
         if (uicomponent.isProfileOwner()) { %>
