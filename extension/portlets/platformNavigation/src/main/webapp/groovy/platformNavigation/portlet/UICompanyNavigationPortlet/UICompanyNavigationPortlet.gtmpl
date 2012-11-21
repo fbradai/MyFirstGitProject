@@ -1,0 +1,89 @@
+<%
+    import java.util.List;
+
+    import org.exoplatform.portal.mop.user.UserNavigation;
+    import org.exoplatform.portal.mop.user.UserNode;
+    import org.exoplatform.web.application.JavascriptManager;
+    import org.exoplatform.portal.webui.util.Util ;
+    import org.exoplatform.webui.organization.OrganizationUtils;
+    import org.gatein.common.text.EntityEncoder;
+    import org.exoplatform.platform.webui.NavigationURLUtils;
+    def rcontext = _ctx.getRequestContext() ;
+    JavascriptManager jsmanager = rcontext.getJavascriptManager();
+    //jsmanager.addCustomizedOnLoadScript('eXo.portal.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
+    jsmanager.require("SHARED/navigation", "navigation").addScripts('navigation.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
+    %>
+<%
+    void renderCurrentPortal() {
+        def nodes = uicomponent.getUserNodes(uicomponent.getCurrentPortalNavigation());
+        print """
+			<ul style="position: absolute; display:none" class="MenuItemContainer">
+		""";
+        int idx = 0;
+        for(UserNode node in nodes) {
+            renderPageNode(node, idx++ % 2 == 0);
+        }
+        print """
+			</ul>
+		""";
+    }
+
+    void renderPageNode(UserNode node, boolean flag) {
+        UserNode selectedNode = uicomponent.getSelectedPageNode();
+        String tabStyleNavigation = "";
+        if(selectedNode != null && node.getURI() == selectedNode.getURI()) {
+            tabStyleNavigation = "SelectedItem";
+        }
+
+        boolean hasChild = (node.getChildren() != null && node.getChildren().size() > 0);
+        String clazz = "";
+        if(hasChild) clazz = "ArrowIcon";
+        String	href = NavigationURLUtils.getURL(node);
+        String icon = node.getIcon();
+        if(icon == null) icon = "DefaultPageIcon";
+        boolean toolong = (node.resolvedLabel.length() > 60);
+        String label = ( toolong ? node.resolvedLabel.substring(0, 57) + "..." : node.resolvedLabel);
+        String title = "";
+        if(toolong) title = "title='$node.resolvedLabel'";
+        else title = "";
+        EntityEncoder entityEncoder = EntityEncoder.FULL;
+        label = entityEncoder.encode(label);
+        print """
+			<li class="MenuItem $tabStyleNavigation $clazz">
+		""";
+        if(node.pageRef != null) {
+            print """<a class="ItemIcon $icon" href="$href" $title>$label</a>""";
+        } else {
+            print """<a class="ItemIcon $icon" href="#" $title>$label</a>""";
+        }
+        if(hasChild) {
+            print """
+				<ul class="MenuItemContainer" style="position: absolute; display:none">
+			""" ;
+            int idx = 0;
+            for(UserNode child : node.getChildren()) {
+                renderPageNode(child, idx++ % 2 == 0);
+            }
+            print """
+				</ul>
+			""" ;
+
+        }
+        print """
+			</li>
+		""" ;
+    }
+    //String portal = allPortalNames.get(0);
+	String href = "/portal/intranet"
+	%>
+<li class="UIUserToolBarSitePortlet UIHorizontalTabs" id="$uicomponent.id">
+    <li class="UITab NormalToolbarTab">
+        <a class="ArrowIcon TBIcon" href="$href" style="text-transform: capitalize;">
+            intranet
+        </a>
+        <%
+            renderCurrentPortal();
+        %>
+
+    </li>
+</ul>

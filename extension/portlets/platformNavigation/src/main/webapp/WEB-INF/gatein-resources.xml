@@ -147,4 +147,12 @@
                     </depends>
         </module>
     </portlet>
+    <portlet>
+        <name>UICompanyNavigationPortlet</name>
+        <module>
+            <depends>
+                <module>navigation</module>
+            </depends>
+        </module>
+    </portlet>
 </gatein-resources>
