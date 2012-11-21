@@ -1,5 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
     <UIUserNavigationPortlet>
-
-</UIUserNavigationPortlet>
-    </bundle>
+        <label>
+            <activities>
+                Activités
+            </activities>
+            <profile>
+                Profile
+            </profile>
+            <connections>
+                Connections
+            </connections>
+            <wiki>
+                Wiki
+            </wiki>
+            <dashboard>
+                Dashboard
+            </dashboard>
+            <Myactivities>
+                Mes Activités
+            </Myactivities>
+            <Myprofile>
+                Mon Profile
+            </Myprofile>
+            <Myconnections>
+                Mes Connections
+            </Myconnections>
+            <Mywiki>
+                Mon Wiki
+            </Mywiki>
+            <Mydashboard>
+                Mon Dashboard
+            </Mydashboard>
+        </label>
+    </UIUserNavigationPortlet>
+</bundle>

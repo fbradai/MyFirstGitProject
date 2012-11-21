@@ -24,6 +24,7 @@ import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.Visibility;
 import org.exoplatform.portal.mop.navigation.Scope;
 import org.exoplatform.portal.mop.user.UserNavigation;
@@ -34,13 +35,19 @@ import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.webui.Utils;
+import org.exoplatform.web.application.RequestContext;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webos.webui.page.UIDesktopPage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author <a href="fbradai@exoplatform.com">Fbradai</a>
@@ -62,7 +69,7 @@ public class UIUserNavigationPortlet extends UIPortletApplication {
     public static String DEFAULT_TAB_NAME = "Tab_Default";
     private static final String USER ="/user/"  ;
     private static final String WIKI_HOME = "/WikiHome";
-    private static final String WIKI_REF ="myWiki" ;
+    private static final String WIKI_REF ="mywiki" ;
 
 
     public UIUserNavigationPortlet() throws Exception {
@@ -138,17 +145,20 @@ public class UIUserNavigationPortlet extends UIPortletApplication {
 
     public String getDashboardURL() throws Exception {
         Collection<UserNode> nodes = getUserNodes(getCurrentUserNavigation());
-        if (nodes == null || nodes.isEmpty()) {
-            return NavigationURLUtils.getURL(SiteKey.user(WebuiRequestContext.getCurrentInstance().getRemoteUser()), DEFAULT_TAB_NAME);
+        String dashboardLink;
+        RequestContext ctx = RequestContext.getCurrentInstance();
+        NodeURL dashboardUrl = ctx.createURL(NodeURL.TYPE);
+        UserNode dashboardNode = findDashboardNode();
+        if (dashboardNode != null)
+        {
+            dashboardLink = dashboardUrl.setNode(dashboardNode).toString();
         }
-        Iterator<UserNode> nodesIterator = nodes.iterator();
-        while (nodesIterator.hasNext()) {
-            UserNode userNode = (UserNode) nodesIterator.next();
-            if (!isWebOSNode(userNode) && !userNode.getVisibility().equals(Visibility.HIDDEN)) {
-                return NavigationURLUtils.getURL(userNode);
-            }
+        else
+        {
+            dashboardUrl.setResource(new NavigationResource(SiteType.USER,getCurrentUser(), null));
+            dashboardLink = dashboardUrl.toString();
         }
-        return NavigationURLUtils.getURL(SiteKey.user(WebuiRequestContext.getCurrentInstance().getRemoteUser()), DEFAULT_TAB_NAME);
+        return dashboardLink;
     }
 
     public UserNavigation getCurrentUserNavigation() throws Exception {
@@ -212,5 +222,24 @@ public class UIUserNavigationPortlet extends UIPortletApplication {
     public static UserPortal getUserPortal() {
         UserPortalConfig portalConfig = Util.getPortalRequestContext().getUserPortalConfig();
         return portalConfig.getUserPortal();
+    }
+
+    private UserNode findDashboardNode() throws Exception {
+        Collection<UserNode> nodes = getUserNodes(getCurrentUserNavigation());
+        if(nodes == null) {
+            return null;
+
+        }
+        else
+        {
+            for(UserNode node : nodes)
+            {
+                if(!isWebOSNode(node))
+                {
+                    return node;
+                }
+            }
+            return null;
+        }
     }
 }

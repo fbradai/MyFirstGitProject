@@ -23,6 +23,7 @@
 @import url(UICLVFolderMode/Stylesheet.css);
 @import url(UIBreadcrumb/Stylesheet.css);
 @import url(userNavigationPortlet/Stylesheet.css);
+@import url(UICompanyNavigationPortlet/UICompanyNavigationPortlet.css);
 
 div, table, th, tr, td, img, form {
 	padding: 0px; margin: 0px;

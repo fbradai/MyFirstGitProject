@@ -1,0 +1,30 @@
+
+
+.FL {
+    float: left;
+}
+
+.ClearFix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.UICompanyNavigationPortlet  {
+    background-color: #f0f0f0;
+}
+.UICompanyNavigations  {
+    background-color: #f0f0f0;
+}
+.UICompanyNavigationPortletItem {
+    height: 25;
+    width:50;
+    margin: 10px 10px 10px 10px;
+}
+
+.UICompanyNavigationPortletSelectedItem{
+
+    margin: 2px 5px 6px 10px;
+    background-color: #959595;
+}

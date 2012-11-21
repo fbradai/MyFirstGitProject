@@ -71,4 +71,5 @@ public class UICompanyNavigationPortlet extends UIPortletApplication {
     public UserNode getSelectedPageNode() throws Exception {
         return Util.getUIPortal().getSelectedUserNode();
     }
+
 }

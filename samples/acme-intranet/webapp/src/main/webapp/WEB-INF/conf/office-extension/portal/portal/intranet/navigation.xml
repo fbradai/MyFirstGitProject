@@ -24,8 +24,7 @@
   <priority>1</priority>
 
   <page-nodes>
-    
-                           
+
   <node>
 			<uri>home</uri>
 			<name>home</name>
@@ -217,10 +216,11 @@
       <page-reference>portal::intranet::wiki</page-reference>
     </node>
       <node>
-          <uri>myWiki</uri>
-          <name>myWiki</name>
-          <label>#{portal.intranet.myWiki}</label>
-          <page-reference>portal::intranet::myWiki</page-reference>
+          <uri>mywiki</uri>
+          <name>mywiki</name>
+          <label>#{portal.intranet.mywiki}</label>
+          <visibility>SYSTEM</visibility>
+          <page-reference>portal::intranet::mywiki</page-reference>
       </node>
   </page-nodes>
   </node-navigation>

@@ -1,46 +1,29 @@
 <%
-    import java.util.List;
-
-    import org.exoplatform.portal.mop.user.UserNavigation;
     import org.exoplatform.portal.mop.user.UserNode;
-    import org.exoplatform.web.application.JavascriptManager;
-    import org.exoplatform.portal.webui.util.Util ;
-    import org.exoplatform.webui.organization.OrganizationUtils;
     import org.gatein.common.text.EntityEncoder;
     import org.exoplatform.platform.webui.NavigationURLUtils;
-    def rcontext = _ctx.getRequestContext() ;
-    JavascriptManager jsmanager = rcontext.getJavascriptManager();
-    //jsmanager.addCustomizedOnLoadScript('eXo.portal.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
-    jsmanager.require("SHARED/navigation", "navigation").addScripts('navigation.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
-    %>
+%>
 <%
     void renderCurrentPortal() {
         def nodes = uicomponent.getUserNodes(uicomponent.getCurrentPortalNavigation());
         print """
-			<ul style="position: absolute; display:none" class="MenuItemContainer">
+			<div class="UICompanyNavigations" >
 		""";
-        int idx = 0;
         for(UserNode node in nodes) {
-            renderPageNode(node, idx++ % 2 == 0);
+            renderPageNode(node);
         }
         print """
-			</ul>
+			</div>
 		""";
     }
 
-    void renderPageNode(UserNode node, boolean flag) {
+    void renderPageNode(UserNode node) {
         UserNode selectedNode = uicomponent.getSelectedPageNode();
-        String tabStyleNavigation = "";
+        String tabStyleNavigation = "UICompanyNavigationPortletItem";
         if(selectedNode != null && node.getURI() == selectedNode.getURI()) {
-            tabStyleNavigation = "SelectedItem";
+            tabStyleNavigation = "UICompanyNavigationPortletSelectedItem";
         }
-
-        boolean hasChild = (node.getChildren() != null && node.getChildren().size() > 0);
-        String clazz = "";
-        if(hasChild) clazz = "ArrowIcon";
         String	href = NavigationURLUtils.getURL(node);
-        String icon = node.getIcon();
-        if(icon == null) icon = "DefaultPageIcon";
         boolean toolong = (node.resolvedLabel.length() > 60);
         String label = ( toolong ? node.resolvedLabel.substring(0, 57) + "..." : node.resolvedLabel);
         String title = "";
@@ -49,41 +32,26 @@
         EntityEncoder entityEncoder = EntityEncoder.FULL;
         label = entityEncoder.encode(label);
         print """
-			<li class="MenuItem $tabStyleNavigation $clazz">
+			<div class="$tabStyleNavigation">
 		""";
         if(node.pageRef != null) {
-            print """<a class="ItemIcon $icon" href="$href" $title>$label</a>""";
+            print """<a  href="$href" $title>$label</a>""";
         } else {
-            print """<a class="ItemIcon $icon" href="#" $title>$label</a>""";
-        }
-        if(hasChild) {
-            print """
-				<ul class="MenuItemContainer" style="position: absolute; display:none">
-			""" ;
-            int idx = 0;
-            for(UserNode child : node.getChildren()) {
-                renderPageNode(child, idx++ % 2 == 0);
-            }
-            print """
-				</ul>
-			""" ;
-
+            print """<a  href="#" $title>$label</a>""";
         }
         print """
-			</li>
+			</div>
 		""" ;
     }
-    //String portal = allPortalNames.get(0);
-	String href = "/portal/intranet"
-	%>
-<li class="UIUserToolBarSitePortlet UIHorizontalTabs" id="$uicomponent.id">
-    <li class="UITab NormalToolbarTab">
-        <a class="ArrowIcon TBIcon" href="$href" style="text-transform: capitalize;">
-            intranet
+%>
+<div>
+    <div class="UICompanyNavigationPortlet">
+        <a  href="#" style="text-transform: capitalize;">
+            <%= _ctx.appRes("UICompanyNavigationPortlet.CompanyBar")  %>
         </a>
+    </div>
         <%
             renderCurrentPortal();
         %>
+</div>
 
-    </li>
-</ul>

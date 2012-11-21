@@ -28,14 +28,18 @@
 %>
 
 <div class="UIUserNAvigationPortlet ClearFix" id="$uicomponentId">
-    <% def myLabel = "";
-    if (uicomponent.isProfileOwner()) myLabel = "My"
+    <%
     String[] urlList = uicomponent.getURLAsList();
     def i = 0;
     def pageURL;
     def imgPath="/eXoPlatformResources/skin/platformSkin/userNavigationPortlet/background/";
     def imgUrl;
     for (node in uicomponent.getUserNodesAsList()) {
+        def nodeLabel;
+        def str="UIUserNavigationPortlet.label."+node;
+        if (uicomponent.isProfileOwner()) str="UIUserNavigationPortlet.label.My"+node;
+        else   str="UIUserNavigationPortlet.label."+node;
+        nodeLabel = _ctx.appRes("UIUserNavigationPortlet.label.connections");
         pageURL = urlList[i];
         imgUrl=imgPath+node+".jpg";
         def navigationTabClass = "UIUserNAvigationPortletTab";
@@ -47,19 +51,19 @@
         if (uicomponent.isProfileOwner()) { %>
     <div class="$navigationTabClass FL">
         <a href="$pageURL">
-            <img title="$node" alt="$node" src="$imgUrl">
+            <img title="<%=nodeLabel%>" alt="<%=nodeLabel%>" src="$imgUrl">
             <h4>
-                <%=myLabel%> <%=node%>
+                <%=nodeLabel%>
             </h4>
         </a>
     </div>
     <% }
     } else { %>
     <div class="$navigationTabClass FL">
-        <a title="$node" href="$pageURL" >
-            <img alt="$node" src="$imgUrl">
+        <a title="<%=nodeLabel%>" href="$pageURL" >
+            <img alt="<%= nodeLabel %>" src="$imgUrl">
             <h4 >
-                <%=myLabel%> <%=node%>
+                <%=nodeLabel%>
             </h4>
         </a>
     </div>

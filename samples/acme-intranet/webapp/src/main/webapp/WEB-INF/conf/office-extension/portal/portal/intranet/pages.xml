@@ -1352,7 +1352,7 @@
     </page>
 
     <page>
-        <name>myWiki</name>
+        <name>mywiki</name>
         <title>myWiki</title>
         <access-permissions>*:/platform/users</access-permissions>
         <edit-permission>*:/platform/administrators</edit-permission>
