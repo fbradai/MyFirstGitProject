@@ -20,6 +20,7 @@
 
 -->
 
+<container id="NavigationPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
 <container template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
 	<container template="war:/groovy/portal/webui/container/UIPinToolbarContainer.gtmpl">
 		<access-permissions>*:/platform/users</access-permissions>
@@ -95,5 +96,20 @@
 			</container>
 		</container>
 	</container>
-	<site-body/>
+
 </container>
+
+<container id="LeftNavigationPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+            <access-permissions>*:/platform/users</access-permissions>
+            <portlet-application>
+                <portlet>
+                    <application-ref>platformNavigation</application-ref>
+                    <portlet-ref>UICompanyNavigationPortlet</portlet-ref>
+                </portlet>
+                <access-permissions>*:/platform/users</access-permissions>
+                <show-info-bar>false</show-info-bar>
+            </portlet-application>
+        </container>
+    <site-body/>
+    </container>
+
