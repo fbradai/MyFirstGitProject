@@ -155,4 +155,12 @@
             </depends>
         </module>
     </portlet>
+    <portlet>
+        <name>UISpaceNavigationPortlet</name>
+        <module>
+            <depends>
+                <module>navigation</module>
+            </depends>
+        </module>
+    </portlet>
 </gatein-resources>
