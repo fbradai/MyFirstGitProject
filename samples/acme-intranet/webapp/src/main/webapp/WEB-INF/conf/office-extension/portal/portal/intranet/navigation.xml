@@ -55,7 +55,7 @@
     <visibility>SYSTEM</visibility>
     <page-reference>portal::intranet::profile</page-reference>
    </node>
-   
+
    <node>
     <uri>connections</uri>
     <name>connections</name>

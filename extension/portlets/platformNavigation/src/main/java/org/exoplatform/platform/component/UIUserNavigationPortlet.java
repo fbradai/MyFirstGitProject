@@ -19,35 +19,18 @@
 package org.exoplatform.platform.component;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.exoplatform.platform.component.utils.DashboardUtils;
 import org.exoplatform.platform.webui.NavigationURLUtils;
-import org.exoplatform.portal.config.DataStorage;
-import org.exoplatform.portal.config.UserPortalConfig;
-import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.Visibility;
-import org.exoplatform.portal.mop.navigation.Scope;
-import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
-import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.webui.Utils;
-import org.exoplatform.web.application.RequestContext;
-import org.exoplatform.web.url.navigation.NavigationResource;
-import org.exoplatform.web.url.navigation.NodeURL;
-import org.exoplatform.webos.webui.page.UIDesktopPage;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author <a href="fbradai@exoplatform.com">Fbradai</a>
@@ -110,7 +93,7 @@ public class UIUserNavigationPortlet extends UIPortletApplication {
         urlList=(String[])ArrayUtils.add(urlList, getactivitesURL());
         urlList=(String[])ArrayUtils.add(urlList, getrelationURL());
         urlList=(String[])ArrayUtils.add(urlList, getWikiURL());
-        urlList=(String[])ArrayUtils.add(urlList, getDashboardURL());
+        urlList=(String[])ArrayUtils.add(urlList, DashboardUtils.getDashboardURL());
         return urlList;
     }
 
@@ -137,109 +120,4 @@ public class UIUserNavigationPortlet extends UIPortletApplication {
         return LinkProvider.getUserProfileUri(Utils.getOwnerIdentity(true).getRemoteId());
     }
 
-     //////////////////////////////////////////////////////////
-     /**/                                                 /**/
-     /**/                 //DASHBOARD//                   /**/
-     /**/                                                 /**/
-    //////////////////////////////////////////////////////////
-
-    public String getDashboardURL() throws Exception {
-        Collection<UserNode> nodes = getUserNodes(getCurrentUserNavigation());
-        String dashboardLink;
-        RequestContext ctx = RequestContext.getCurrentInstance();
-        NodeURL dashboardUrl = ctx.createURL(NodeURL.TYPE);
-        UserNode dashboardNode = findDashboardNode();
-        if (dashboardNode != null)
-        {
-            dashboardLink = dashboardUrl.setNode(dashboardNode).toString();
-        }
-        else
-        {
-            dashboardUrl.setResource(new NavigationResource(SiteType.USER,getCurrentUser(), null));
-            dashboardLink = dashboardUrl.toString();
-        }
-        return dashboardLink;
-    }
-
-    public UserNavigation getCurrentUserNavigation() throws Exception {
-        return getNavigation(SiteKey.user(getCurrentUser()));
-
-    }
-
-    public String getCurrentUser() {
-        WebuiRequestContext rcontext = WebuiRequestContext.getCurrentInstance();
-        return rcontext.getRemoteUser();
-    }
-
-    private UserNavigation getNavigation(SiteKey userKey) {
-        UserPortal userPortal = getUserPortal();
-        return userPortal.getNavigation(userKey);
-    }
-
-    private boolean isWebOSNode(UserNode userNode) throws Exception {
-        if (userNode == null) {
-            return false;
-        }
-        String pageRef = userNode.getPageRef();
-        if (pageRef == null) {
-            return false;
-        }
-        DataStorage ds = getApplicationComponent(DataStorage.class);
-        Page page = ds.getPage(pageRef);
-        return page == null || UIDesktopPage.DESKTOP_FACTORY_ID.equals(page.getFactoryId());
-    }
-
-    public Collection<UserNode> getUserNodes(UserNavigation nav) {
-        UserPortal userPortall = getUserPortal();
-        if (nav != null) {
-            try {
-                UserNode rootNode = userPortall.getNode(nav, Scope.CHILDREN, toolbarFilterConfig, null);
-                return filterWebOSNode(rootNode.getChildren());
-            } catch (Exception exp) {
-                log.warn(nav.getKey().getName() + " has been deleted");
-            }
-        }
-        return Collections.emptyList();
-    }
-
-    private Collection<UserNode> filterWebOSNode(Collection<UserNode> pageNodes) throws Exception {
-        if (pageNodes == null || pageNodes.size() == 0) {
-            return pageNodes;
-        }
-        List<UserNode> tempNodes = new ArrayList<UserNode>(pageNodes);
-        UserNode webOSNode = null;
-        for (UserNode node : tempNodes) {
-            if (isWebOSNode(node)) {
-                webOSNode = node;
-            }
-        }
-        if (webOSNode != null) {
-            tempNodes.remove(tempNodes);
-        }
-        return tempNodes;
-    }
-
-    public static UserPortal getUserPortal() {
-        UserPortalConfig portalConfig = Util.getPortalRequestContext().getUserPortalConfig();
-        return portalConfig.getUserPortal();
-    }
-
-    private UserNode findDashboardNode() throws Exception {
-        Collection<UserNode> nodes = getUserNodes(getCurrentUserNavigation());
-        if(nodes == null) {
-            return null;
-
-        }
-        else
-        {
-            for(UserNode node : nodes)
-            {
-                if(!isWebOSNode(node))
-                {
-                    return node;
-                }
-            }
-            return null;
-        }
-    }
 }
