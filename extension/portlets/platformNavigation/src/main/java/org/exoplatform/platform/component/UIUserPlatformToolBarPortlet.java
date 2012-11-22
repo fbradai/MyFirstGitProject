@@ -17,6 +17,7 @@
 package org.exoplatform.platform.component;
 
 import org.exoplatform.container.ExoContainer;
+import org.exoplatform.platform.webui.NavigationURLUtils;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.navigation.Scope;
@@ -47,12 +48,13 @@ public class UIUserPlatformToolBarPortlet extends UIPortletApplication {
 
   private String currentPortalName = null;
   private boolean socialPortal = false;
+    private static final String USER ="/user/"  ;
+    private static final String WIKI_HOME = "/WikiHome";
+    private static final String WIKI_REF ="mywiki" ;
 
   public UIUserPlatformToolBarPortlet() throws Exception {
 
   }
-
-
 
   public User getUser() throws Exception {
     OrganizationService service = getApplicationComponent(OrganizationService.class);
@@ -112,5 +114,8 @@ public class UIUserPlatformToolBarPortlet extends UIPortletApplication {
             ownerAvatar = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
         }
         return ownerAvatar;
+    }
+    public String getWikiURL() {
+        return NavigationURLUtils.getURLInCurrentPortal(WIKI_REF)+USER +Utils.getOwnerIdentity(true).getRemoteId()+WIKI_HOME;
     }
 }
