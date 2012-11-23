@@ -19,6 +19,7 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.social.core.space.SpaceException;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.social.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -39,7 +40,8 @@ import java.util.*;
  */
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UISpaceNavigationPortlet/UISpaceNavigationPortlet.gtmpl",
         events = {
-                @EventConfig(listeners = UISpaceNavigationPortlet.IncrementActionListener.class)
+        @EventConfig(listeners = UISpaceNavigationPortlet.IncrementActionListener.class) ,
+        @EventConfig(listeners = UISpaceNavigationPortlet.SearchActionListener.class, phase = Event.Phase.DECODE)
         }
 )
 public class UISpaceNavigationPortlet extends UIPortletApplication {
@@ -59,6 +61,7 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
     private List<String> spacesSortedByAccesscount = null;
     static int MY_SPACES_MAX_NUMBER =10;
     static int loadingCapacity =10;
+    private UISpaceNavigationSearch uiSpaceSearch = null;
 
     private Comparator<UserNavigation> spaceAccessComparator = new Comparator<UserNavigation>() {
         public int compare(UserNavigation o1, UserNavigation o2) {
@@ -96,12 +99,15 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         }
         UserNodeFilterConfig.Builder builder = UserNodeFilterConfig.builder();
         mySpaceFilterConfig = builder.build();
-       // addChild(UISpaceNavigationSearch.class,null,null);
+        uiSpaceSearch = createUIComponent(UISpaceNavigationSearch.class, null, "UISpaceNavigationSearch");
+      //  uiSpaceSearch.setTypeOfRelation(ALL_SPACES_STATUS);
+        addChild(uiSpaceSearch);
     }
 
 
     public List<UserNavigation> getGroupNavigations() throws Exception {
         List<UserNavigation> computedNavigations = null;
+        String searchCondition=uiSpaceSearch.getSpaceNameSearch();
         if (spaceService != null) {
             String remoteUser = getUserId();
             UserPortal userPortal = getUserPortal();
@@ -124,6 +130,8 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
                     if (space == null)
                         navigationItr.remove();
                     if (!navigationParts[1].equals("spaces") && !spaces.contains(space))
+                        navigationItr.remove();
+                    if(searchCondition!=null && !navigationParts[2].contains(searchCondition) )
                         navigationItr.remove();
                 } else { // not spaces navigation
                     navigationItr.remove();
@@ -280,7 +288,25 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         }
     }
 
-    public String getImageSource(Space space) throws Exception {
+    static public class SearchActionListener extends EventListener<UISpaceNavigationPortlet> {
+        @Override
+        public void execute(Event<UISpaceNavigationPortlet> event) throws Exception {
+            UISpaceNavigationPortlet uiManageAllSpaces = event.getSource();
+            uiManageAllSpaces.getGroupNavigations();
+            LOG.info("search triggered222222222222222222222222222");
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiManageAllSpaces);
+        }
+    }
+
+
+
+
+
+
+
+    public String getImageSource(String SpaceLaBel) throws Exception {
+        SpaceService spaceService = Utils.getSpaceService();
+        Space space=spaceService.getSpaceByDisplayName(SpaceLaBel)  ;
         return space.getAvatarUrl();
     }
 

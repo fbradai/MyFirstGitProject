@@ -15,8 +15,7 @@ JavascriptManager jsmanager = rcontext.getJavascriptManager();
 jsmanager.require("SHARED/navigation", "nav").addScripts("nav.UIPortalNavigation.onLoad('" + uicomponent.id + "');");
 %>
 <div id="$uicomponent.id">
-		<% System.out.println("##################"+uicomponent.getChildren().size());
-		if(uicomponent.getChildren().size()==0){%>	
+		<% if(uicomponent.getChildren().size()==0){%>
 		
 			<li class="MenuItem">
 				<a href="<%=uicomponent.event("Topic","Topic")%>" class="ToolBarActivityIcon">$labelTopic</a>

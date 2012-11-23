@@ -1,6 +1,7 @@
 package org.exoplatform.platform.component;
 
-import org.exoplatform.social.common.ResourceBundleUtil;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -26,8 +27,12 @@ import java.util.ResourceBundle;
         lifecycle = UIFormLifecycle.class,
         template = "app:/groovy/platformNavigation/portlet/UISpaceNavigationPortlet/UISpaceNavigationSearch.gtmpl",
         events = {
-                @EventConfig(listeners = UISpaceNavigationSearch.SearchActionListener.class)
-        }
+                @EventConfig(
+                        phase = Event.Phase.DECODE,
+                        listeners = UISpaceNavigationSearch.SearchNavigationActionListener.class
+
+                )
+}
 )
 
 public class UISpaceNavigationSearch extends UIForm {
@@ -37,7 +42,8 @@ public class UISpaceNavigationSearch extends UIForm {
     String spaceNameSearch = null;
     public static final String SEARCH = "Search";
     private boolean isNewSearch;
-    int spaceNum;
+
+    protected static Log log = ExoLogger.getLogger(UISpaceNavigationSearch.class);
 
 
     public UISpaceNavigationSearch() throws Exception {
@@ -46,12 +52,14 @@ public class UISpaceNavigationSearch extends UIForm {
         UIFormStringInput findSpace = new UIFormStringInput(SPACE_SEARCH, null, null);
         findSpace.setHTMLAttribute(HTML_ATTRIBUTE_TITLE, resourceBundle.getString("UISpaceSearch.label.FindSpace"));
         findSpace.setHTMLAttribute(HTML_ATTRIBUTE_PLACEHOLDER, resourceBundle.getString("UISpaceSearch.label.DefaultSpaceNameAndDesc"));
-        addUIFormInput(findSpace);
+
+       addUIFormInput(findSpace);
     }
 
-    static public class SearchActionListener extends EventListener<UISpaceNavigationSearch> {
+    static public class SearchNavigationActionListener extends EventListener<UISpaceNavigationSearch> {
         @Override
         public void execute(Event<UISpaceNavigationSearch> event) throws Exception {
+            log.info("search triggered11111111111111111111111111111111111111111111111");
             WebuiRequestContext ctx = event.getRequestContext();
             UISpaceNavigationSearch uiSpaceSearch = event.getSource();
 
@@ -60,7 +68,7 @@ public class UISpaceNavigationSearch extends UIForm {
             String searchCondition = (((UIFormStringInput) uiSpaceSearch.getChildById(SPACE_SEARCH)).getValue());
             if ((searchCondition == null || searchCondition.equals(defaultSpaceNameAndDesc))) {
                 // uiSpaceSearch.setSelectedChar(ALL);
-                uiSpaceSearch.setSpaceNameSearch(defaultSpaceNameAndDesc);
+                uiSpaceSearch.setSpaceNameSearch(null);
                 uiSpaceSearch.setNewSearch(true);
             } else {
                 if (searchCondition != null) {
@@ -71,7 +79,7 @@ public class UISpaceNavigationSearch extends UIForm {
                 uiSpaceSearch.setSpaceNameSearch(searchCondition);
                 uiSpaceSearch.setNewSearch(true);
 
-                Event<UIComponent> searchEvent = uiSpaceSearch.<UIComponent>getParent().createEvent(SEARCH, Event.Phase.DECODE, ctx);
+                Event<UIComponent> searchEvent = uiSpaceSearch.<UIComponent>getParent().createEvent(SEARCH,null, ctx);
                 if (searchEvent != null) {
                     searchEvent.broadcast();
                 }
@@ -79,28 +87,22 @@ public class UISpaceNavigationSearch extends UIForm {
         }
     }
 
-    public int getSpaceNum() {
-        return spaceNum;
-    }
+
+
+
+
+
 
     public void setSpaceNameSearch(String spaceNameSearch) {
         this.spaceNameSearch = spaceNameSearch;
     }
-
     public void setNewSearch(boolean isNewSearch) {
         this.isNewSearch = isNewSearch;
     }
-
-    protected String getLabelSpaceFound() {
-        String labelArg = "UISpaceSearch.label.SpaceFoundListingFilter";
-
-        if (getSpaceNum() > 1) {
-            labelArg = "UISpaceSearch.label.SpacesFoundListingFilter";
-        }
-        return ResourceBundleUtil.
-                replaceArguments(WebuiRequestContext.getCurrentInstance()
-                        .getApplicationResourceBundle().getString(labelArg), new String[]{
-                        Integer.toString(getSpaceNum())});
+    public String getSpaceNameSearch() {
+        return spaceNameSearch;
     }
+
+
 
 }

@@ -28,9 +28,9 @@
   import org.exoplatform.portal.mop.Visibility;
   import org.exoplatform.webui.organization.OrganizationUtils;
   import org.exoplatform.platform.webui.NavigationURLUtils;
-import org.exoplatform.social.core.service.LinkProvider;
+  import org.exoplatform.social.core.service.LinkProvider;
   import java.util.Collection;
-
+  import org.exoplatform.platform.component.UISpaceNavigationSearch
   import org.exoplatform.web.application.JavascriptManager;
   import org.gatein.common.text.EntityEncoder;
 
@@ -72,11 +72,15 @@ import org.exoplatform.social.core.service.LinkProvider;
 		else title = "";
         EntityEncoder entityEncoder = EntityEncoder.FULL;
 		label = entityEncoder.encode(label);
+		def imageSource = uicomponent.getImageSource(node.resolvedLabel);
+        if (imageSource == null) {
+          imageSource = LinkProvider.SPACE_DEFAULT_AVATAR_URL;
+        }
 		print """
 			<div class="SpaceItem $clazz $tabStyleNavigation">
 		""";
 						if(node.pageRef != null) {
-								print """<a class="ItemIcon" href="$href" $title>$label</a>""";
+								print """<a class="ItemIcon" href="$href" $title><img title="" alt="" src="$imageSource" />  $label</a>""";
 
 						} else {
 								print """<a class="ItemIcon" href="#" $title>$label</a>""";
@@ -106,9 +110,10 @@ import org.exoplatform.social.core.service.LinkProvider;
 
 %>
 
-<div class="UIUserToolBarGroupPortlet UIHorizontalTabs" id="$uicomponent.id">
-  <div class="NormalToolbarTab"><a class="EditorIcon TBIcon" href="<%= spacesLink %>"><%=_ctx.appRes("UISpaceNavigationPortlet.label.Spaces")%> ($spaceTotal)</a></div> <!-- Merge exoadmin:  navigation-->
-
+<div class="UISpaceNavigationPortlet UIHorizontalTabs" id="$uicomponent.id">
+  <div class="UISpaceNavigationPortletTab NormalToolbarTab"><a class="EditorIcon TBIcon" href="<%= spacesLink %>"><%=_ctx.appRes("UISpaceNavigationPortlet.label.Spaces")%> ($spaceTotal)</a></div> <!-- Merge exoadmin:  navigation-->
+     <% uicomponent.renderChild(UISpaceNavigationSearch.class); %>
+	 <div class="ListNavigationSpaces">
 
     <%
 
@@ -150,7 +155,7 @@ import org.exoplatform.social.core.service.LinkProvider;
     <% } %>
     <!-- FIN -->
 
-
+</div>
   </div>
 </div>
 <% } %>
