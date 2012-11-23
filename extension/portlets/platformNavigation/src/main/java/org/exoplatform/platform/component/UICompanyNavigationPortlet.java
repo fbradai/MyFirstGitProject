@@ -19,7 +19,6 @@
 
 package org.exoplatform.platform.component;
 
-import org.exoplatform.platform.component.utils.DashboardUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.mop.SiteKey;
@@ -57,7 +56,7 @@ public class UICompanyNavigationPortlet extends UIPortletApplication {
         userFilterConfig = builder.build();
         userACL = getApplicationComponent(UserACL.class);
     }
-    String g=DashboardUtils.getDashboardURL();
+
     public UserNavigation getCurrentPortalNavigation() throws Exception {
         return getNavigation(SiteKey.portal(getCurrentPortal()));
     }
