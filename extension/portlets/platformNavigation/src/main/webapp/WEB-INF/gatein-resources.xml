@@ -163,4 +163,16 @@
             </depends>
         </module>
     </portlet>
+    <portlet>
+        <name>UISearchPlatformToolbarPortlet</name>
+        <module>
+            <script>
+                <name>eXo.search.SearchAdminToolbar</name>
+                <path>/javascript/eXo/platform/search/Search.js</path>
+            </script>
+            <depends>
+                <module>jquery</module>
+            </depends>
+        </module>
+    </portlet>
 </gatein-resources>
