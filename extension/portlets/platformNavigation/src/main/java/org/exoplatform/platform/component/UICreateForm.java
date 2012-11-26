@@ -49,12 +49,12 @@ public class UICreateForm extends UIContainer {
 
     public UICreateForm() throws Exception {
 
-        //  UIWikiSpaceSwitcher uiWikiSpaceSwitcher = addChild(UIWikiSpaceSwitcher.class, null, SPACE_SWITCHER);
-        //   EventUIComponent eventComponent = new EventUIComponent(CREATE_FORM_CONTAINER, SWITCH_SPACE_ACTION, EventUIComponent.EVENTTYPE.EVENT);
-        //   uiWikiSpaceSwitcher.init(eventComponent);
+        // UIWikiSpaceSwitcher uiWikiSpaceSwitcher = addChild(UIWikiSpaceSwitcher.class, null, SPACE_SWITCHER);
+         // EventUIComponent eventComponent = new EventUIComponent(CREATE_FORM_CONTAINER, SWITCH_SPACE_ACTION, EventUIComponent.EVENTTYPE.EVENT);
+         // uiWikiSpaceSwitcher.init(eventComponent);
 
 
-        //  addUIFormInput(new UIFormSelectBox(LOCATION, LOCATION, options));
+          //addUIFormInput(new UIFormSelectBox(LOCATION, LOCATION, options));
     }
 
     public String[] getActions() {
@@ -81,18 +81,12 @@ public class UICreateForm extends UIContainer {
 
         public void execute(Event<UICreateForm> event)
                 throws Exception {
-
-            log.info("#################### Cancel  Action was triggered");
             UICreateList uiparent = event.getSource().getAncestorOfType(UICreateList.class);
             WebuiRequestContext context = event.getRequestContext();
             if(uiparent.getChild(UICreateForm.class)!=null) {
             uiparent.removeChild(UICreateForm.class);
             }
-
-            log.info("*********************** Cancel  Action was triggered");
-
             context.addUIComponentToUpdateByAjax(uiparent);
-
 
         }
     }

@@ -41,7 +41,7 @@ import java.util.*;
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UISpaceNavigationPortlet/UISpaceNavigationPortlet.gtmpl",
         events = {
         @EventConfig(listeners = UISpaceNavigationPortlet.IncrementActionListener.class) ,
-        @EventConfig(listeners = UISpaceNavigationPortlet.SearchActionListener.class, phase = Event.Phase.DECODE)
+        @EventConfig(listeners = UISpaceNavigationPortlet.SearchNavigationActionListener.class)
         }
 )
 public class UISpaceNavigationPortlet extends UIPortletApplication {
@@ -288,7 +288,7 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         }
     }
 
-    static public class SearchActionListener extends EventListener<UISpaceNavigationPortlet> {
+    static public class SearchNavigationActionListener extends EventListener<UISpaceNavigationPortlet> {
         @Override
         public void execute(Event<UISpaceNavigationPortlet> event) throws Exception {
             UISpaceNavigationPortlet uiManageAllSpaces = event.getSource();

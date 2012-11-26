@@ -1,8 +1,10 @@
 package org.exoplatform.platform.component;
 
 import org.exoplatform.cs.event.UICreateEvent;
-import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.commons.UIDocumentSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -11,7 +13,6 @@ import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +44,16 @@ import java.util.List;
 
                 @EventConfig
                         (listeners = UICreateList.UploadActionListener.class
-                        )
+                        ) ,
+                @EventConfig(
+                        listeners = UICreateList.CancelActionListener.class
+                )
         }
 )
 
 public class UICreateList extends UIContainer {
     static String parStatus;
+    private static Log log = ExoLogger.getLogger(UICreateList.class);
 
     public static void remove(UICreateList uiform) {
         List<UIComponent> uilist = uiform.getChildren();
@@ -73,7 +78,6 @@ public class UICreateList extends UIContainer {
 
             UIUserPlatformToolBarCreatePortlet uiForm = (UIUserPlatformToolBarCreatePortlet) event.getSource().getAncestorOfType(UIUserPlatformToolBarCreatePortlet.class);
             UICreateList uisource = (UICreateList) event.getSource();
-            HttpServletRequest request = Util.getPortalRequestContext().getRequest();
             remove(uisource);
             uisource.addChild(UICreateEvent.class, null, null).setRendered(true);
             event.getRequestContext().addUIComponentToUpdateByAjax(uisource);
@@ -155,6 +159,21 @@ public class UICreateList extends UIContainer {
     /**
      * **
      */
+    static public class CancelActionListener extends EventListener<UICreateList> {
+
+
+        public void execute(Event<UICreateList> event)
+                throws Exception {
+            UIUserPlatformToolBarCreatePortlet uiForm = (UIUserPlatformToolBarCreatePortlet) event.getSource().getAncestorOfType(UIUserPlatformToolBarCreatePortlet.class);
+            UICreateList uiparent = event.getSource();
+            WebuiRequestContext context = event.getRequestContext();
+            remove(uiparent);
+            context.addUIComponentToUpdateByAjax(uiparent);
+            context.addUIComponentToUpdateByAjax(uiForm);
+
+
+        }
+    }
 
     public static String getParStatus() {
         return parStatus;

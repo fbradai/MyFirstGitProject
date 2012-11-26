@@ -28,8 +28,8 @@ import java.util.ResourceBundle;
         template = "app:/groovy/platformNavigation/portlet/UISpaceNavigationPortlet/UISpaceNavigationSearch.gtmpl",
         events = {
                 @EventConfig(
-                        phase = Event.Phase.DECODE,
-                        listeners = UISpaceNavigationSearch.SearchNavigationActionListener.class
+
+                        listeners = UISpaceNavigationSearch.SearchNavigationActionListener.class  ,  phase = org.exoplatform.webui.event.Event.Phase.DECODE
 
                 )
 }
@@ -40,7 +40,7 @@ public class UISpaceNavigationSearch extends UIForm {
     public static final String SPACE_SEARCH = "SpaceSearch";
     private static final String HTML_ATTRIBUTE_PLACEHOLDER = "placeholder";
     String spaceNameSearch = null;
-    public static final String SEARCH = "Search";
+    public static final String SEARCH = "SearchNavigation";
     private boolean isNewSearch;
 
     protected static Log log = ExoLogger.getLogger(UISpaceNavigationSearch.class);
@@ -79,7 +79,7 @@ public class UISpaceNavigationSearch extends UIForm {
                 uiSpaceSearch.setSpaceNameSearch(searchCondition);
                 uiSpaceSearch.setNewSearch(true);
 
-                Event<UIComponent> searchEvent = uiSpaceSearch.<UIComponent>getParent().createEvent(SEARCH,null, ctx);
+                Event<UIComponent> searchEvent = uiSpaceSearch.<UIComponent>getParent().createEvent(SEARCH, Event.Phase.DECODE, ctx);
                 if (searchEvent != null) {
                     searchEvent.broadcast();
                 }
