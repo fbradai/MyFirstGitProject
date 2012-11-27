@@ -18,16 +18,6 @@
         xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2_1 http://www.gatein.org/xml/ns/gatein_resources_1_2_1"
         xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2_1">
 
- <!--   <portlet-skin>
-        <portlet-ref> </portlet-ref>
-        <application-name>platformNavigation</application-name>
-        <portlet-name>UserNavigationPortlet</portlet-name>
-        <skin-name>Default</skin-name>
-        <css-path>/skin/social/portlet/UIProfileNavigationPortlet/DefaultStylesheet.css</css-path>
-        <css-priority>1</css-priority>
-    </portlet-skin>
-         -->
-
     <portlet>
         <name>PlatformAdminToolbarPortlet</name>
         <module>
@@ -174,5 +164,17 @@
                 <module>jquery</module>
             </depends>
         </module>
+    </portlet>
+    <portlet>
+        <name>UIGroupsNavigationPortlet</name>
+        <scripts>
+            <script>
+                <name>eXo.webui.UISiteMap</name>
+                <path>/javascript/UIGroupsNavigation/UIGroupsTree.js</path>
+            </script>
+            <depends>
+                <scripts>bootstrap</scripts>
+            </depends>
+        </scripts>
     </portlet>
 </gatein-resources>
