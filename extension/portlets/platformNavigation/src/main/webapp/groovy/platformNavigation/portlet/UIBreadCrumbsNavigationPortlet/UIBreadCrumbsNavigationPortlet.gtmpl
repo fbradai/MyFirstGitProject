@@ -1,0 +1,49 @@
+<%
+
+import org.exoplatform.portal.mop.user.UserNavigation;
+import java.util.List;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.gatein.common.text.EntityEncoder;
+import org.exoplatform.commons.utils.HTMLEntityEncoder;
+import org.exoplatform.web.url.PortalURL;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.social.core.service.LinkProvider;
+import org.exoplatform.social.core.space.model.Space;
+import org.exoplatform.portal.mop.user.UserPortal;
+
+	boolean isUserUrl=uicomponent.isUserUrl();
+	boolean isSpaceUrl=uicomponent.isSpaceUrl();
+
+	if(isUserUrl || isSpaceUrl){
+
+	String actionLink;
+	String nodeName;
+	String srcImage;
+	String ownerId=null;
+
+	 if(isSpaceUrl) {
+
+        ownerId = uicomponent.getSpaceLabel();
+        if(ownerId!=null){
+			nodeName=uicomponent.getSpacename(ownerId);
+			srcImage=uicomponent.getImageSource(ownerId);
+        }
+	}else{
+
+           ownerId=uicomponent.getUserName();
+		   if(ownerId!=null){
+           actionLink=uicomponent.getProfileURL(ownerId)
+		   nodeName=uicomponent.getUserFullName(ownerId);
+		   srcImage=uicomponent.getAvatarURL(ownerId);
+            }
+		}
+
+        %>
+	<div class="UIBreadcumbsNavigationPortlet" id="$uicomponent.id">
+		<a class="BreadcumbEntry" href="#"><img title="" alt="" src="$srcImage" /> $nodeName</a>
+	</div>
+
+
+<%}%>

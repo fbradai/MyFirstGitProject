@@ -177,4 +177,13 @@
             </depends>
         </scripts>
     </portlet>
+    <portlet>
+        <name>UIBreadCrumbsNavigationPortlet</name>
+        <module>
+            <depends>
+                <module>navigation</module>
+            </depends>
+        </module>
+    </portlet>
+
 </gatein-resources>

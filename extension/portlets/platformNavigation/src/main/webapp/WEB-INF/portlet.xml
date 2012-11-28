@@ -340,6 +340,30 @@
             <short-title>UIGroupsNavigationPortlet</short-title>
         </portlet-info>
     </portlet>
+
+
+    <portlet>
+        <description xml:lang="EN">BreadCrumbs Navigation Portlet</description>
+        <portlet-name>UIBreadCrumbsNavigationPortlet</portlet-name>
+        <display-name xml:lang="EN">UIBreadCrumbsNavigationPortlet</display-name>
+        <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+        <init-param>
+            <name>webui.configuration</name>
+            <!-- must match the path to configuration file -->
+            <value>/WEB-INF/conf/portlet/UIBreadCrumbsNavigationPortlet/configuration.xml</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>help</portlet-mode>
+        </supports>
+
+
+        <portlet-info>
+            <title>UIBreadCrumbsNavigationPortlet</title>
+            <short-title>UIBreadCrumbsNavigationPortlet</short-title>
+        </portlet-info>
+    </portlet>
 	<event-definition>
 		<name>NavigationChange</name>
 	</event-definition>
