@@ -76,7 +76,7 @@ function getModule(params)
    module.component = {};
    module.component.common = new Project("org.exoplatform.platform", "platform-component-common", "jar", module.version).
    addDependency(new Project("org.exoplatform.commons", "commons-component-upgrade", "jar", commonsVersion)).
-       addDependency(new Project("org.exoplatform.commons", "commons-component-common", "jar", commonsVersion)).
+   addDependency(new Project("org.exoplatform.commons", "commons-component-common", "jar", commonsVersion)).
    addDependency(new Project("org.exoplatform.commons", "commons-component-product", "jar", commonsVersion));
 
    module.common = {};
@@ -85,7 +85,8 @@ function getModule(params)
    module.common.resources = new Project("org.exoplatform.commons", "commons-webui-resources", "war", commonsVersion);
    module.common.resources.deployName = "CommonsResources";
 
-   module.common.extension = new Project("org.exoplatform.commons", "commons-extension-webapp", "war", commonsVersion);
+   module.common.extension = new Project("org.exoplatform.commons", "commons-extension-webapp", "war", commonsVersion).
+    addDependency(new Project("org.exoplatform.commons", "commons-api", "jar", commonsVersion));
    module.common.extension.deployName = "commons-extension";
 
    module.patch = {};
