@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
 
-    Copyright (C) 2009 eXo Platform SAS.
+    Copyright (C) 2012 eXo Platform SAS.
 
     This is free software; you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License as
@@ -27,7 +27,7 @@
     <external-component-plugins>
         <target-component>org.exoplatform.services.wcm.core.WebSchemaConfigService</target-component>
         <component-plugin>
-            <name>PortalFolderSchemaHandler</name>
+            <name>NavigationServiceHandler</name>
             <set-method>addWebSchemaHandler</set-method>
             <type>org.exoplatform.platform.common.navigation.NavigationServiceHandler</type>
         </component-plugin>
