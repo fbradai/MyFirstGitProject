@@ -279,11 +279,12 @@ a {
 .UISpaceNavigationPortletSelectedItem {
     background-color: #EBEBEB;
 }
-
-
 .ListNavigationSpaces {
     max-height: 230px;
     overflow-y: auto;
 }
 .UISpaceNavigationPortletTab NormalToolbarTab{
+}
+.LeftNavigationTDContainer{
+    width: 250px;
 }
