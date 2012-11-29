@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-    <UICompanyNavigationPortlet>
+    <UISpaceNavigationPortlet>
+        <label>
+            <Spaces>Spaces</Spaces>
+            <Join> Join a space</Join>
+        </label>
 
-    </UICompanyNavigationPortlet>
+    </UISpaceNavigationPortlet>
 </bundle>

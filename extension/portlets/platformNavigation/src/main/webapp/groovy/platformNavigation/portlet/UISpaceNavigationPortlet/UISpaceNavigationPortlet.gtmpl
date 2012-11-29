@@ -111,7 +111,7 @@
 %>
 
 <div class="UISpaceNavigationPortlet UIHorizontalTabs" id="$uicomponent.id">
-  <div class="UISpaceNavigationPortletTab NormalToolbarTab"><a class="EditorIcon TBIcon" href="<%= spacesLink %>"><%=_ctx.appRes("UISpaceNavigationPortlet.label.Spaces")%> ($spaceTotal)</a></div> <!-- Merge exoadmin:  navigation-->
+  <div class="UISpaceNavigationPortletTab NormalToolbarTab"><%=_ctx.appRes("UISpaceNavigationPortlet.label.Spaces")%> ($spaceTotal)</div> <!-- Merge exoadmin:  navigation-->
      <% uicomponent.renderChild(UISpaceNavigationSearch.class); %>
 	 <div class="ListNavigationSpaces">
 
@@ -157,5 +157,7 @@
 
 </div>
   </div>
+
+ <div> <a class="EditorIcon TBIcon" href="<%= findSpacesLink %>"><%=_ctx.appRes("UISpaceNavigationPortlet.label.Join")%></a></div>
 </div>
 <% } %>

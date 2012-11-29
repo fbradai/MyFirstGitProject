@@ -39,10 +39,10 @@ def rcontext = _ctx.getRequestContext();
   <%uiform.renderField(childs.get(0)); %>
     </div>
 
-		   <div>
+
 		   <%String link = uicomponent.event("SearchNavigation");%>
-		    <a href="$link" >Search</a>
-		   </div>
+
+
 
 
 

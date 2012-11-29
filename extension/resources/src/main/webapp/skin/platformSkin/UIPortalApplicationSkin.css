@@ -282,7 +282,7 @@ a {
 
 
 .ListNavigationSpaces {
-    height: 230px;
+    max-height: 230px;
     overflow-y: auto;
 }
 .UISpaceNavigationPortletTab NormalToolbarTab{
