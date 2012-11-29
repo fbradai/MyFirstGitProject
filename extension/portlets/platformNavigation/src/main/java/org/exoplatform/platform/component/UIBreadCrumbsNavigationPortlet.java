@@ -12,11 +12,16 @@ import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvide
 import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.social.webui.UIAvatarUploader;
 import org.exoplatform.social.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -30,12 +35,15 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 
-@ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UIBreadCrumbsNavigationPortlet/UIBreadCrumbsNavigationPortlet.gtmpl"
+@ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UIBreadCrumbsNavigationPortlet/UIBreadCrumbsNavigationPortlet.gtmpl",
+        events = {
+        @EventConfig(listeners = UIBreadCrumbsNavigationPortlet.ChangePictureActionListener.class)
+}
 
 )
 public class UIBreadCrumbsNavigationPortlet extends UIPortletApplication {
 
-
+    private final String POPUP_AVATAR_UPLOADER = "UIPopupAvatarUploader";
     private SpaceService spaceService = null;
     private OrganizationService orgService = null;
     private UserNavigationHandlerService userService = null;
@@ -44,6 +52,9 @@ public class UIBreadCrumbsNavigationPortlet extends UIPortletApplication {
         spaceService = getApplicationComponent(SpaceService.class);
         orgService = getApplicationComponent(OrganizationService.class);
         userService = getApplicationComponent(UserNavigationHandlerService.class);
+        UIPopupWindow uiPopup = createUIComponent(UIPopupWindow.class, null, POPUP_AVATAR_UPLOADER);
+        uiPopup.setWindowSize(510, 0);
+        addChild(uiPopup);
     }
 
 
@@ -166,6 +177,21 @@ public class UIBreadCrumbsNavigationPortlet extends UIPortletApplication {
             return true;
         } else return false;
 
+    }
+
+    public boolean isOwner() {
+        return Utils.isOwner();
+    }
+    public static class ChangePictureActionListener extends EventListener<UIBreadCrumbsNavigationPortlet> {
+
+        @Override
+        public void execute(Event<UIBreadCrumbsNavigationPortlet> event) throws Exception {
+            UIBreadCrumbsNavigationPortlet uiProfileNavigation = event.getSource();
+            UIPopupWindow uiPopup = uiProfileNavigation.getChild(UIPopupWindow.class);
+            UIAvatarUploader uiAvatarUploader = uiProfileNavigation.createUIComponent(UIAvatarUploader.class, null, null);
+            uiPopup.setUIComponent(uiAvatarUploader);
+            uiPopup.setShow(true);
+        }
     }
 
 
