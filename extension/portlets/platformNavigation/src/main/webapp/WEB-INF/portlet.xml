@@ -357,7 +357,8 @@
             <mime-type>text/html</mime-type>
             <portlet-mode>help</portlet-mode>
         </supports>
-
+        <supported-locale>en</supported-locale>
+        <resource-bundle>locale.portlet.UIBreadCrumbsNavigationPortlet.UIBreadCrumbsNavigationPortlet</resource-bundle>
 
         <portlet-info>
             <title>UIBreadCrumbsNavigationPortlet</title>

@@ -12,7 +12,9 @@ import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.portal.mop.user.UserPortal;
+import org.exoplatform.webui.core.UIPopupWindow;
 
+    def changePictureLabel = _ctx.appRes(uicomponent.id + ".label.ChangePicture");
 	boolean isUserUrl=uicomponent.isUserUrl();
 	boolean isSpaceUrl=uicomponent.isSpaceUrl();
 
@@ -42,7 +44,17 @@ import org.exoplatform.portal.mop.user.UserPortal;
 
         %>
 	<div class="UIBreadcumbsNavigationPortlet" id="$uicomponent.id">
-		<a class="BreadcumbEntry" href="#"><img title="" alt="" src="$srcImage" /> $nodeName</a>
+	 <% uicomponent.renderChild(UIPopupWindow.class); %>
+	  <div class="BreadcumbEntry">
+	  <img title="$nodeName" alt="$nodeName" src="$srcImage" />
+	  $nodeName
+	   <%if (uicomponent.isOwner() && isUserUrl) { %>
+
+          <div class="ChangeAvatar">
+            <a onclick="<%=uicomponent.event("ChangePicture")%>; return false;" href="javascript:void(0)">$changePictureLabel</a>
+          </div>
+      <% } %>
+	  </div>
 	</div>
 
 
