@@ -14,7 +14,7 @@ JavascriptManager jsmanager = rcontext.getJavascriptManager();
 //jsmanager.addCustomizedOnLoadScript('eXo.portal.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
 jsmanager.require("SHARED/navigation", "nav").addScripts("nav.UIPortalNavigation.onLoad('" + uicomponent.id + "');");
 
-
+ if(uicomponent.isSocialPortal()){
 %>
 
 <ul class="UICreateToolBarPortlet UIHorizontalTabs" id="$uicomponent.id">
@@ -26,6 +26,8 @@ jsmanager.require("SHARED/navigation", "nav").addScripts("nav.UIPortalNavigation
 		</ul>
 	</li>
 </ul>
+
 <%uicomponent.renderChild(UIPopupContainer.class);%>
+<%}%>
 
 
