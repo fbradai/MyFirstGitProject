@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-    <UIHelpPlatformToolbarPortlet>
-        <Title>
-            Ricerca
-        </Title>
-    </UIHelpPlatformToolbarPortlet>
+    <UISearchPlatformToolbarPortlet>
+        <Search>
+            Ricerca:
+        </Search>
+    </UISearchPlatformToolbarPortlet>
 
 </bundle>
