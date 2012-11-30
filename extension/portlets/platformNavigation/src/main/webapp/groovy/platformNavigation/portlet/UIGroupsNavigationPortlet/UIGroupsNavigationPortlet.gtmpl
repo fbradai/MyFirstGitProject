@@ -34,44 +34,33 @@
 
 
     JavascriptManager jsManager = Util.getPortalRequestContext().getJavascriptManager();
-    jsManager.addJavascript("initSitemapPortlet('$uicomponent.id');");
+    jsManager.addJavascript("initGroupNavigationPortlet('$uicomponent.id')");
 
-    void renderGroupPageNavigation(UserNavigation navigation, String lastNode) {
+    void renderGroupPageNavigation(UserNavigation navigation) {
 
         def nodes = uicomponent.getValidUserNodes(navigation);
         if (nodes == null || nodes.isEmpty()) return;
 
         def ownerId = navigation.getKey().getName();
         String navTitle = OrganizationUtils.getGroupLabel(ownerId);
-
-        println """
-						<div class="$lastNode Node">
-							<div class="ExpandIcon ClearFix">
-							<input type="hidden" name="expandURL" value=""/>
-					""";
-        println """<a class=NodeIcon DefaultPageIcon' href="#">$navTitle</a>""";
-        println """
-							</div>
-				        <div class="ChildrenContainer" style="display: none">
-					""";
-
-        lastNode1 = '';
-        int childrenSize1 = nodes.size();
-        int size1 = 0;
+        println """<div>
+                      <div class="GroupName">
+                         <a  href="#">$navTitle</a>
+                      </div>
+					  <div class="GroupListContent">
+                         <div class="UIGroupTree">
+					            """;
         for (UserNode node : nodes) {
-            size1++;
-            if (size1 == childrenSize1) {
-                lastNode1 = 'LastNode';
-            }
-            renderPageNodeGroup(node, lastNode1);
+             renderPageNodeGroup(node);
         }
-        println """
+         println """
+						    </div>
 						</div>
 					</div>
 				""";
     }
 
-    void renderPageNodeGroup(UserNode node, String lastNode) {
+    void renderPageNodeGroup(UserNode node) {
 
         if (!node.getVisibility().equals(Visibility.DISPLAYED)) {
             return;
@@ -81,8 +70,8 @@
         def hasChild = (childrenNodes != null) && !childrenNodes.isEmpty();
         String href = NavigationURLUtils.getURL(node);
 
-        boolean toolong = (node.resolvedLabel.length() > 60);
-        String label = (toolong ? node.resolvedLabel.substring(0, 57) + "..." : node.resolvedLabel);
+        boolean toolong = (node.resolvedLabel.length() > 16);
+        String label = (toolong ? node.resolvedLabel.substring(0, 15) + "..." : node.resolvedLabel);
         String title = "";
         if (toolong) title = "title='$node.resolvedLabel'";
         else title = "";
@@ -94,34 +83,22 @@
         }
         if (hasChild) {
 
-            MimeResponse res = _ctx.getRequestContext().getResponse();
-            ResourceURL resourceURL = res.createResourceURL();
-            def treePath = node.getId();
-            resourceURL.setResourceID(treePath);
-            def actionExpand = resourceURL.toString();
             println """
-						<div class="$lastNode Node">
-							<div class="ExpandIcon ClearFix">
-							<input type="hidden" name="expandURL" value="$actionExpand"/>
-					""";
-            println """<a class=NodeIcon DefaultPageIcon' href="$href">$label</a>""";
-            println """
-							</div>
-				        <div class="ChildrenContainer" style="display: none">
+					<div class=" Node">
+						<div class="NodeContent">
+						    <a class="NodeIcon DefaultPageIcon" href="$href">$label</a>
+                            <img class="ExpandIcon" src="/eXoPlatformResources/skin/platformSkin/UIGroupsNavigation/DefaultSkin/background/icon_expand.gif"/>
+						</div>
+                    <div class="ChildrenContainer" style="display: none">
 					""";
 
-            lastNode2 = '';
-            int childrenSize2 = childrenNodes.size();
-            int size2 = 0;
+
             for (UserNode child : childrenNodes) {
                 if (!node.getVisibility().equals(Visibility.DISPLAYED)) {
                     continue;
                 }
-                size2++;
-                if (size2 == childrenSize2) {
-                    lastNode2 = 'LastNode';
-                }
-                renderPageNodeGroup(child, lastNode2);
+
+                renderPageNodeGroup(child);
             }
 
             println """
@@ -131,7 +108,7 @@
         }
         else {
             println """
-					<div class="$lastNode Node ClearFix">
+					<div class=" Node ClearFix">
 						<div class="NullItem">
 							<div class="ClearFix">
 								<a class="NodeIcon DefaultPageIcon" href="$href">$label</a>
@@ -144,43 +121,25 @@
     }
 
     def groupNavigations = uicomponent.getGroupNavigations();
-    def collapseAll = uicomponent.event("CollapseAll");
+
 %>
 
-<div id="$uicomponent.id" class="UISitemap">
-   <div>
+<div id="$uicomponent.id" class="UIGroupsNavigation">
+   <div class="UIGroupsNavigationTitle">
        <a href="#"><%=_ctx.appRes("UIGroupsNavigationPortlet.label")%></a>
    </div>
-    <%
-        if (groupNavigations != null && !groupNavigations.isEmpty()) {
-    %>
 
-    <div class="ClearFix">
-        <div class="CollapseAll FL" onclick="$collapseAll">
-            <%=_ctx.appRes("UIGroupsNavigationPortlet.label.CollapseAll")%>
-        </div>
-    </div>
-    <%
-        }
-    %>
-    <div class="SitemapContent">
-        <div class="UISiteTree">
+
             <% if (groupNavigations != null && !groupNavigations.isEmpty()) {
                 lastNode = '';
-                int childrenSize = groupNavigations.size();
-                int size = 0;
-                for (navigation in groupNavigations) {
-                    size++;
 
-                    if (size == childrenSize) {
-                        lastNode = 'LastNode';
-                    }
-                    renderGroupPageNavigation(navigation, lastNode);
+                for (navigation in groupNavigations) {
+
+                    renderGroupPageNavigation(navigation);
                 }
             }
             %>
-        </div>
-    </div>
+
 </div>
 
 

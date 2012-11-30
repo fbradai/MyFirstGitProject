@@ -169,7 +169,7 @@
         <name>UIGroupsNavigationPortlet</name>
         <scripts>
             <script>
-                <name>eXo.webui.UISiteMap</name>
+                <name>eXo.webui.UIGroupNavigation</name>
                 <path>/javascript/UIGroupsNavigation/UIGroupsTree.js</path>
             </script>
             <depends>

@@ -31,10 +31,8 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
-import org.exoplatform.webui.event.*;
 
 import java.util.*;
 
@@ -47,9 +45,8 @@ import java.util.*;
         lifecycle =
                 UIApplicationLifecycle.class,
         template =
-                "app:/groovy/platformNavigation/portlet/UIGroupsNavigationPortlet/UIGroupsNavigationPortlet.gtmpl",
-        events =
-                { @EventConfig(listeners = UIGroupsNavigationPortlet.CollapseAllActionListener.class)})
+                "app:/groovy/platformNavigation/portlet/UIGroupsNavigationPortlet/UIGroupsNavigationPortlet.gtmpl"
+      )
 
 public class UIGroupsNavigationPortlet extends UIPortletApplication {
 
@@ -147,13 +144,5 @@ public class UIGroupsNavigationPortlet extends UIPortletApplication {
         return portalConfig.getUserPortal();
     }
 
-    // This event is only a trick for updating the  Portlet to collapse all nodes
 
-    static public class CollapseAllActionListener extends org.exoplatform.webui.event.EventListener<UIGroupsNavigationPortlet>
-    {
-        public void execute(Event<UIGroupsNavigationPortlet> event) throws Exception
-        {
-
-        }
-    }
 }
