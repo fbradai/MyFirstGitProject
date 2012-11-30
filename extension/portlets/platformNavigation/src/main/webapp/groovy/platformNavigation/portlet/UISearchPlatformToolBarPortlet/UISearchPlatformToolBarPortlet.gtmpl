@@ -3,10 +3,10 @@
 <ul class="UISearchPlatformToolBarPortlet UIHorizontalTabs" id="$uicomponent.id">
 <li class="UITab NormalToolbarTab">
     <div id="ToolBarSearch" class="ArrowIcon TBIcon">
-        <input id="adminkeyword" name="adminkeyword" value=$labelSearch
+        <input id="adminkeyword" name="adminkeyword" value="$labelSearch"
         onkeypress="eXo.search.SearchAdminToolbar.quickSearchadminOnEnter(event);" type="text" />
         <a href="#">
-            <img alt="Search" src="/eXoPlatformResources/skin/platformSkin/icons/Search.png">
+            <img alt="Search" src="/eXoPlatformResources/skin/platformSkin/icons/Search.png"/>
         </a>
     </div>
 </li>
