@@ -146,14 +146,6 @@
         </module>
     </portlet>
     <portlet>
-        <name>UISpaceNavigationPortlet</name>
-        <module>
-            <depends>
-                <module>navigation</module>
-            </depends>
-        </module>
-    </portlet>
-    <portlet>
         <name>UISearchPlatformToolbarPortlet</name>
         <module>
             <script>
@@ -185,5 +177,15 @@
             </depends>
         </module>
     </portlet>
+    <module>
+        <name>navigation-spaces-search</name>
+        <script>
+            <name>eXo.navigation.UISpaceNavigation</name>
+            <path>/javascript/eXo/platform/navigation/UISpaceNavigationPortlet/UISpaceNavigation.js</path>
+        </script>
+        <depends>
+            <module>jquery</module>
+        </depends>
+    </module>
 
 </gatein-resources>

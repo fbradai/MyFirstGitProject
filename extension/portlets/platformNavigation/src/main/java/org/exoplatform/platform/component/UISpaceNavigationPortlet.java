@@ -46,9 +46,6 @@ import java.util.*;
 )
 public class UISpaceNavigationPortlet extends UIPortletApplication {
 
-
-
-
     private static final Log LOG = ExoLogger.getLogger(UISpaceNavigationPortlet.class);
 
     private static final String SPACE_SETTINGS = "settings";
@@ -61,7 +58,7 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
     private List<String> spacesSortedByAccesscount = null;
     static int MY_SPACES_MAX_NUMBER =10;
     static int loadingCapacity =10;
-    private UISpaceNavigationSearch uiSpaceSearch = null;
+    //private UISpaceNavigationSearch uiSpaceSearch = null;
 
     private Comparator<UserNavigation> spaceAccessComparator = new Comparator<UserNavigation>() {
         public int compare(UserNavigation o1, UserNavigation o2) {
@@ -99,15 +96,14 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         }
         UserNodeFilterConfig.Builder builder = UserNodeFilterConfig.builder();
         mySpaceFilterConfig = builder.build();
-        uiSpaceSearch = createUIComponent(UISpaceNavigationSearch.class, null, "UISpaceNavigationSearch");
-      //  uiSpaceSearch.setTypeOfRelation(ALL_SPACES_STATUS);
-        addChild(uiSpaceSearch);
+        //uiSpaceSearch = createUIComponent(UISpaceNavigationSearch.class, null, "UISpaceNavigationSearch");
+        //addChild(uiSpaceSearch);
     }
 
 
     public List<UserNavigation> getGroupNavigations() throws Exception {
         List<UserNavigation> computedNavigations = null;
-        String searchCondition=uiSpaceSearch.getSpaceNameSearch();
+        //String searchCondition=uiSpaceSearch.getSpaceNameSearch();
         if (spaceService != null) {
             String remoteUser = getUserId();
             UserPortal userPortal = getUserPortal();
@@ -131,8 +127,8 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
                         navigationItr.remove();
                     if (!navigationParts[1].equals("spaces") && !spaces.contains(space))
                         navigationItr.remove();
-                    if(searchCondition!=null && !navigationParts[2].contains(searchCondition) )
-                        navigationItr.remove();
+                    //if(searchCondition!=null && !navigationParts[2].contains(searchCondition) )
+                        //navigationItr.remove();
                 } else { // not spaces navigation
                     navigationItr.remove();
                 }

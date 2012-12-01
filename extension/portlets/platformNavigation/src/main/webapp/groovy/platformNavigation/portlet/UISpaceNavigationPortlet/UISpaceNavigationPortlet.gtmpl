@@ -109,22 +109,21 @@
     def mySpacesDisplayed = 0;
 
 %>
+<%
+  def rcontext = _ctx.getRequestContext() ;
+  def requireJs = rcontext.getJavascriptManager().getRequireJS();
+  requireJs.require("SHARED/navigation-spaces-search", "spacesSearch");
+  requireJs.addScripts("spacesSearch.UISpaceNavigation.init('" + uicomponent.id  + "','" + restUrl + "','" + defaultValueForTextSearch + "','" + selectSpaceAction + "');");
+%>
 
 <div class="UISpaceNavigationPortlet UIHorizontalTabs" id="$uicomponent.id">
   <div class="UISpaceNavigationPortletTab NormalToolbarTab"><%=_ctx.appRes("UISpaceNavigationPortlet.label.Spaces")%> ($spaceTotal)</div> <!-- Merge exoadmin:  navigation-->
-     <% uicomponent.renderChild(UISpaceNavigationSearch.class); %>
+     <div class="SpaceSearch"><input type="text" class="SpaceSearchText LostFocus" value="Filter spaces"/></div>
 	 <div class="ListNavigationSpaces">
 
     <%
 
-    def rcontext = _ctx.getRequestContext();
-    def jsManager = rcontext.getJavascriptManager();
-    //jsManager.addCustomizedOnLoadScript('eXo.portal.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
-    jsManager.require("SHARED/navigation", "navigation").addScripts('navigation.UIPortalNavigation.onLoad("' + uicomponent.id + '");');
-
     if (groupNavigations!= null && !groupNavigations.isEmpty()) {
-
-
 
       for(navigation in groupNavigations) {
       	if (navigation.getKey().getName().indexOf("spaces") <0 || mySpacesDisplayed == -1){
