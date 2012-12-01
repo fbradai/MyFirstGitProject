@@ -3,7 +3,6 @@ package org.exoplatform.platform.component;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.platform.common.space.statistic.SpaceAccessService;
-import org.exoplatform.platform.webui.NavigationURLUtils;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.mop.SiteKey;
@@ -22,7 +21,6 @@ import org.exoplatform.social.core.space.SpaceException;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.social.webui.Utils;
-import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -295,27 +293,8 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         @Override
         public void execute(Event<UISpaceNavigationPortlet> event) throws Exception {
 
-            WebuiRequestContext context = event.getRequestContext();
-
-            UISpaceNavigationPortlet uiManageAllSpaces = event.getSource();
-
-            UserNode userNode = uiManageAllSpaces.getSelectedNode();
-
-            String	href = NavigationURLUtils.getURL(userNode);
-            RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
-
-            requireJS.require("SHARED/navigation-spaces-search", "spacesSearch");
-            requireJS.require("SHARED/wiki-view", "wikiView").addScripts("spacesSearch.UISpaceNavigation.ajaxRedirect('" + href + "');");
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiManageAllSpaces);
         }
     }
-
-
-
-
-
-
-
     public String getImageSource(String SpaceLaBel) throws Exception {
         SpaceService spaceService = Utils.getSpaceService();
         Space space=spaceService.getSpaceByDisplayName(SpaceLaBel)  ;

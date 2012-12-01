@@ -28,8 +28,8 @@ UISpaceNavigation.prototype.init = function(uicomponentId, mySpaceRestUrl, defau
     me.selectSpaceAction = selectSpaceAction;
 
     var me = eXo.navigation.UISpaceNavigation;
-    var wikiSpaceSwitcher = document.getElementById(uicomponentId);
-    var textField = $(wikiSpaceSwitcher).find("input.SpaceSearchText")[0];
+    var navigationSpaceSearch = document.getElementById(uicomponentId);
+    var textField = $(navigationSpaceSearch).find("input.SpaceSearchText")[0];
     textField.value = defaultValueForTextSearch;
 
     textField.onkeydown = function() {
@@ -85,8 +85,8 @@ UISpaceNavigation.prototype.render = function(dataList, uicomponentId) {
     var me = eXo.navigation.UISpaceNavigation;
     me.dataList = dataList;
 
-    var wikiSpaceSwitcher = document.getElementById(uicomponentId);
-    var spaceChooserPopup = $(wikiSpaceSwitcher).find('div.ListNavigationSpaces')[0];
+    var navigationSpaceSearch = document.getElementById(uicomponentId);
+    var spacesListREsult = $(navigationSpaceSearch).find('div.ListNavigationSpaces')[0];
     //var spaces = dataList.jsonList;
     var spaces = dataList;
     var groupSpaces = '';
@@ -99,14 +99,13 @@ UISpaceNavigation.prototype.render = function(dataList, uicomponentId) {
             + name + "</a>";
         groupSpaces += spaceDiv;
     }
-    //alert(groupSpaces);
-    spaceChooserPopup.innerHTML = groupSpaces;
+    spacesListREsult.innerHTML = groupSpaces;
 
 };
 UISpaceNavigation.prototype.onTextSearchChange = function(uicomponentId) {
     var me = eXo.navigation.UISpaceNavigation;
-    var wikiSpaceSwitcher = document.getElementById(uicomponentId);
-    var textSearch = $(wikiSpaceSwitcher).find("input.SpaceSearchText")[0].value;
+    var navigationSpaceSearch = document.getElementById(uicomponentId);
+    var textSearch = $(navigationSpaceSearch).find("input.SpaceSearchText")[0].value;
     if (textSearch != me.lastSearchKeyword) {
         me.lastSearchKeyword = textSearch;
         me.requestData(textSearch, uicomponentId);
