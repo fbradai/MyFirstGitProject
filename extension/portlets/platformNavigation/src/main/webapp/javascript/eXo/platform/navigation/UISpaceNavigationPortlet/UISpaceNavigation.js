@@ -16,6 +16,8 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
+if (!eXo.navigation)
+    eXo.navigation = {};
 function UISpaceNavigation() {
 };
 UISpaceNavigation.prototype.init = function(uicomponentId, mySpaceRestUrl, defaultValueForTextSearch, selectSpaceAction) {
@@ -49,9 +51,13 @@ UISpaceNavigation.prototype.init = function(uicomponentId, mySpaceRestUrl, defau
         textField.className="SpaceSearchText Focus"
     };
 
-    textField.onclick = function() {
-        var event = event || window.event;
-        event.cancelBubble = true;
+    textField.onclick = function(event) {
+
+        if (event.stopPropagation){
+            event.stopPropagation();
+        } else if(window.event){
+            window.event.cancelBubble=true;
+        }
     };
 
     // When textField lost focus
@@ -62,16 +68,49 @@ UISpaceNavigation.prototype.init = function(uicomponentId, mySpaceRestUrl, defau
         }
     };
 
-    // Hide popup when user click outside
-    document.onclick = function() {
-        var wikiSpaceSwitcher = document.getElementById(uicomponentId);
-        var spaceChooserPopups = document.getElementsByClassName('SpaceChooserPopup');
-
-        // var spaceChooserPopup = $(wikiSpaceSwitcher).find("div.SpaceChooserPopup")[0];
-        for (var i = 0; i < spaceChooserPopups.length; i++) {
-            spaceChooserPopups[i].style.display = "none";
+};
+UISpaceNavigation.prototype.requestData = function(keyword, uicomponentId) {
+    var me = eXo.navigation.UISpaceNavigation;
+    $.ajax({
+        async : false,
+        url : me.mySpaceRestUrl + "?keyword=" + keyword,
+        type : 'GET',
+        data : '',
+        success : function(data) {
+            me.render(data, uicomponentId);
         }
-    };
+    });
+};
+UISpaceNavigation.prototype.render = function(dataList, uicomponentId) {
+    var me = eXo.navigation.UISpaceNavigation;
+    me.dataList = dataList;
+
+    var wikiSpaceSwitcher = document.getElementById(uicomponentId);
+    var spaceChooserPopup = $(wikiSpaceSwitcher).find('div.ListNavigationSpaces')[0];
+    //var spaces = dataList.jsonList;
+    var spaces = dataList;
+    var groupSpaces = '';
+    for (i = 0; i < spaces.length; i++) {
+        var spaceId = spaces[i].id;
+        var spaceUrl = window.location.protocol + "//" + window.location.host + "/" + spaces[i].url;
+        var name = spaces[i].displayName;
+        var spaceDiv = "<a class='ItemIcon'"
+            + "' href='" + spaceUrl + "'>"
+            + name + "</a>";
+        groupSpaces += spaceDiv;
+    }
+    //alert(groupSpaces);
+    spaceChooserPopup.innerHTML = groupSpaces;
+
+};
+UISpaceNavigation.prototype.onTextSearchChange = function(uicomponentId) {
+    var me = eXo.navigation.UISpaceNavigation;
+    var wikiSpaceSwitcher = document.getElementById(uicomponentId);
+    var textSearch = $(wikiSpaceSwitcher).find("input.SpaceSearchText")[0].value;
+    if (textSearch != me.lastSearchKeyword) {
+        me.lastSearchKeyword = textSearch;
+        me.requestData(textSearch, uicomponentId);
+    }
 };
 
 eXo.navigation.UISpaceNavigation = new UISpaceNavigation();

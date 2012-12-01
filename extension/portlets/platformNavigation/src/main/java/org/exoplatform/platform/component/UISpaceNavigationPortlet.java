@@ -1,7 +1,9 @@
 package org.exoplatform.platform.component;
 
 import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.platform.common.space.statistic.SpaceAccessService;
+import org.exoplatform.platform.webui.NavigationURLUtils;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.mop.SiteKey;
@@ -20,6 +22,7 @@ import org.exoplatform.social.core.space.SpaceException;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.social.webui.Utils;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -41,7 +44,7 @@ import java.util.*;
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UISpaceNavigationPortlet/UISpaceNavigationPortlet.gtmpl",
         events = {
         @EventConfig(listeners = UISpaceNavigationPortlet.IncrementActionListener.class) ,
-        @EventConfig(listeners = UISpaceNavigationPortlet.SearchNavigationActionListener.class)
+        @EventConfig(listeners = UISpaceNavigationPortlet.SelectSpaceActionListener.class)
         }
 )
 public class UISpaceNavigationPortlet extends UIPortletApplication {
@@ -49,6 +52,10 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
     private static final Log LOG = ExoLogger.getLogger(UISpaceNavigationPortlet.class);
 
     private static final String SPACE_SETTINGS = "settings";
+
+    private static final String MY_SPACE_REST_URL = "/space/user/searchSpace/";
+
+    public static final String SELECT_SPACE_ACTION = "SelectSpace";
 
     private SpaceService spaceService = null;
     private OrganizationService organizationService = null;
@@ -284,12 +291,21 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         }
     }
 
-    static public class SearchNavigationActionListener extends EventListener<UISpaceNavigationPortlet> {
+    static public class SelectSpaceActionListener extends EventListener<UISpaceNavigationPortlet> {
         @Override
         public void execute(Event<UISpaceNavigationPortlet> event) throws Exception {
+
+            WebuiRequestContext context = event.getRequestContext();
+
             UISpaceNavigationPortlet uiManageAllSpaces = event.getSource();
-            uiManageAllSpaces.getGroupNavigations();
-            LOG.info("search triggered222222222222222222222222222");
+
+            UserNode userNode = uiManageAllSpaces.getSelectedNode();
+
+            String	href = NavigationURLUtils.getURL(userNode);
+            RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
+
+            requireJS.require("SHARED/navigation-spaces-search", "spacesSearch");
+            requireJS.require("SHARED/wiki-view", "wikiView").addScripts("spacesSearch.UISpaceNavigation.ajaxRedirect('" + href + "');");
             event.getRequestContext().addUIComponentToUpdateByAjax(uiManageAllSpaces);
         }
     }
@@ -304,6 +320,15 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         SpaceService spaceService = Utils.getSpaceService();
         Space space=spaceService.getSpaceByDisplayName(SpaceLaBel)  ;
         return space.getAvatarUrl();
+    }
+    protected String getRestUrl() {
+        return  getCurrentRestURL () + MY_SPACE_REST_URL;
+    }
+    public static String getCurrentRestURL() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("/").append(PortalContainer.getCurrentPortalContainerName()).append("/");
+        sb.append(PortalContainer.getCurrentRestContextName());
+        return sb.toString();
     }
 
 
