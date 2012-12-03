@@ -47,7 +47,7 @@ public class SpaceRestServiceImpl implements ResourceContainer {
     private final SpaceService spaceService;
 
     private final CacheControl cacheControl;
-
+    SpaceListAccess listAccess;
     public SpaceRestServiceImpl ( SpaceService spaceService) {
         this.spaceService = spaceService;
         cacheControl = new CacheControl();
@@ -67,14 +67,18 @@ public class SpaceRestServiceImpl implements ResourceContainer {
             if (userId == null) {
                 return Response.status(HTTPStatus.INTERNAL_ERROR).cacheControl(cacheControl).build();
             }
-
-            SpaceListAccess listAccess = spaceService.getVisibleSpacesWithListAccess(userId, new SpaceFilter(keyword));
+               if(keyword==null || keyword.equals("") )    {
+                   listAccess = spaceService.getVisibleSpacesWithListAccess(userId, null);
+               }else{
+             listAccess = spaceService.getVisibleSpacesWithListAccess(userId, new SpaceFilter(keyword));
+               }
             List<Space> spaces = Arrays.asList(listAccess.load(0, 10));
 
             for (Space space : spaces) {
 
                 baseSpaceURL = new StringBuffer();
                 //TODO Found solution to build spaces Link
+
                 baseSpaceURL.append(PortalContainer.getCurrentPortalContainerName()+ "/g/:spaces:") ;
                 String groupId = space.getGroupId();
                 String permanentSpaceName = groupId.split("/")[2];

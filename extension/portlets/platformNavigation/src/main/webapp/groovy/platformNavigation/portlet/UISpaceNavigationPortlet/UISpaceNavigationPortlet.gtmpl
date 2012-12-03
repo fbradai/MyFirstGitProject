@@ -30,7 +30,6 @@
   import org.exoplatform.platform.webui.NavigationURLUtils;
   import org.exoplatform.social.core.service.LinkProvider;
   import java.util.Collection;
-  import org.exoplatform.platform.component.UISpaceNavigationSearch
   import org.exoplatform.web.application.JavascriptManager;
   import org.gatein.common.text.EntityEncoder;
 
@@ -160,6 +159,6 @@
 </div>
   </div>
 
- <div> <a class="EditorIcon TBIcon" href="<%= findSpacesLink %>"><%=_ctx.appRes("UISpaceNavigationPortlet.label.Join")%></a></div>
+ <div> <img title="" alt="" src="/eXoPlatformResources/skin/platformSkin/icons/icon_join.jpg" /><a class="EditorIcon TBIcon" href="<%= findSpacesLink %>"><%=_ctx.appRes("UISpaceNavigationPortlet.label.Join")%></a></div>
 </div>
 <% } %>
