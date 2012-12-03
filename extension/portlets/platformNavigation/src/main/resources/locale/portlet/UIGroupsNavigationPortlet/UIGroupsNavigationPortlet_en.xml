@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
     <UIGroupsNavigationPortlet>
-        <label>My Groups Pages</label>
-
-        <CollapseAll>Collapse All</CollapseAll>
+        <label>Group</label>
     </UIGroupsNavigationPortlet>
 </bundle>
