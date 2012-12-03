@@ -64,8 +64,9 @@ UISpaceNavigation.prototype.init = function(uicomponentId, mySpaceRestUrl, defau
     textField.onblur = function() {
         if (textField.value == "") {
             textField.value = me.defaultValueForTextSearch;
-            textField.className="SpaceSearchText LostFocus"
+            textField.className="SpaceSearchText LostFocus";
         }
+        me.onBlurTextSearch(me.selectSpaceAction);
     };
 
 };
@@ -122,6 +123,11 @@ UISpaceNavigation.prototype.onTextSearchChange = function(uicomponentId) {
         me.requestData(textSearch, uicomponentId);
 		
     }	
+};
+UISpaceNavigation.prototype.onBlurTextSearch = function(selectSpaceAction) {
+    var me = eXo.navigation.UISpaceNavigation;
+    var url = decodeURIComponent(selectSpaceAction);
+    eval(url);
 };
 
 eXo.navigation.UISpaceNavigation = new UISpaceNavigation();

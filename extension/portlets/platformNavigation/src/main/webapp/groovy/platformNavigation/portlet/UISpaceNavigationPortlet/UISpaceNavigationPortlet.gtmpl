@@ -111,7 +111,7 @@
 <%
   String restUrl = uicomponent.getRestUrl();
   String defaultValueForTextSearch = _ctx.appRes("UISpaceNavigationPortlet.msg.filter-spaces");
-  String selectSpaceAction = URLEncoder.encode(uicomponent.event(uicomponent.SELECT_SPACE_ACTION), "utf-8");
+  String selectSpaceAction = URLEncoder.encode(uicomponent.event(uicomponent.LOAD_NAVIGATION_ACTION), "utf-8");
   def rcontext = _ctx.getRequestContext() ;
   def requireJs = rcontext.getJavascriptManager().getRequireJS();
   requireJs.require("SHARED/navigation-spaces-search", "spacesSearch");

@@ -42,7 +42,7 @@ import java.util.*;
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UISpaceNavigationPortlet/UISpaceNavigationPortlet.gtmpl",
         events = {
         @EventConfig(listeners = UISpaceNavigationPortlet.IncrementActionListener.class) ,
-        @EventConfig(listeners = UISpaceNavigationPortlet.SelectSpaceActionListener.class)
+        @EventConfig(listeners = UISpaceNavigationPortlet.LoadNavigationActionListener.class)
         }
 )
 public class UISpaceNavigationPortlet extends UIPortletApplication {
@@ -53,7 +53,7 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
 
     private static final String MY_SPACE_REST_URL = "/space/user/searchSpace/";
 
-    public static final String SELECT_SPACE_ACTION = "SelectSpace";
+    public static final String LOAD_NAVIGATION_ACTION = "LoadNavigation";
 
     private SpaceService spaceService = null;
     private OrganizationService organizationService = null;
@@ -251,12 +251,15 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         return groupNavigationPermitted;
     }
 
-    public static class NavigationChangeActionListener extends org.exoplatform.webui.event.EventListener<UISpaceNavigationPortlet> {
+    public static class LoadNavigationActionListener extends EventListener<UISpaceNavigationPortlet> {
 
         @Override
         public void execute(Event<UISpaceNavigationPortlet> event) throws Exception {
-            // This event is only a trick for updating the MySpacePlatformToolBar
-            // Portlet
+
+            UISpaceNavigationPortlet uisource=event.getSource();
+
+            event.getRequestContext().addUIComponentToUpdateByAjax(uisource);
+
         }
 
     }
@@ -264,7 +267,6 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
     public static class IncrementActionListener extends EventListener<UISpaceNavigationPortlet> {
 
         @Override
-
         public void execute(Event<UISpaceNavigationPortlet> event) throws Exception {
             HttpServletRequest request = Util.getPortalRequestContext().getRequest();
 
