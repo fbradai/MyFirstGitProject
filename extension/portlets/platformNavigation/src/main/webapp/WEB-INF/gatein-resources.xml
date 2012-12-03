@@ -161,8 +161,8 @@
         <name>UIGroupsNavigationPortlet</name>
         <scripts>
             <script>
-                <name>eXo.webui.UIGroupNavigation</name>
-                <path>/javascript/UIGroupsNavigation/UIGroupsTree.js</path>
+                <name>eXo.webui.UIGroupsNavigation</name>
+                <path>/javascript/eXo/platform/navigation/UIGroupsNavigationPortlet/UIGroupsNavigation.js</path>
             </script>
             <depends>
                 <scripts>bootstrap</scripts>

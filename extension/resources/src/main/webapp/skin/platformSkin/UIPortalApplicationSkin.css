@@ -25,6 +25,7 @@
 @import url(userNavigationPortlet/Stylesheet.css);
 @import url(UICompanyNavigationPortlet/UICompanyNavigationPortlet.css);
 @import url(UIGroupsNavigation/DefaultStylesheet.css);
+@import url(UIHelpPortlet/StyleSheet.css);
 
 div, table, th, tr, td, img, form {
     padding: 0px; margin: 0px;

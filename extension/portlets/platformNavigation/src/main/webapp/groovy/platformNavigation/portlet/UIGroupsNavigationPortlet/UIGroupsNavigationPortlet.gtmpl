@@ -19,19 +19,14 @@
      */
 %>
 <%
-    import javax.portlet.MimeResponse;
-    import javax.portlet.ResourceURL;
     import org.exoplatform.portal.mop.user.UserNavigation;
     import org.exoplatform.portal.mop.user.UserNode;
     import org.exoplatform.portal.webui.util.Util;
     import org.exoplatform.portal.mop.Visibility;
     import org.exoplatform.webui.organization.OrganizationUtils;
-
-    import org.exoplatform.web.application.JavascriptManager;
     import org.gatein.common.text.EntityEncoder;
     import org.exoplatform.platform.webui.NavigationURLUtils;
     import org.exoplatform.web.application.JavascriptManager;
-
 
     JavascriptManager jsManager = Util.getPortalRequestContext().getJavascriptManager();
     jsManager.addJavascript("initGroupNavigationPortlet('$uicomponent.id')");
@@ -43,20 +38,22 @@
 
         def ownerId = navigation.getKey().getName();
         String navTitle = OrganizationUtils.getGroupLabel(ownerId);
+        //def lang=Util.getPortalRequestContext().getUserPortalConfig().getPortalConfig().getLocale();
+        def groupId= navTitle +" "+ _ctx.appRes("UIGroupsNavigationPortlet.label") ;
         println """<div>
                       <div class="GroupName">
-                         <a  href="#">$navTitle</a>
+                         <a  href="#">$groupId</a>
                       </div>
 					  <div class="GroupListContent">
                          <div class="UIGroupTree">
 					            """;
         for (UserNode node : nodes) {
-             renderPageNodeGroup(node);
+            renderPageNodeGroup(node);
         }
-         println """
-						    </div>
-						</div>
-					</div>
+        println """
+						 </div>
+				      </div>
+				   </div>
 				""";
     }
 
@@ -84,12 +81,12 @@
         if (hasChild) {
 
             println """
-					<div class=" Node">
+				<div class=" Node">
 						<div class="NodeContent">
 						    <a class="NodeIcon DefaultPageIcon" href="$href">$label</a>
                             <img class="ExpandIcon" src="/eXoPlatformResources/skin/platformSkin/UIGroupsNavigation/DefaultSkin/background/icon_expand.gif"/>
 						</div>
-                    <div class="ChildrenContainer" style="display: none">
+                        <div class="ChildrenContainer" style="display: none">
 					""";
 
 
@@ -102,8 +99,8 @@
             }
 
             println """
-						</div>
-					</div>
+					    </div>
+				</div>
 				""";
         }
         else {
@@ -119,27 +116,19 @@
 				""";
         }
     }
-
     def groupNavigations = uicomponent.getGroupNavigations();
-
 %>
 
 <div id="$uicomponent.id" class="UIGroupsNavigation">
-   <div class="UIGroupsNavigationTitle">
-       <a href="#"><%=_ctx.appRes("UIGroupsNavigationPortlet.label")%></a>
-   </div>
 
+    <% if (groupNavigations != null && !groupNavigations.isEmpty()) {
+        lastNode = '';
 
-            <% if (groupNavigations != null && !groupNavigations.isEmpty()) {
-                lastNode = '';
-
-                for (navigation in groupNavigations) {
-
-                    renderGroupPageNavigation(navigation);
-                }
-            }
-            %>
-
+        for (navigation in groupNavigations) {
+            renderGroupPageNavigation(navigation);
+        }
+    }
+    %>
 </div>
 
 
