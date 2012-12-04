@@ -84,7 +84,7 @@
 				<div class=" Node">
 						<div class="NodeContent">
 						    <a class="NodeIcon DefaultPageIcon" href="$href">$label</a>
-                            <img class="ExpandIcon" src="/eXoPlatformResources/skin/platformSkin/UIGroupsNavigation/DefaultSkin/background/icon_expand.gif"/>
+                            <img class="GroupsNavigationExpandIcon" src="/eXoPlatformResources/skin/platformSkin/UIGroupsNavigation/DefaultSkin/background/icon_expand.gif"/>
 						</div>
                         <div class="ChildrenContainer" style="display: none">
 					""";
