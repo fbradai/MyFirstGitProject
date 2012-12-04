@@ -84,7 +84,7 @@
       </dependency>
       <dependency>
           <groupId>org.exoplatform.platform</groupId>
-          <artifactId>platform-component-UXPnavigation</artifactId>
+          <artifactId>platform-component-uxpnavigation</artifactId>
           <version>${project.version}</version>
           <scope>provided</scope>
       </dependency>

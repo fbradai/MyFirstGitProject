@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>platform-component-UXPnavigation</artifactId>
+    <artifactId>platform-component-uxpnavigation</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.exoplatform.kernel</groupId>
