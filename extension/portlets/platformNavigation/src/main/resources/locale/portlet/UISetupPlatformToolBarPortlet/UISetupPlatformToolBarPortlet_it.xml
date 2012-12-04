@@ -19,6 +19,7 @@
 			<spaces>Spazi</spaces>
 			<Branding>Branding</Branding>
 			<ide>IDE</ide>
+			<search>Search</search>
 		</label>
 	</UISetupPlatformToolBarPortlet>
 </bundle>

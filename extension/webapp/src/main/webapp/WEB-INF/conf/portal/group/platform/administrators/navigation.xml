@@ -94,5 +94,11 @@
 			<label>#{administration.spaces}</label>
 			<page-reference>group::/platform/administrators::spaces</page-reference>
 		</node>
+		<node>
+			<uri>search</uri>
+			<name>search</name>
+			<label>#{administration.search}</label>
+			<page-reference>group::/platform/administrators::search</page-reference>
+		</node>
 	</page-nodes>
 </node-navigation>

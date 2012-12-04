@@ -44,6 +44,12 @@
 				<label>#{UISetupPlatformToolBarPortlet.label.wcmAdmin}</label>
 				<page-reference>group::platform/web-contributors::WcmAdmin</page-reference>
 			</node>
+			<node>
+				<uri>search</uri>
+				<name>search</name>
+				<label>#{UISetupPlatformToolBarPortlet.label.search}</label>
+				<page-reference>group::platform/administrators::search</page-reference>
+			</node>
 		</node>
 		<node>
 			<uri>portal</uri>

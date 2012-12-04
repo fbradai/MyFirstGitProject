@@ -223,4 +223,10 @@
 		<access-permissions>manager:/platform/administrators</access-permissions>
 		<edit-permission>manager:/platform/administrators</edit-permission>
 	</page>
+	<page>
+		<name>search</name>
+		<title>search</title>
+		<access-permissions>manager:/platform/administrators</access-permissions>
+		<edit-permission>manager:/platform/administrators</edit-permission>
+	</page>
 </page-set>
