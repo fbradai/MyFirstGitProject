@@ -66,12 +66,10 @@
         def childrenNodes = uicomponent.getValidChildren(node);
         def hasChild = (childrenNodes != null) && !childrenNodes.isEmpty();
         String href = NavigationURLUtils.getURL(node);
-
+        def imgSrc ="/eXoPlatformResources/skin/platformSkin/UIGroupsNavigation/DefaultSkin/background/icon_expand.gif"
         boolean toolong = (node.resolvedLabel.length() > 16);
         String label = (toolong ? node.resolvedLabel.substring(0, 15) + "..." : node.resolvedLabel);
-        String title = "";
-        if (toolong) title = "title='$node.resolvedLabel'";
-        else title = "";
+
         EntityEncoder entityEncoder = EntityEncoder.FULL;
         label = entityEncoder.encode(label);
 
@@ -83,8 +81,8 @@
             println """
 				<div class=" Node">
 						<div class="NodeContent">
-						    <a class="NodeIcon DefaultPageIcon" href="$href">$label</a>
-                            <img class="GroupsNavigationExpandIcon" src="/eXoPlatformResources/skin/platformSkin/UIGroupsNavigation/DefaultSkin/background/icon_expand.gif"/>
+						    <a class="NodeIcon DefaultPageIcon" href="$href" title="$node.resolvedLabel">$label</a>
+                            <img class="GroupsNavigationExpandIcon" src="$imgSrc"/>
 						</div>
                         <div class="ChildrenContainer" style="display: none">
 					""";
@@ -108,7 +106,7 @@
 					<div class=" Node ClearFix">
 						<div class="NullItem">
 							<div class="ClearFix">
-								<a class="NodeIcon DefaultPageIcon" href="$href">$label</a>
+								<a class="NodeIcon DefaultPageIcon" href="$href" title="$node.resolvedLabel">$label</a>
 							</div>
 						</div>
 					</div>
