@@ -51,7 +51,7 @@
     def wikiLink = uicomponent.getWikiURL();
     def connectionLink = NavigationURLUtils.getURLInCurrentPortal("connections") + "/network/" + remoteUser;
     def directoryLink = NavigationURLUtils.getURLInCurrentPortal("people");
-    def changeLanguageAction = "if(document.getElementById('UIMaskWorkspace')) ajaxGet(eXo.env.server.createPortalURL('UIPortal', 'ChangeLanguage', true));";
+    def changeLanguageAction = "javascript:if(document.getElementById('UIMaskWorkspace')) ajaxGet(eXo.env.server.createPortalURL('UIPortal', 'ChangeLanguage', true));";
     def accountSetting = "javascript:if(document.getElementById('UIMaskWorkspace')) ajaxGet(eXo.env.server.createPortalURL('UIPortal', 'AccountSettings', true));"
 //String createDashboardLink = nodeURL.setResource(new NavigationResource(SiteType.USER, remoteUser, null)).toString();
     String clazz = "";
