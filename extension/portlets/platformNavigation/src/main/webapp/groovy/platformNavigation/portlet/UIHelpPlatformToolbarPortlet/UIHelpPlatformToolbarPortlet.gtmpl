@@ -21,6 +21,6 @@
 %>
 <div>
     <a  href="<%=uicomponent.getHelpPage()%>"  TARGET="_blank">
-        <img class="UIHelpIcon" src="/eXoPlatformResources/skin/platformSkin/UIHelpPortlet/background/help.png" alt="$labelHelp" title="$labelHelp"/>
+        <img class="UIHelpIcon" src="/eXoPlatformResources/skin/platformSkin/UIHelpPortlet/background/help.png" alt="$labelHelp" />
     </a>
 </div>

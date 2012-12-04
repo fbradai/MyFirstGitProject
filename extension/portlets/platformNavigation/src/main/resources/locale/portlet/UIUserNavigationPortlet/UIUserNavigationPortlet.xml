@@ -3,7 +3,7 @@
     <UIUserNavigationPortlet>
         <label>
             <activities>
-                Activités
+                Activities Stream
             </activities>
             <profile>
                 Profile
@@ -14,23 +14,21 @@
             <wiki>
                 Wiki
             </wiki>
-            <dashboard>
-                Dashboard
-            </dashboard>
+
             <Myactivities>
-                Mes Activités
+                My Activities Stream
             </Myactivities>
             <Myprofile>
-                Mon Profile
+                My Profile
             </Myprofile>
             <Myconnections>
-                Mes Connections
+                My Connections
             </Myconnections>
             <Mywiki>
-                Mon Wiki
+                My Wiki
             </Mywiki>
             <Mydashboard>
-                Mon Dashboard
+                My Dashboard
             </Mydashboard>
         </label>
     </UIUserNavigationPortlet>

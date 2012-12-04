@@ -33,7 +33,7 @@
         </node>
         <node>
             <uri>people</uri>
-            <name>people</name>
+            <name>connexions</name>
             <label>#{portal.intranet.people}</label>
             <page-reference>portal::intranet::people</page-reference>
         </node>

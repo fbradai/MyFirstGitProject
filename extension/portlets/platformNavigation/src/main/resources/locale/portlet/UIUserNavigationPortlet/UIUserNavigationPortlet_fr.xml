@@ -6,7 +6,7 @@
         </My>
         <label>
             <activities>
-                Activités
+                Flux d'Activités
             </activities>
             <profile>
                 Profile
@@ -17,11 +17,9 @@
             <wiki>
                 Wiki
             </wiki>
-            <dashboard>
-                Dashboard
-            </dashboard>
+
             <Myactivities>
-                Mes Activités
+                Mon Flux d'Activités
             </Myactivities>
             <Myprofile>
                 Mon Profile

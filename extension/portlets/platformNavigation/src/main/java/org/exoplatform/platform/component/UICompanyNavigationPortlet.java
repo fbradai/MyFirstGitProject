@@ -49,12 +49,12 @@ public class UICompanyNavigationPortlet extends UIPortletApplication {
     private UserACL userACL = null;
     private UserNodeFilterConfig userFilterConfig;
 
-
     public UICompanyNavigationPortlet() throws Exception {
         UserNodeFilterConfig.Builder builder = UserNodeFilterConfig.builder();
         builder.withReadWriteCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL).withTemporalCheck();
         userFilterConfig = builder.build();
         userACL = getApplicationComponent(UserACL.class);
+
     }
 
     public UserNavigation getCurrentPortalNavigation() throws Exception {

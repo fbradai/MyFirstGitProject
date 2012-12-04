@@ -69,7 +69,8 @@
         def imgSrc ="/eXoPlatformResources/skin/platformSkin/UIGroupsNavigation/DefaultSkin/background/icon_expand.gif"
         boolean toolong = (node.resolvedLabel.length() > 16);
         String label = (toolong ? node.resolvedLabel.substring(0, 15) + "..." : node.resolvedLabel);
-
+        def icon=node.getIcon();
+        if(icon == null) icon = "DefaultPageIcon";
         EntityEncoder entityEncoder = EntityEncoder.FULL;
         label = entityEncoder.encode(label);
 
@@ -81,7 +82,7 @@
             println """
 				<div class=" Node">
 						<div class="NodeContent">
-						    <a class="NodeIcon DefaultPageIcon" href="$href" title="$node.resolvedLabel">$label</a>
+						    <a class="NodeIcon $icon" href="$href" title="$node.resolvedLabel">$label</a>
                             <img class="GroupsNavigationExpandIcon" src="$imgSrc"/>
 						</div>
                         <div class="ChildrenContainer" style="display: none">
@@ -106,7 +107,7 @@
 					<div class=" Node ClearFix">
 						<div class="NullItem">
 							<div class="ClearFix">
-								<a class="NodeIcon DefaultPageIcon" href="$href" title="$node.resolvedLabel">$label</a>
+								<a class="NodeIcon $icon" href="$href" title="$node.resolvedLabel">$label</a>
 							</div>
 						</div>
 					</div>
