@@ -82,6 +82,7 @@
                 <ul class="ClearFix">
                     <li class="MenuItem $clazz">
                         <a href="$accountSetting" class="AccountSettingIcon">$labelaccount</a>
+                        <a href="$changeLanguageAction" class="ChangeLanguageIcon">$labellanguage</a>
                     </li>
 
                 </ul>
