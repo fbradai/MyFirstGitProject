@@ -20,7 +20,7 @@
 function initGroupNavigationPortlet(id)
 {
     require(['SHARED/jquery'], function($){
-        $("#" + id).on("click", "img.ExpandIcon, img.CollapseIcon", function(event) {
+        $("#" + id).on("click", "img.GroupsNavigationExpandIcon, img.GroupsNavigationCollapseIcon", function(event) {
             collapseExpand(this);
 
             event.stopPropagation();
@@ -34,18 +34,18 @@ function initGroupNavigationPortlet(id)
             var subGroup = jqNode.parent().parent().children("div.ChildrenContainer");
             if(subGroup.css("display") == "none")
             {
-                if(jqNode.hasClass("ExpandIcon"))
+                if(jqNode.hasClass("GroupsNavigationExpandIcon"))
                 {
-                    jqNode.attr("class", "CollapseIcon ClearFix");
+                    jqNode.attr("class", "GroupsNavigationCollapseIcon ClearFix");
                     jqNode.parent().children("img").attr("src","/eXoPlatformResources/skin/platformSkin/UIGroupsNavigation/DefaultSkin/background/icon_collapse.png");
                 }
                 subGroup.css("display", "block");
             }
             else
             {
-                if(jqNode.hasClass("CollapseIcon"))
+                if(jqNode.hasClass("GroupsNavigationCollapseIcon"))
                 {
-                    jqNode.attr("class", "ExpandIcon ClearFix");
+                    jqNode.attr("class", "GroupsNavigationExpandIcon ClearFix");
                     jqNode.parent().children("img").attr("src","/eXoPlatformResources/skin/platformSkin/UIGroupsNavigation/DefaultSkin/background/icon_expand.gif");
                 }
 
