@@ -17,11 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Racha
- * Date: 08/11/12
- * Time: 09:56
- * To change this template use File | Settings | File Templates.
+ * @author <a href="rtouzi@exoplatform.com">rtouzi</a>
+ * @date 08/11/12
  */
 
 @ComponentConfig(
@@ -48,13 +45,6 @@ public class UICreateForm extends UIContainer {
     private static Log log = ExoLogger.getLogger(UICreateForm.class);
 
     public UICreateForm() throws Exception {
-
-        // UIWikiSpaceSwitcher uiWikiSpaceSwitcher = addChild(UIWikiSpaceSwitcher.class, null, SPACE_SWITCHER);
-         // EventUIComponent eventComponent = new EventUIComponent(CREATE_FORM_CONTAINER, SWITCH_SPACE_ACTION, EventUIComponent.EVENTTYPE.EVENT);
-         // uiWikiSpaceSwitcher.init(eventComponent);
-
-
-          //addUIFormInput(new UIFormSelectBox(LOCATION, LOCATION, options));
     }
 
     public String[] getActions() {
@@ -83,8 +73,8 @@ public class UICreateForm extends UIContainer {
                 throws Exception {
             UICreateList uiparent = event.getSource().getAncestorOfType(UICreateList.class);
             WebuiRequestContext context = event.getRequestContext();
-            if(uiparent.getChild(UICreateForm.class)!=null) {
-            uiparent.removeChild(UICreateForm.class);
+            if (uiparent.getChild(UICreateForm.class) != null) {
+                uiparent.removeChild(UICreateForm.class);
             }
             context.addUIComponentToUpdateByAjax(uiparent);
 

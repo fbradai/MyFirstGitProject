@@ -17,11 +17,8 @@ import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Racha
- * Date: 01/11/12
- * Time: 18:04
- * To change this template use File | Settings | File Templates.
+ * @author <a href="rtouzi@exoplatform.com">rtouzi</a>
+ * @date 01/11/12
  */
 @ComponentConfig(
         lifecycle = UIApplicationLifecycle.class,
@@ -34,6 +31,7 @@ public class UIUserPlatformToolBarCreatePortlet extends UIPortletApplication {
     private SpaceService spaceService = null;
     private String currentPortalName = null;
     private boolean socialPortal = false;
+
     public UIUserPlatformToolBarCreatePortlet() throws Exception {
         try {
             spaceService = getApplicationComponent(SpaceService.class);
@@ -79,6 +77,7 @@ public class UIUserPlatformToolBarCreatePortlet extends UIPortletApplication {
         UserPortalConfig portalConfig = Util.getPortalRequestContext().getUserPortalConfig();
         return portalConfig.getUserPortal();
     }
+
     private String getCurrentPortalName() {
         return Util.getPortalRequestContext().getPortalOwner();
     }

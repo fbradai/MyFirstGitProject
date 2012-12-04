@@ -17,11 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Racha
- * Date: 09/11/12
- * Time: 16:57
- * To change this template use File | Settings | File Templates.
+ * @author <a href="rtouzi@exoplatform.com">rtouzi</a>
+ * @date 09/11/12
  */
 @ComponentConfig(
         template = "app:/groovy/platformNavigation/portlet/UIUserPlatformToolBarCreatePortlet/UICreateList.gtmpl",
@@ -44,7 +41,7 @@ import java.util.List;
 
                 @EventConfig
                         (listeners = UICreateList.UploadActionListener.class
-                        ) ,
+                        ),
                 @EventConfig(
                         listeners = UICreateList.CancelActionListener.class
                 )
@@ -58,15 +55,15 @@ public class UICreateList extends UIContainer {
     public static void remove(UICreateList uiform) {
         List<UIComponent> uilist = uiform.getChildren();
         List<String> lisID = new ArrayList<String>();
-       if(uilist.size()!=0) {
-        for (UIComponent uIComponent : uilist) {
-            lisID.add(uIComponent.getId());
-        }
-        for (String id : lisID) {
-            uiform.removeChildById(id);
+        if (uilist.size() != 0) {
+            for (UIComponent uIComponent : uilist) {
+                lisID.add(uIComponent.getId());
+            }
+            for (String id : lisID) {
+                uiform.removeChildById(id);
 
+            }
         }
-       }
     }
 
 
@@ -111,7 +108,7 @@ public class UICreateList extends UIContainer {
         public void execute(Event<UICreateList> event)
                 throws Exception {
 
-             UIUserPlatformToolBarCreatePortlet uiForm = (UIUserPlatformToolBarCreatePortlet) event.getSource().getAncestorOfType(UIUserPlatformToolBarCreatePortlet.class);
+            UIUserPlatformToolBarCreatePortlet uiForm = (UIUserPlatformToolBarCreatePortlet) event.getSource().getAncestorOfType(UIUserPlatformToolBarCreatePortlet.class);
             parStatus = event.getRequestContext().getRequestParameter("objectId");
             UICreateList uisource = (UICreateList) event.getSource();
             remove(uisource);
@@ -145,8 +142,6 @@ public class UICreateList extends UIContainer {
 
         public void execute(Event<UICreateList> event) throws Exception {
             UICreateList uiCraeteList = event.getSource();
-            //PortalRequestContext prContext = Util.getPortalRequestContext();
-
             try {
                 UIDocumentSelector selector = uiCraeteList.createUIComponent(UIDocumentSelector.class, null, "UploadFileSelector");
                 Utils.createPopupWindow(uiCraeteList, selector, "UploadFileSelectorPopUpWindow", 335);
@@ -156,9 +151,7 @@ public class UICreateList extends UIContainer {
         }
     }
 
-    /**
-     * **
-     */
+
     static public class CancelActionListener extends EventListener<UICreateList> {
 
 

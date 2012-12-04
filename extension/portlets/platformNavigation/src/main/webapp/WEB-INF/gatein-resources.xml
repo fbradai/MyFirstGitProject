@@ -27,39 +27,7 @@
         </module>
     </portlet>
     <portlet>
-        <name>UIMyGroupsPlatformToolBarPortlet</name>
-        <module>
-            <depends>
-                <module>navigation</module>
-            </depends>
-        </module>
-    </portlet>
-    <portlet>
-        <name>UIMySpacePlatformToolBarPortlet</name>
-        <module>
-            <depends>
-                <module>navigation</module>
-            </depends>
-        </module>
-    </portlet>
-    <portlet>
         <name>UISetupPlatformToolBarPortlet</name>
-        <module>
-            <depends>
-                <module>navigation</module>
-            </depends>
-        </module>
-    </portlet>
-    <portlet>
-        <name>UIUserPlatformToolbarDesktopPortlet</name>
-        <module>
-            <depends>
-                <module>navigation</module>
-            </depends>
-        </module>
-    </portlet>
-    <portlet>
-        <name>UIUserPlatformToolBarSitePortlet</name>
         <module>
             <depends>
                 <module>navigation</module>
@@ -88,11 +56,6 @@
             <depends>
                 <module>base</module>
             </depends>
-            <!--
-            <depends>
-                <module>socialcomposer</module>
-            </depends>
-            -->
             <depends>
                 <module>social-core</module>
             </depends>
@@ -110,10 +73,8 @@
             <depends>
                 <module>social-core</module>
             </depends>
-
         </module>
     </portlet>
-
     <!--Begin-->
     <portlet>
         <name>UIHelpPlatformToolBarPortlet</name>
@@ -127,14 +88,13 @@
             </depends>
         </module>
     </portlet>
-
     <!--END-->
     <portlet>
         <name>UserNavigationPortlet</name>
         <module>
-                    <depends>
-                        <module>webui-ext</module>
-                    </depends>
+            <depends>
+                <module>webui-ext</module>
+            </depends>
         </module>
     </portlet>
     <portlet>

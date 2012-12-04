@@ -43,68 +43,68 @@ import java.util.Collections;
  */
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class,
 
-template = "app:/groovy/platformNavigation/portlet/UIUserPlatformToolBarPortlet/UIUserPlatformToolBarPortlet.gtmpl")
+        template = "app:/groovy/platformNavigation/portlet/UIUserPlatformToolBarPortlet/UIUserPlatformToolBarPortlet.gtmpl")
 public class UIUserPlatformToolBarPortlet extends UIPortletApplication {
 
-  private String currentPortalName = null;
-  private boolean socialPortal = false;
-    private static final String USER ="/user/"  ;
+    private String currentPortalName = null;
+    private boolean socialPortal = false;
+    private static final String USER = "/user/";
     private static final String WIKI_HOME = "/WikiHome";
-    private static final String WIKI_REF ="mywiki" ;
+    private static final String WIKI_REF = "mywiki";
 
-  public UIUserPlatformToolBarPortlet() throws Exception {
+    public UIUserPlatformToolBarPortlet() throws Exception {
 
-  }
-
-  public User getUser() throws Exception {
-    OrganizationService service = getApplicationComponent(OrganizationService.class);
-    String userName = Util.getPortalRequestContext().getRemoteUser();
-    User user = service.getUserHandler().findUserByName(userName);
-    return user;
-  }
-
-  private String getCurrentPortalName() {
-    return Util.getPortalRequestContext().getPortalOwner();
-  }
-
-  public boolean isSocialPortal() {
-    if (currentPortalName != null && getCurrentPortalName().equals(currentPortalName)) {
-      return socialPortal;
     }
-    if (!isSocialProfileActivated()) {
-      socialPortal = false;
-    } else {
-      currentPortalName = getCurrentPortalName();
-      UserPortal userPortal = getUserPortal();
-      UserNavigation userNavigation = userPortal.getNavigation(SiteKey.portal(currentPortalName));
-      UserNode portalNode = userPortal.getNode(userNavigation, Scope.CHILDREN, null, null);
-      socialPortal = portalNode.getChild("spaces") != null;
+
+    public User getUser() throws Exception {
+        OrganizationService service = getApplicationComponent(OrganizationService.class);
+        String userName = Util.getPortalRequestContext().getRemoteUser();
+        User user = service.getUserHandler().findUserByName(userName);
+        return user;
     }
-    return socialPortal;
-  }
 
-  public boolean isSocialProfileActivated() {
-    return (ExoContainer.getProfiles().contains("social") || ExoContainer.getProfiles().contains("default") || ExoContainer
-        .getProfiles().contains("all"));
-  }
-
-  public static UserPortal getUserPortal() {
-    UserPortalConfig portalConfig = Util.getPortalRequestContext().getUserPortalConfig();
-    return portalConfig.getUserPortal();
-  }
-
-  public Collection<UserNode> getUserNodes(UserNavigation nav) {
-    UserPortal userPortall = getUserPortal();
-    if (nav != null) {
-      try {
-        UserNode rootNode = userPortall.getNode(nav, Scope.CHILDREN, null, null);
-        return rootNode.getChildren();
-      } catch (Exception exp) {
-        log.warn(nav.getKey().getName() + " has been deleted");
-      }
+    private String getCurrentPortalName() {
+        return Util.getPortalRequestContext().getPortalOwner();
     }
-    return Collections.emptyList();
-  }
+
+    public boolean isSocialPortal() {
+        if (currentPortalName != null && getCurrentPortalName().equals(currentPortalName)) {
+            return socialPortal;
+        }
+        if (!isSocialProfileActivated()) {
+            socialPortal = false;
+        } else {
+            currentPortalName = getCurrentPortalName();
+            UserPortal userPortal = getUserPortal();
+            UserNavigation userNavigation = userPortal.getNavigation(SiteKey.portal(currentPortalName));
+            UserNode portalNode = userPortal.getNode(userNavigation, Scope.CHILDREN, null, null);
+            socialPortal = portalNode.getChild("spaces") != null;
+        }
+        return socialPortal;
+    }
+
+    public boolean isSocialProfileActivated() {
+        return (ExoContainer.getProfiles().contains("social") || ExoContainer.getProfiles().contains("default") || ExoContainer
+                .getProfiles().contains("all"));
+    }
+
+    public static UserPortal getUserPortal() {
+        UserPortalConfig portalConfig = Util.getPortalRequestContext().getUserPortalConfig();
+        return portalConfig.getUserPortal();
+    }
+
+    public Collection<UserNode> getUserNodes(UserNavigation nav) {
+        UserPortal userPortall = getUserPortal();
+        if (nav != null) {
+            try {
+                UserNode rootNode = userPortall.getNode(nav, Scope.CHILDREN, null, null);
+                return rootNode.getChildren();
+            } catch (Exception exp) {
+                log.warn(nav.getKey().getName() + " has been deleted");
+            }
+        }
+        return Collections.emptyList();
+    }
 
     public String getAvatarURL() {
         Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,
@@ -115,7 +115,8 @@ public class UIUserPlatformToolBarPortlet extends UIPortletApplication {
         }
         return ownerAvatar;
     }
+
     public String getWikiURL() {
-        return NavigationURLUtils.getURLInCurrentPortal(WIKI_REF)+USER +Utils.getOwnerIdentity(true).getRemoteId()+WIKI_HOME;
+        return NavigationURLUtils.getURLInCurrentPortal(WIKI_REF) + USER + Utils.getOwnerIdentity(true).getRemoteId() + WIKI_HOME;
     }
 }
