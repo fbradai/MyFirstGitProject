@@ -28,17 +28,14 @@ import javax.portlet.PortletRequest;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Racha
- * Date: 26/11/12
- * Time: 11:21
- * To change this template use File | Settings | File Templates.
+ * @author <a href="rtouzi@exoplatform.com">rtouzi</a>
+ * @date 26/11/12
  */
 
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UIBreadCrumbsNavigationPortlet/UIBreadCrumbsNavigationPortlet.gtmpl",
         events = {
-        @EventConfig(listeners = UIBreadCrumbsNavigationPortlet.ChangePictureActionListener.class)
-}
+                @EventConfig(listeners = UIBreadCrumbsNavigationPortlet.ChangePictureActionListener.class)
+        }
 
 )
 public class UIBreadCrumbsNavigationPortlet extends UIPortletApplication {
@@ -73,17 +70,12 @@ public class UIBreadCrumbsNavigationPortlet extends UIPortletApplication {
     }
 
     public String getSpacename(String SpaceLabel) throws Exception {
-
-
         Space space = spaceService.getSpaceByUrl(SpaceLabel);
         if (space != null) {
             String spaceNAme = space.getDisplayName();
             return spaceNAme;
 
         } else return "";
-
-        // Space targetspace = spaceService.getSpaceByUrl(space);
-
     }
 
     public String getSpaceLabel() throws Exception {
@@ -103,18 +95,11 @@ public class UIBreadCrumbsNavigationPortlet extends UIPortletApplication {
         if (spaceAvatar == null || spaceAvatar.isEmpty()) {
             spaceAvatar = LinkProvider.SPACE_DEFAULT_AVATAR_URL;
         }
-
         return spaceAvatar;
     }
 
     public String getUserFullName(String userNAme) throws Exception {
-
-        //String urlPath= Util.getPortalRequestContext().getRequest().getRequestURI();
-        //String[] urlPart=urlPath.split("/");
-        //UserNavigation nav = getSelectedNode();
-
         String fullName = orgService.getUserHandler().findUserByName(userNAme).getFullName();
-
         return fullName;
     }
 
@@ -162,7 +147,6 @@ public class UIBreadCrumbsNavigationPortlet extends UIPortletApplication {
         SiteType navType = nav.getKey().getType();
         UserNode node = Util.getUIPortal().getSelectedUserNode();
         String uri = node.getURI();
-
         if (uris.contains(uri) || navType.equals(SiteType.USER)) {
             return true;
         } else return false;
@@ -182,6 +166,7 @@ public class UIBreadCrumbsNavigationPortlet extends UIPortletApplication {
     public boolean isOwner() {
         return Utils.isOwner();
     }
+
     public static class ChangePictureActionListener extends EventListener<UIBreadCrumbsNavigationPortlet> {
 
         @Override
@@ -193,6 +178,4 @@ public class UIBreadCrumbsNavigationPortlet extends UIPortletApplication {
             uiPopup.setShow(true);
         }
     }
-
-
 }

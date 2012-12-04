@@ -8,11 +8,8 @@ import org.exoplatform.services.log.Log;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Racha
- * Date: 28/11/12
- * Time: 11:51
- * To change this template use File | Settings | File Templates.
+ * @author <a href="rtouzi@exoplatform.com">rtouzi</a>
+ * @date 28/11/12
  */
 public class UserNavigationHandlerServiceImpl implements UserNavigationHandlerService {
 

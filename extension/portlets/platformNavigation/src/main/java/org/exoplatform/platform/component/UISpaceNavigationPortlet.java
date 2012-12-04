@@ -33,16 +33,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Racha
- * Date: 22/11/12
- * Time: 09:57
- * To change this template use File | Settings | File Templates.
+ * @author <a href="rtouzi@exoplatform.com">rtouzi</a>
+ * @date 22/11/12
  */
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/platformNavigation/portlet/UISpaceNavigationPortlet/UISpaceNavigationPortlet.gtmpl",
         events = {
-        @EventConfig(listeners = UISpaceNavigationPortlet.IncrementActionListener.class) ,
-        @EventConfig(listeners = UISpaceNavigationPortlet.LoadNavigationActionListener.class)
+                @EventConfig(listeners = UISpaceNavigationPortlet.IncrementActionListener.class),
+                @EventConfig(listeners = UISpaceNavigationPortlet.LoadNavigationActionListener.class)
         }
 )
 public class UISpaceNavigationPortlet extends UIPortletApplication {
@@ -56,14 +53,20 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
     public static final String LOAD_NAVIGATION_ACTION = "LoadNavigation";
 
     private SpaceService spaceService = null;
+
     private OrganizationService organizationService = null;
+
     private String userId = null;
+
     private boolean groupNavigationPermitted = false;
+
     private UserNodeFilterConfig mySpaceFilterConfig;
+
     private List<String> spacesSortedByAccesscount = null;
-    static int MY_SPACES_MAX_NUMBER =10;
-    static int loadingCapacity =10;
-    //private UISpaceNavigationSearch uiSpaceSearch = null;
+
+    static int MY_SPACES_MAX_NUMBER = 10;
+
+    static int loadingCapacity = 10;
 
     private Comparator<UserNavigation> spaceAccessComparator = new Comparator<UserNavigation>() {
         public int compare(UserNavigation o1, UserNavigation o2) {
@@ -72,6 +75,7 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
             return spacesSortedByAccesscount.indexOf(ownerId2) - spacesSortedByAccesscount.indexOf(ownerId1);
         }
     };
+
     public UISpaceNavigationPortlet() throws Exception {
         try {
             spaceService = getApplicationComponent(SpaceService.class);
@@ -85,8 +89,6 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         spacesSortedByAccesscount = spaceAccessService.getSpaceAccessList(getUserId());
         organizationService = getApplicationComponent(OrganizationService.class);
         UserACL userACL = getApplicationComponent(UserACL.class);
-        // groupNavigationPermitted is set to true if the user is the super
-        // user
         if (getUserId().equals(userACL.getSuperUser())) {
             groupNavigationPermitted = true;
         } else {
@@ -101,14 +103,11 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         }
         UserNodeFilterConfig.Builder builder = UserNodeFilterConfig.builder();
         mySpaceFilterConfig = builder.build();
-        //uiSpaceSearch = createUIComponent(UISpaceNavigationSearch.class, null, "UISpaceNavigationSearch");
-        //addChild(uiSpaceSearch);
     }
 
 
     public List<UserNavigation> getGroupNavigations() throws Exception {
         List<UserNavigation> computedNavigations = null;
-        //String searchCondition=uiSpaceSearch.getSpaceNameSearch();
         if (spaceService != null) {
             String remoteUser = getUserId();
             UserPortal userPortal = getUserPortal();
@@ -132,8 +131,6 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
                         navigationItr.remove();
                     if (!navigationParts[1].equals("spaces") && !spaces.contains(space))
                         navigationItr.remove();
-                    //if(searchCondition!=null && !navigationParts[2].contains(searchCondition) )
-                        //navigationItr.remove();
                 } else { // not spaces navigation
                     navigationItr.remove();
                 }
@@ -256,12 +253,10 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         @Override
         public void execute(Event<UISpaceNavigationPortlet> event) throws Exception {
 
-            UISpaceNavigationPortlet uisource=event.getSource();
+            UISpaceNavigationPortlet uisource = event.getSource();
 
             event.getRequestContext().addUIComponentToUpdateByAjax(uisource);
-
         }
-
     }
 
     public static class IncrementActionListener extends EventListener<UISpaceNavigationPortlet> {
@@ -270,23 +265,24 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
         public void execute(Event<UISpaceNavigationPortlet> event) throws Exception {
             HttpServletRequest request = Util.getPortalRequestContext().getRequest();
 
-            MY_SPACES_MAX_NUMBER+=loadingCapacity;
+            MY_SPACES_MAX_NUMBER += loadingCapacity;
 
-            request.setAttribute("MY_SPACES_MAX_NUMBER",MY_SPACES_MAX_NUMBER);
+            request.setAttribute("MY_SPACES_MAX_NUMBER", MY_SPACES_MAX_NUMBER);
 
-            UISpaceNavigationPortlet uisource=event.getSource();
+            UISpaceNavigationPortlet uisource = event.getSource();
 
             event.getRequestContext().addUIComponentToUpdateByAjax(uisource);
         }
 
     }
+
     public int getSpaceMaxNumber() {
         HttpServletRequest request = Util.getPortalRequestContext().getRequest();
-       Integer   NUMBER = (Integer) request.getAttribute("MY_SPACES_MAX_NUMBER");
-        if(NUMBER!=null) {
-        return NUMBER.intValue();
-        }else{
-            MY_SPACES_MAX_NUMBER =10;
+        Integer NUMBER = (Integer) request.getAttribute("MY_SPACES_MAX_NUMBER");
+        if (NUMBER != null) {
+            return NUMBER.intValue();
+        } else {
+            MY_SPACES_MAX_NUMBER = 10;
             return 0;
         }
     }
@@ -297,20 +293,21 @@ public class UISpaceNavigationPortlet extends UIPortletApplication {
 
         }
     }
+
     public String getImageSource(String SpaceLaBel) throws Exception {
         SpaceService spaceService = Utils.getSpaceService();
-        Space space=spaceService.getSpaceByDisplayName(SpaceLaBel)  ;
+        Space space = spaceService.getSpaceByDisplayName(SpaceLaBel);
         return space.getAvatarUrl();
     }
+
     protected String getRestUrl() {
-        return  getCurrentRestURL () + MY_SPACE_REST_URL;
+        return getCurrentRestURL() + MY_SPACE_REST_URL;
     }
+
     public static String getCurrentRestURL() {
         StringBuilder sb = new StringBuilder();
         sb.append("/").append(PortalContainer.getCurrentPortalContainerName()).append("/");
         sb.append(PortalContainer.getCurrentRestContextName());
         return sb.toString();
     }
-
-
 }
