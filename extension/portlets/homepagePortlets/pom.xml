@@ -10,6 +10,6 @@
   <packaging>war</packaging>
   <name>eXo Platform - HomePage Portlets </name>
   <build>
-    <finalName>homepagePortlets</finalName>
+    <finalName>homepage-portlets</finalName>
   </build>
 </project>

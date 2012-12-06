@@ -94,6 +94,13 @@
 	<scope>provided</scope>
       <type>jar</type>
 	</dependency>
+	<dependency>
+	<groupId>org.gatein.shindig</groupId>
+	 <artifactId>shindig-social-api</artifactId>
+	 <version> ${org.gatein.shindig.version}</version>
+	 <scope>provided</scope>
+      <type>jar</type>
+	</dependency>
   </dependencies>
   
 </project>

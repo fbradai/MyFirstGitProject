@@ -1283,6 +1283,13 @@
       <scope>provided</scope>
       <type>war</type>
     </dependency>
+      <dependency>
+          <groupId>org.exoplatform.platform</groupId>
+          <artifactId>platform-extension-portlets-services</artifactId>
+          <version>${project.version}</version>
+          <scope>provided</scope>
+          <type>jar</type>
+      </dependency>
 	<dependency>
       <groupId>org.exoplatform.platform</groupId>
         <artifactId>platform-extension-portlets-homepage</artifactId>

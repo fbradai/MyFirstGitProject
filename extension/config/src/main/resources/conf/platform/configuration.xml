@@ -217,6 +217,9 @@
               <value>
                 <string>eXoPlatformResources</string>
               </value>
+			  <value>
+                <string>homepage-portlets</string>
+              </value>
             </collection>
           </field>
 
