@@ -61,7 +61,7 @@ function getModule(params)
       addDependency(new Project("org.exoplatform.platform", "platform-component-gadgets", "jar", module.version)).
       addDependency(new Project("org.exoplatform.platform", "platform-component-upgrade-plugins", "jar", module.version)).
       addDependency(new Project("org.exoplatform.platform", "platform-component-organization", "jar", module.version)).
-          addDependency(new Project("org.exoplatform.platform", "platform-component-UXPnavigation", "jar", module.version)).
+          addDependency(new Project("org.exoplatform.platform", "platform-component-uxpnavigation", "jar", module.version)).
       addDependency(new Project("org.exoplatform.platform", "platform-component-edition-enterprise", "jar", module.version));
    module.extension.webapp.deployName = "platform-extension";
    module.extension.resources = 
