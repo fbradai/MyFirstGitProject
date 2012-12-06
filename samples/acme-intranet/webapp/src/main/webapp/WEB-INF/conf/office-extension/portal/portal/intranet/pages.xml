@@ -172,7 +172,6 @@
 
             <container id="OfficeRight" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
                 <access-permissions>Everyone</access-permissions>
-                <!-- Who is online gadget -->
                 <portlet-application>
                     <portlet>
                         <application-ref>dashboard</application-ref>
@@ -180,18 +179,35 @@
                         <preferences>
                             <preference>
                                 <name>url</name>
-                                <value>local://WhoIsOnline</value>
+                                <value>local://GettingStarted</value>
                                 <read-only>false</read-only>
                             </preference>
                         </preferences>
                     </portlet>
-                    <title>Who Is Online</title>
+                    <title>GettingStarted</title>
+                    <access-permissions>*:/platform/users</access-permissions>
+                    <show-info-bar>false</show-info-bar>
+                    <show-application-state>true</show-application-state>
+                </portlet-application>
+                <portlet-application>
+                    <portlet>
+                        <application-ref>dashboard</application-ref>
+                        <portlet-ref>GadgetPortlet</portlet-ref>
+                        <preferences>
+                            <preference>
+                                <name>url</name>
+                                <value>local://InviteJoinWs</value>
+                                <read-only>false</read-only>
+                            </preference>
+                        </preferences>
+                    </portlet>
+                    <title>InviteJoinWs</title>
                     <access-permissions>*:/platform/users</access-permissions>
                     <show-info-bar>false</show-info-bar>
                     <show-application-state>true</show-application-state>
                 </portlet-application>
 
-                <!-- Bookmark gadget -->
+                
                 <portlet-application>
                     <portlet>
                         <application-ref>dashboard</application-ref>
@@ -199,18 +215,18 @@
                         <preferences>
                             <preference>
                                 <name>url</name>
-                                <value>local://Bookmark</value>
+                                <value>local://SuggestPeopleGadget</value>
                                 <read-only>false</read-only>
                             </preference>
                         </preferences>
                     </portlet>
-                    <title>Bookmarks</title>
+                    <title>SuggestPeopleGadget</title>
                     <access-permissions>*:/platform/users</access-permissions>
                     <show-info-bar>false</show-info-bar>
                     <show-application-state>true</show-application-state>
                 </portlet-application>
 
-                <!-- Favorites Documents gadget -->
+                
                 <portlet-application>
                     <portlet>
                         <application-ref>dashboard</application-ref>
@@ -218,12 +234,12 @@
                         <preferences>
                             <preference>
                                 <name>url</name>
-                                <value>local://FavoriteDocument</value>
+                                <value>local://WhosOnlineGadget</value>
                                 <read-only>false</read-only>
                             </preference>
                         </preferences>
                     </portlet>
-                    <title>Favorite Documents</title>
+                    <title>WhosOnlineGadget</title>
                     <access-permissions>*:/platform/users</access-permissions>
                     <show-info-bar>false</show-info-bar>
                     <show-application-state>true</show-application-state>

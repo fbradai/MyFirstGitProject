@@ -3,15 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.platform</groupId>
-      <artifactId>platform-extension</artifactId>
+      <artifactId>platform-extension-portlets</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>platform-extension-portlets</artifactId>
-  <packaging>pom</packaging>
-  <name>eXo Platform - Extension Portlets</name>
-  <modules>
-    <module>platformNavigation</module>
-	<module>homepagePortlets</module>
-	<module>services</module>
-  </modules>
+  <artifactId>platform-extension-portlets-homepage</artifactId>
+  <packaging>war</packaging>
+  <name>eXo Platform - HomePage Portlets </name>
+  <build>
+    <finalName>homepagePortlets</finalName>
+  </build>
 </project>
