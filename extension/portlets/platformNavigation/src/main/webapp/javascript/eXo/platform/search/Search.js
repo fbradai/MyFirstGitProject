@@ -26,6 +26,7 @@ function SearchAdminToolbar() {
 $(document).ready(function () {
   var isAlt = false;
   var value = $("#adminkeyword").val();
+  var isDefault = false;
 
   $("#adminkeyword").hide();
   $('#ToolBarSearch > a').click(function () {
@@ -35,8 +36,13 @@ $(document).ready(function () {
       if ($("#adminkeyword").val('')) {
         $("#adminkeyword").val(value);
         $("#adminkeyword").css('color', '#555');
+        isDefault = true;
       }
       $("#adminkeyword").show();
+    }
+    else
+    if (isDefault == true) {
+      $("#adminkeyword").hide();
     }
     else
       eXo.search.SearchAdminToolbar.quickSearchOnClick();
@@ -46,6 +52,7 @@ $(document).ready(function () {
     if ($("#adminkeyword").val(value)) {
       $("#adminkeyword").val('');
       $("#adminkeyword").css('color', '#000');
+      isDefault = false;
     }
   });
 
@@ -97,15 +104,17 @@ SearchAdminToolbar.prototype.quickSearchadminOnEnter = function (event, resultPa
     keyword.replace(/[\"\'][\s]*javascript:(.*)[\"\']/gi, "\"\"");
     keyword = keyword.replace(/script(.*)/gi, "");
     keyword = keyword.replace(/eval\((.*)\)/gi, "");
-    var resultPageURIDefault = "searchResult";
-    var params = "portal=" + eXo.env.portal.portalName + "&keyword=" + keyword;
-    var baseURI = eXo.search.SearchAdminToolbar.getHostName() + eXo.env.portal.context + "/" + eXo.env.portal.portalName;
-    if (resultPageURI != undefined) {
-      baseURI = baseURI + "/" + resultPageURI;
-    } else {
-      baseURI = baseURI + "/" + resultPageURIDefault;
+    if (keyword != "") {
+      var resultPageURIDefault = "searchResult";
+      var params = "portal=" + eXo.env.portal.portalName + "&keyword=" + keyword;
+      var baseURI = eXo.search.SearchAdminToolbar.getHostName() + eXo.env.portal.context + "/" + eXo.env.portal.portalName;
+      if (resultPageURI != undefined) {
+        baseURI = baseURI + "/" + resultPageURI;
+      } else {
+        baseURI = baseURI + "/" + resultPageURIDefault;
+      }
+      window.location = baseURI + "?" + params;
     }
-    window.location = baseURI + "?" + params;
   }
 };
 
@@ -116,15 +125,17 @@ SearchAdminToolbar.prototype.quickSearchOnClick = function (resultPageURI) {
   keyword.replace(/[\"\'][\s]*javascript:(.*)[\"\']/gi, "\"\"");
   keyword = keyword.replace(/script(.*)/gi, "");
   keyword = keyword.replace(/eval\((.*)\)/gi, "");
-  var resultPageURIDefault = "searchResult";
-  var params = "portal=" + eXo.env.portal.portalName + "&keyword=" + keyword;
-  var baseURI = eXo.search.SearchAdminToolbar.getHostName() + eXo.env.portal.context + "/" + eXo.env.portal.portalName;
-  if (resultPageURI != undefined) {
-    baseURI = baseURI + "/" + resultPageURI;
-  } else {
-    baseURI = baseURI + "/" + resultPageURIDefault;
+  if (keyword != "") {
+    var resultPageURIDefault = "searchResult";
+    var params = "portal=" + eXo.env.portal.portalName + "&keyword=" + keyword;
+    var baseURI = eXo.search.SearchAdminToolbar.getHostName() + eXo.env.portal.context + "/" + eXo.env.portal.portalName;
+    if (resultPageURI != undefined) {
+      baseURI = baseURI + "/" + resultPageURI;
+    } else {
+      baseURI = baseURI + "/" + resultPageURIDefault;
+    }
+    window.location = baseURI + "?" + params;
   }
-  window.location = baseURI + "?" + params;
 };
 
 eXo.search.SearchAdminToolbar = new SearchAdminToolbar();
