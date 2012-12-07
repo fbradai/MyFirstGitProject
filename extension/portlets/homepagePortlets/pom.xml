@@ -9,7 +9,145 @@
   <artifactId>platform-extension-portlets-homepage</artifactId>
   <packaging>war</packaging>
   <name>eXo Platform - HomePage Portlets </name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.juzu</groupId>
+            <artifactId>juzu-builder</artifactId>
+            <version>0.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.juzu</groupId>
+            <artifactId>juzu-plugins-less</artifactId>
+            <version>0.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.juzu</groupId>
+            <artifactId>juzu-plugins-portlet</artifactId>
+            <version>0.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.exoplatform.portal</groupId>
+            <artifactId>exo.portal.webui.portal</artifactId>
+            <version>3.4.0.Final</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.kernel</groupId>
+            <artifactId>exo.kernel.container</artifactId>
+            <version>${org.exoplatform.kernel.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.commons</groupId>
+            <artifactId>commons-component-product</artifactId>
+            <version>${org.exoplatform.commons.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.portal</groupId>
+            <artifactId>exo.portal.component.web.api</artifactId>
+            <version>${org.exoplatform.portal.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.ecms</groupId>
+            <artifactId>ecms-core-services</artifactId>
+            <version>${org.exoplatform.ecms.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.commons</groupId>
+            <artifactId>commons-component-common</artifactId>
+            <version>${org.exoplatform.commons.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.social</groupId>
+            <artifactId>social-component-common</artifactId>
+            <version>${org.exoplatform.social.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.social</groupId>
+            <artifactId>social-component-core</artifactId>
+            <version>${org.exoplatform.social.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.portlet</groupId>
+            <artifactId>portlet-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${org.slf4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.calendar</groupId>
+            <artifactId>calendar-service</artifactId>
+            <version>4.0.0.Alpha1-SNAPSHOT</version>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.calendar</groupId>
+            <artifactId>calendar-webservice</artifactId>
+            <version>4.0.0.Alpha1-SNAPSHOT</version>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.forum</groupId>
+            <artifactId>forum-forum-service</artifactId>
+            <version>4.0.0.Alpha1-SNAPSHOT</version>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.gatein.shindig</groupId>
+            <artifactId>shindig-social-api</artifactId>
+            <version> ${org.gatein.shindig.version}</version>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
   <build>
     <finalName>homepage-portlets</finalName>
+      <plugins>
+
+      <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <dependencies>
+              <dependency>
+                  <groupId>org.juzu</groupId>
+                  <artifactId>juzu-builder</artifactId>
+                  <version>0.5.1</version>
+              </dependency>
+          </dependencies>
+          <executions>
+              <execution>
+                  <id>gatein</id>
+                  <goals>
+                      <goal>single</goal>
+                  </goals>
+                  <phase>package</phase>
+                  <configuration>
+                      <classifier>gatein</classifier>
+                      <descriptorRefs>
+                          <descriptorRef>gatein</descriptorRef>
+                      </descriptorRefs>
+                  </configuration>
+              </execution>
+
+          </executions>
+
+      </plugin>
+      </plugins>
   </build>
 </project>

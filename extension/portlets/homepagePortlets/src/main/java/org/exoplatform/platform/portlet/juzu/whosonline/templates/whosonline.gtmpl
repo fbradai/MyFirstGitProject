@@ -1,0 +1,28 @@
+#{param name=list/}
+
+<h1>Who's on line</h1>
+
+
+
+
+
+<% if (list==null) { %>
+    <p>
+        No Freind on line
+    </p>
+<% } else { %>
+
+
+
+           <% for (def freind : list ) { %>
+               <div>
+                   <div>${freind.getFullName()}</div>
+                   <div>${freind.getAvatarImageSource()}</div>
+                   <div>${freind.getUrl()}</div>
+                   <div>${freind.getPosition()}</div>
+                   <div>${freind.USERNAME}</div>
+
+               </div>
+           <% } %>
+
+<% } %>
