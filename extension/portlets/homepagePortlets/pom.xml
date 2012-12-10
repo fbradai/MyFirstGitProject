@@ -7,7 +7,7 @@
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
   <artifactId>platform-extension-portlets-homepage</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <name>eXo Platform - HomePage Portlets </name>
 
     <dependencies>
@@ -130,6 +130,10 @@
                   <version>0.5.1</version>
               </dependency>
           </dependencies>
+		  <configuration>
+          <attach>true</attach>
+          <appendAssemblyId>false</appendAssemblyId>
+        </configuration>
           <executions>
               <execution>
                   <id>gatein</id>
@@ -138,7 +142,7 @@
                   </goals>
                   <phase>package</phase>
                   <configuration>
-                      <classifier>gatein</classifier>
+                      <finalName>${project.build.finalName}</finalName>
                       <descriptorRefs>
                           <descriptorRef>gatein</descriptorRef>
                       </descriptorRefs>

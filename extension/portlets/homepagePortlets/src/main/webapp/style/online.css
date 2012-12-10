@@ -20,7 +20,7 @@
 #OnlineGadget .gallery li {
         display: inline;
         list-style: none;
-        width: 40px;
+        width: 26px;
         height: 40px;
         float: left;
         margin: 0 5px 5px 0;
@@ -30,7 +30,7 @@
 #OnlineGadget .gallery li img {
  
  height: 40px;
- width: 40px;
+ width: 26px;
   
 }
 

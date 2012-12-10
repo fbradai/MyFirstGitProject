@@ -227,7 +227,7 @@
                 </portlet-application>
 
 
-                <portlet-application>
+                <!--portlet-application>
                     <portlet>
                         <application-ref>dashboard</application-ref>
                         <portlet-ref>GadgetPortlet</portlet-ref>
@@ -243,6 +243,20 @@
                     <access-permissions>*:/platform/users</access-permissions>
                     <show-info-bar>false</show-info-bar>
                     <show-application-state>true</show-application-state>
+                </portlet-application-->
+				
+				
+				
+				 <portlet-application>
+                    <portlet>
+                        <application-ref>homepage-portlets</application-ref>
+                        <portlet-ref>WhoIsOnLinPortlet</portlet-ref>
+                    </portlet>
+                    <title>Who is on line</title>
+                    <access-permissions>*:/platform/users</access-permissions>
+                    <show-info-bar>false</show-info-bar>
+                    <show-application-state>false</show-application-state>
+                    <show-application-mode>false</show-application-mode>
                 </portlet-application>
             </container>
         </container>
