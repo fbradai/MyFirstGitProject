@@ -18,7 +18,16 @@
  */
 
 @Application
-@Portlet package org.exoplatform.platform.portlet.juzu.whosonline;
+@Portlet
+@Assets(
+        scripts = {@Script(src = "js/jquery.simpletip-1.3.1.min.js"),@Script(id = "jquery", src = "js/jquery-1.3.2.min.js")},
+        stylesheets = {@Stylesheet(src = "style/online.css") })
 
+
+package org.exoplatform.platform.portlet.juzu.whosonline;
 import juzu.Application;
+import juzu.plugin.asset.Assets;
+import juzu.plugin.asset.Script;
+import juzu.plugin.asset.Stylesheet;
 import juzu.plugin.portlet.Portlet;
+

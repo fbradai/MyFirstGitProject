@@ -28,14 +28,14 @@ import javax.inject.Inject;
 import java.util.List;
 
 /** @author <a href="mailto:rtouzi@exoplatform.com">Racha Touzi</a> */
-public class Whosonline extends Controller{
+public class WhoIsOnLine extends Controller{
 
   @Inject
-    @Path("whosonline.gtmpl")
-    org.exoplatform.platform.portlet.juzu.whosonline.templates.whosonline index;
+    @Path("list.gtmpl")
+    org.exoplatform.platform.portlet.juzu.whosonline.templates.list index;
 
     @Inject
-    WhosonlineListService listService;
+    WhoIsOnLineListService listService;
 
     @View
   public void index() {

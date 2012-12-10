@@ -26,8 +26,8 @@ import java.util.List;
  * Time: 18:04
  * To change this template use File | Settings | File Templates.
  */
-public class WhosonlineListService {
-    private static Log log = ExoLogger.getLogger(WhosonlineListService.class);
+public class WhoIsOnLineListService {
+    private static Log log = ExoLogger.getLogger(WhoIsOnLineListService.class);
 
     private static final CacheControl cacheControl;
     static {
