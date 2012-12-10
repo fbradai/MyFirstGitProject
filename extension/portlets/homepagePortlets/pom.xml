@@ -148,9 +148,7 @@
                       </descriptorRefs>
                   </configuration>
               </execution>
-
           </executions>
-
       </plugin>
       </plugins>
   </build>
