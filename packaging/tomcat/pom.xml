@@ -132,7 +132,7 @@
     </dependency>
 	<dependency>
       <groupId>org.exoplatform.calendar</groupId>
-      <artifactId>calendar-Create-event</artifactId>
+      <artifactId>calendar-component-create</artifactId>
       <version>${org.exoplatform.calendar.version}</version>
       <scope>provided</scope>
       <type>jar</type>
