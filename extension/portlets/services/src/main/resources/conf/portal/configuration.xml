@@ -30,7 +30,9 @@
     <type>com.exoplatform.cloudworkspaces.gadget.services.GettingStarted.GettingStartedRestService</type>
   </component>
 
-
+    <component>
+        <type>com.exoplatform.cloudworkspaces.gadget.services.TestService</type>
+    </component>
   <!-- SUGGESTED PEOPLE -->
   <component>
     <type>com.exoplatform.cloudworkspaces.gadget.services.SuggestPeopleGadget.PeopleRestServices</type>
