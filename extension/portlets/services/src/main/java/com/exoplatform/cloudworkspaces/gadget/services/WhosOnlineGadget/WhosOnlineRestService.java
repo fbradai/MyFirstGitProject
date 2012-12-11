@@ -7,9 +7,11 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.impl.RuntimeDelegateImpl;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.manager.RelationshipManager;
 import org.exoplatform.social.core.relationship.model.Relationship;
@@ -56,17 +58,21 @@ public class WhosOnlineRestService implements ResourceContainer {
       RelationshipManager relationshipManager = (RelationshipManager) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(RelationshipManager.class);
 
 
-
+      ActivityManager activityManager = (ActivityManager)  ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ActivityManager.class);
       Identity myIdentity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userId);
+
       List<String> users = forumService.getOnlineUsers();
+
+        if(users.size()>18){
       users=  users.subList(0,17) ;
+        }
       JSONArray jsonArray = new JSONArray();
 
       for (String user : users) {
 
 
-        Identity userIdentity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, user);        
-        
+        Identity userIdentity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, user);
+        List<ExoSocialActivity> activitiesList= activityManager.getActivities(userIdentity);
         if (relationshipManager.getStatus(userIdentity, myIdentity) == null)
         	continue;	
         else if (!relationshipManager.getStatus(userIdentity, myIdentity).equals(Relationship.Type.CONFIRMED))
@@ -86,6 +92,7 @@ public class WhosOnlineRestService implements ResourceContainer {
         json.put("avatarUrl", avatar);
         json.put("profileUrl", userProfile.getUrl());
         json.put("title", position);
+        json.put("activity",activitiesList.get(0).getTitle());
         jsonArray.put(json);    
       }
       

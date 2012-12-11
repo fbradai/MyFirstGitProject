@@ -22,18 +22,20 @@
                       pos = ['-20', '30'];
 
                   $onlineContact.simpletip({
-                    content: '<div id="tipName">'+contact.name+'</div><div>'+contact.title+'</div>',
+                    content: '<div id="tipName">'+contact.name+'</div><div>'+contact.title+'</div><div>'+contact.activity+'</div>',
                       fixed: true,
                       position: pos
                   });
 
 
                   $("#onlineList").append($onlineContact);
-                  
+
 
                 });
 
-          }
+          }else{
+		   $("#OnlinePortlet").hide();
+		  }
 
           });
 
@@ -45,4 +47,5 @@
 </script>
 
 <div id="OnlinePortlet">
+
 </div>
