@@ -22,27 +22,20 @@ package org.exoplatform.platform.portlet.juzu.whosonline;
 import juzu.Controller;
 import juzu.Path;
 import juzu.View;
-import org.exoplatform.social.core.identity.model.Profile;
 
 import javax.inject.Inject;
-import java.util.List;
 
 /** @author <a href="mailto:rtouzi@exoplatform.com">Racha Touzi</a> */
 public class WhoIsOnLine extends Controller{
 
   @Inject
-    @Path("list.gtmpl")
-    org.exoplatform.platform.portlet.juzu.whosonline.templates.list index;
-
-    @Inject
-    WhoIsOnLineListService listService;
+    @Path("index.gtmpl")
+    org.exoplatform.platform.portlet.juzu.whosonline.templates.index index;
 
     @View
   public void index() {
-      String userId =  renderContext.getSecurityContext().getRemoteUser();
-      List<Profile> list= listService.getOnlineContacts(userId);
-      //index.render(list);
-       //whosonline.render();
-      index.with().list(list).render();
+
+      index.render();
+
   }
 }

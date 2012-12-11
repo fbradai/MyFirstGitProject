@@ -21,7 +21,7 @@
         </supports>
         <portlet-info>
             <title>Who is on line</title>
-            <keywords>juzu,sample</keywords>
+            <keywords>juzu</keywords>
         </portlet-info>
     </portlet>
 </portlet-app>

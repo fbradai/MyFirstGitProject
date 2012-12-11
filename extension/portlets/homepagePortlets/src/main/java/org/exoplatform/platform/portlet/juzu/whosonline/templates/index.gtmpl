@@ -1,0 +1,48 @@
+<script type="text/javascript">
+ $(function() {
+
+
+
+
+          $.getJSON("/rest/gadgets/online/contacts", function(contacts){
+
+            if (contacts.length){
+                $("#OnlinePortlet").append('<div id="onlineContent"><div class="onlineHeader">Who is online?</div><ul id="onlineList" class="gallery">'+ '</ul></div>');
+
+
+                $.each(contacts, function(i, contact){
+
+                  var onlineContact = '<li><a target="_parent" href="'+contact.profileUrl+'"><img src="'+contact.avatarUrl+'" alt="image" /></a></li>';
+                  $onlineContact = $(onlineContact);
+
+                  var pos;
+                  if(!((i+1)%4))
+                      pos = ['-50', '30'];
+                  else
+                      pos = ['-20', '30'];
+
+                  $onlineContact.simpletip({
+                    content: '<div id="tipName">'+contact.name+'</div><div>'+contact.title+'</div>',
+                      fixed: true,
+                      position: pos
+                  });
+
+
+                  $("#onlineList").append($onlineContact);
+                  
+
+                });
+
+          }
+
+          });
+
+
+
+
+		    });
+
+</script>
+
+<div id="OnlinePortlet">
+</div>

@@ -1,23 +1,5 @@
 package com.exoplatform.cloudworkspaces.gadget.services.WhosOnlineGadget;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONObject;
-import org.json.JSONArray;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.CacheControl;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.ext.RuntimeDelegate;
-
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.forum.service.ForumService;
@@ -25,16 +7,22 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.impl.RuntimeDelegateImpl;
 import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.social.common.RealtimeListAccess;
-import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.identity.model.Identity;
-import org.exoplatform.social.core.relationship.model.Relationship;
 import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
-import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.manager.RelationshipManager;
-import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.social.core.relationship.model.Relationship;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.*;
+import javax.ws.rs.ext.RuntimeDelegate;
+import java.net.URI;
+import java.util.List;
 
 
 
@@ -65,17 +53,18 @@ public class WhosOnlineRestService implements ResourceContainer {
            
       ForumService forumService = (ForumService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ForumService.class);
       IdentityManager identityManager = (IdentityManager) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(IdentityManager.class);
-      RelationshipManager relationshipManager = (RelationshipManager) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(RelationshipManager.class);  
-      
+      RelationshipManager relationshipManager = (RelationshipManager) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(RelationshipManager.class);
+
+
+
       Identity myIdentity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userId);
       List<String> users = forumService.getOnlineUsers();
-     
-      
+      users=  users.subList(0,17) ;
       JSONArray jsonArray = new JSONArray();
-      
+
       for (String user : users) {
-        
-        
+
+
         Identity userIdentity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, user);        
         
         if (relationshipManager.getStatus(userIdentity, myIdentity) == null)
